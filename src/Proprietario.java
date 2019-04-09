@@ -1,6 +1,6 @@
 import java.lang.*;
 import java.util.*;
-import javafx.util.Pair;
+
 public class Proprietario
 {
     private String email;

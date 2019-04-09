@@ -103,7 +103,7 @@ public class Carro
               this.consumo = 0;
           }
 
-          public Gasolina (int v, int p, List<Aluguer> h,int c1, int c2) {
+          public Gasolina (int v, int p, List<Aluguer> h, int c1, int c2) {
               super(v,p,h,c1);
               this.consumo = c2;
           }
@@ -147,7 +147,7 @@ public class Carro
               this.consumo = 0;
           }
 
-          public Hibrido (int v, int p, List<Aluguer> h,int c1, int c2) {
+          public Hibrido (int v, int p, List<Aluguer> h, int c1, int c2) {
               super(v,p,h,c1);
               this.consumo = c2;
           }
@@ -191,7 +191,7 @@ public class Carro
               this.consumo = 0;
           }
 
-          public Eletrico (int v, int p, List<Aluguer> h,int c1, int c2) {
+          public Eletrico (int v, int p, List<Aluguer> h, int c1, int c2) {
               super(v,p,h,c1);
               this.consumo = c2;
           }

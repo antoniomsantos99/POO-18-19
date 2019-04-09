@@ -1,4 +1,3 @@
-
 /**
  * Escreva a descrição da classe Aluguer aqui.
  *
@@ -11,7 +10,7 @@ public class Aluguer
     private int x;
 
     /**
-     * COnstrutor para objetos da classe Aluguer
+     * Construtor para objetos da classe Aluguer
      */
     public Aluguer()
     {
