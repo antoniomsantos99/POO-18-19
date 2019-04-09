@@ -1,46 +1,46 @@
 import java.lang.*;
 import java.util.*;
 import javafx.util.Pair;
-public class Cliente
+public class Proprietario
 {
     private String email;
     private String nome;
     private String password;
     private String morada;
     private String dataNascimento;
-    private Pair<Double,Double> localizacao;
+    private int classificacao;
     private List<Aluguer> historial; 
     
-     public Cliente() {
+     public Proprietario() {
        this.email = "n/a";
        this.nome = "n/a";
        this.password = "n/a";
        this.morada = "n/a";
        this.dataNascimento ="n/a";
-       this.localizacao = new Pair(0,0);
+       this.classificacao = 0;
        this.historial = new ArrayList<Aluguer>();
    }
    
-   public Cliente (String e, String n, String p, String m, String d, Pair<Double,Double> l, List<Aluguer> h) {
+   public Proprietario (String e, String n, String p, String m, String d, int c, List<Aluguer> h) {
        this.email = e;
        this.nome = n;
        this.password = p;
        this.morada = m;
        this.dataNascimento = d;
-       this.localizacao = l;
+       this.classificacao = c;
        this.historial = new ArrayList<Aluguer>();
        for(Aluguer a : h)
             this.historial.add(a);
    }
    
-   public Cliente (Cliente umCliente) {
-       this.email = umCliente.getEmail();
-       this.nome = umCliente.getNome();
-       this.password = umCliente.getPassword();
-       this.morada = umCliente.getMorada();
-       this.dataNascimento = umCliente.getDataNascimento();
-       this.localizacao = umCliente.getLocalizacao();
-       this.historial = umCliente.getHistorial();
+   public Proprietario (Proprietario umProprietario) {
+       this.email = umProprietario.getEmail();
+       this.nome = umProprietario.getNome();
+       this.password = umProprietario.getPassword();
+       this.morada = umProprietario.getMorada();
+       this.dataNascimento = umProprietario.getDataNascimento();
+       this.classificacao = umProprietario.getClassificacao();
+       this.historial = umProprietario.getHistorial();
    }
    
     public String getEmail() {
@@ -63,8 +63,8 @@ public class Cliente
         return this.dataNascimento;
    }
     
-   public Pair<Double,Double> getLocalizacao() {
-       return this.localizacao;
+   public int getClassificacao() {
+       return this.classificacao;
    }
    
    public List<Aluguer> getHistorial() {
@@ -94,8 +94,8 @@ public class Cliente
         this.dataNascimento = d;
    }
    
-   public void setLocalizacao (Pair<Double,Double> l) {
-       this.localizacao = l;
+   public void setClassificacao (int c) {
+       this.classificacao = c;
    }
    
    public void setHistorial (List<Aluguer> h) {
@@ -104,20 +104,20 @@ public class Cliente
             this.historial.add(a);
    }
    
-   public Cliente clone() {
-       return new Cliente();
+   public Proprietario clone() {
+       return new Proprietario();
    }
    
    public boolean equals (Object o) {
        if(o == this) return true;
        if(o == null || o.getClass() != this.getClass()) return false;
-       Cliente c = (Cliente) o;
+       Proprietario c = (Proprietario) o;
        return c.getEmail().equals(this.email) &&
               c.getNome().equals(this.nome) && 
               c.getPassword().equals(this.password) &&
               c.getMorada().equals(this.morada) &&
               c.getDataNascimento().equals(this.dataNascimento) &&
-              c.getLocalizacao().equals(this.localizacao) &&
+              c.getClassificacao() == this.classificacao &&
               c.getHistorial().equals(this.historial);
    }
    
@@ -126,7 +126,7 @@ public class Cliente
        st.append("Dados do cliente: \n").append("Email: ").append(this.email);
        st.append(", nome: ").append(this.nome).append(", password: ").append(this.password);
        st.append(", morada: ").append(this.morada).append(", data de nascimento: ").append(this.dataNascimento);
-       st.append(", localização: ").append(this.localizacao).append(", historial de alugueres: ");
+       st.append(", classificação: ").append(this.classificacao).append(", historial de alugueres: ");
        for(Aluguer a : this.historial)
             st.append(a);
        return st.toString();
