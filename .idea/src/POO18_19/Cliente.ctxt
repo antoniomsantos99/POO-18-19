@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=Cliente
+comment1.params=
+comment1.target=Cliente()
+comment10.params=m
+comment10.target=void\ setMorada(java.lang.String)
+comment11.params=d
+comment11.target=void\ setDataNascimento(java.lang.String)
+comment2.params=
+comment2.target=java.lang.String\ getEmail()
+comment3.params=
+comment3.target=java.lang.String\ getNome()
+comment4.params=
+comment4.target=java.lang.String\ getPassword()
+comment5.params=
+comment5.target=java.lang.String\ getMorada()
+comment6.params=
+comment6.target=java.lang.String\ getDataNascimento()
+comment7.params=e
+comment7.target=void\ setEmail(java.lang.String)
+comment8.params=n
+comment8.target=void\ setNome(java.lang.String)
+comment9.params=p
+comment9.target=void\ setPassword(java.lang.String)
+numComments=12
