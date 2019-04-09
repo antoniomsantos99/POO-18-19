@@ -1,8 +1,8 @@
 
 /**
  * Escreva a descrição da classe Aluguer aqui.
- * 
- * @author (seu nome) 
+ *
+ * @author (seu nome)
  * @version (número de versão ou data)
  */
 public class Aluguer
@@ -21,9 +21,9 @@ public class Aluguer
 
     /**
      * Exemplo de método - substitua este comentário pelo seu próprio
-     * 
+     *
      * @param  y   exemplo de um parâmetro de método
-     * @return     a soma de x com y 
+     * @return     a soma de x com y
      */
     public int sampleMethod(int y)
     {
