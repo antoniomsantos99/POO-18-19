@@ -3,6 +3,8 @@ import java.util.*;
 import javafx.util.Pair;
 public class Atores
 {
+    
+    //fazer duas classes separadas para cada ator
     public String email;
     public String nome;
     public String password;
