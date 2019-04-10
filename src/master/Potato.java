@@ -1,3 +1,5 @@
+package master;
+
 public class Potato {
     int peso;
     String nome;

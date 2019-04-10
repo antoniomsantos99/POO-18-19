@@ -1,5 +1,7 @@
+package master;
+
 /**
- * Escreva a descrição da classe Aluguer aqui.
+ * Escreva a descrição da classe master.Aluguer aqui.
  *
  * @author (seu nome)
  * @version (número de versão ou data)
@@ -10,7 +12,7 @@ public class Aluguer
     private int x;
 
     /**
-     * Construtor para objetos da classe Aluguer
+     * Construtor para objetos da classe master.Aluguer
      */
     public Aluguer()
     {

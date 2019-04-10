@@ -1,3 +1,5 @@
+package master;
+
 public class Friend {
     int idade;
     int altura;

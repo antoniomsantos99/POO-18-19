@@ -1,3 +1,5 @@
+package master;
+
 import java.lang.*;
 import java.util.*;
 import javafx.util.Pair;
