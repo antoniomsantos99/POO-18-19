@@ -1,8 +1,10 @@
-package master;
+package branchForTesting;
 
 import java.lang.*;
 import java.util.*;
 import javafx.util.Pair;
+import master.Aluguer;
+
 public class Cliente
 {
     private String email;
@@ -23,7 +25,7 @@ public class Cliente
        this.historial = new ArrayList<Aluguer>();
    }
 
-   public Cliente (String e, String n, String p, String m, String d, Pair<Double,Double> l, List<Aluguer> h) {
+    public Cliente (String e, String n, String p, String m, String d, Pair<Double,Double> l, List<Aluguer> h) {
        this.email = e;
        this.nome = n;
        this.password = p;
@@ -45,7 +47,7 @@ public class Cliente
        this.historial = umCliente.getHistorial();
    }
 
-    public String getEmail() {
+   public String getEmail() {
         return this.email;
    }
 
