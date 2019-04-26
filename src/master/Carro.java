@@ -139,9 +139,9 @@ class Eletrico extends Carro {
         super();
         this.consumoBat = 0;
     }
-    public Eletrico (int v, int p, List<Aluguer> h, int c1, int c2) {
-        super(v,p,h,c1);
-        this.consumoBat = c2;
+    public Eletrico (int velMed, int precoBase, List<Aluguer> historico, int classificacao, int consumoBat) {
+        super(velMed,precoBase,historico,classificacao);
+        this.consumoBat = consumoBat;
     }
     public Eletrico (Eletrico umEletrico) {
         super(umEletrico);
