@@ -175,8 +175,6 @@ class Eletrico extends Carro {
     }
 }
 
-
-
 class Hibrido extends Carro {
     private int consumoGas;
     private int consumoBat;

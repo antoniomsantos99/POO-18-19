@@ -64,7 +64,7 @@ public class Aluguer {
 
     public boolean equals(Object a) {
         if (this == a) return true;
-        if (a == null || getClass() != a.getClass()) return false;
+        if (a == null || this.getClass() != a.getClass()) return false;
         Aluguer aluguer = (Aluguer) a;
         return  localAtual.equals(aluguer.localAtual) &&
                 localFinal.equals(aluguer.localFinal);
