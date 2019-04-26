@@ -22,8 +22,7 @@ public class Carro
         this.velMed = velMed;
         this.precoBase = precoBase;
         this.historico = new ArrayList <>();
-        for(Aluguer a : historico)
-            this.historico.add(a);
+        this.historico.addAll(historico);
         this.classificacao = classificacao;
     }
     public Carro(Carro umCarro) {
@@ -33,6 +32,8 @@ public class Carro
         this.classificacao = umCarro.getClassificacao();
     }
 
+    //DUVIDA NO GETHISTORICO
+
     public int getVelMed() {
         return this.velMed;
     }
@@ -41,8 +42,7 @@ public class Carro
     }
     public List<Aluguer> getHistorico() {
         ArrayList<Aluguer> a = new ArrayList<>();
-        for(Aluguer s : this.historico)
-            a.add(s);
+        a.addAll(this.historico);
         return a;
     }
     public int getClassificacao() {
@@ -57,12 +57,13 @@ public class Carro
     }
     public void setHistorico (List<Aluguer> novoH) {
         this.historico = new ArrayList<>();
-        for(Aluguer s : novoH)
-            this.historico.add(s);
+        this.historico.addAll(novoH);
     }
     public void setClassificacao (int classificacao) {
         this.classificacao = classificacao;
     }
+
+    //DUVIDA NO CLONE
 
     public Carro clone() {
         return new Carro();

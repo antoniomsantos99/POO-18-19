@@ -156,6 +156,8 @@ class Cliente extends Actor{
     private Pair<Double,Double> localizacao;
     private List<Aluguer> historial;
 
+    //DUVIDA CLIENTE CONSTRUTOR
+
     public Cliente(){
         super();
         this.localizacao = new Pair(0,0);
