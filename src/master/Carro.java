@@ -66,7 +66,7 @@ public class Carro
     //DUVIDA NO CLONE
 
     public Carro clone() {
-        return new Carro();
+        return new Carro(this);
     }
 
     public String toString() {
@@ -116,7 +116,7 @@ class Gasolina extends Carro {
     }
 
     public Gasolina clone() {
-        return new Gasolina();
+        return new Gasolina(this);
     }
 
     public String toString() {
@@ -158,7 +158,7 @@ class Eletrico extends Carro {
     }
 
     public Eletrico clone() {
-        return new Eletrico();
+        return new Eletrico(this);
     }
 
     public String toString() {
@@ -212,7 +212,7 @@ class Hibrido extends Carro {
     }
 
     public Hibrido clone() {
-        return new Hibrido();
+        return new Hibrido(this);
     }
 
     public String toString() {

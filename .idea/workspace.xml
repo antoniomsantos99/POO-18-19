@@ -19,11 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/master/Carro.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-587">
-              <caret line="46" column="5" lean-forward="true" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+            <state relative-caret-position="484">
+              <caret line="91" column="1" lean-forward="true" selection-start-line="91" selection-start-column="1" selection-end-line="91" selection-end-column="1" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#Carro#0;class#Carro#0" />
@@ -48,18 +48,15 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/master/Aluguer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="688">
-              <caret line="70" column="5" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
+            <state relative-caret-position="453">
+              <caret line="45" column="29" lean-forward="true" selection-start-line="45" selection-start-column="29" selection-end-line="45" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#Aluguer#0;class#Aluguer#0" />
                 <element signature="method#Aluguer#1;class#Aluguer#0" />
-                <element signature="method#Aluguer#2;class#Aluguer#0" />
-                <element signature="e#1862#1863#0" expanded="true" />
-                <element signature="e#1939#1940#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -68,8 +65,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/master/Actor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="154" column="6" selection-start-line="154" selection-start-column="6" selection-end-line="154" selection-end-column="6" />
+            <state relative-caret-position="986">
+              <caret line="136" column="60" selection-start-line="136" selection-start-column="60" selection-end-line="136" selection-end-column="60" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#Actor#0;class#Actor#0" />
@@ -82,6 +79,7 @@
                 <element signature="method#Proprietario#2;class#Proprietario#0" />
                 <element signature="method#toString#0;class#Proprietario#0" />
                 <element signature="method#equals#0;class#Proprietario#0" />
+                <element signature="method#Cliente#0;class#Cliente#0" />
                 <element signature="method#Cliente#1;class#Cliente#0" />
                 <element signature="method#Cliente#2;class#Cliente#0" />
                 <element signature="method#equals#0;class#Cliente#0" />
@@ -119,9 +117,9 @@
         <option value="$PROJECT_DIR$/src/branchForTesting/Main.java" />
         <option value="$PROJECT_DIR$/src/branchForTesting/Pessoa.java" />
         <option value="$PROJECT_DIR$/src/master/ClienteTest.groovy" />
-        <option value="$PROJECT_DIR$/src/master/Carro.java" />
-        <option value="$PROJECT_DIR$/src/master/Actor.java" />
         <option value="$PROJECT_DIR$/src/master/Aluguer.java" />
+        <option value="$PROJECT_DIR$/src/master/Actor.java" />
+        <option value="$PROJECT_DIR$/src/master/Carro.java" />
       </list>
     </option>
   </component>
@@ -370,10 +368,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/master/Aluguer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="45" column="29" lean-forward="true" selection-start-line="45" selection-start-column="29" selection-end-line="45" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Aluguer#0;class#Aluguer#0" />
+            <element signature="method#Aluguer#1;class#Aluguer#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/master/Actor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="136" column="60" selection-start-line="136" selection-start-column="60" selection-end-line="136" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Actor#0;class#Actor#0" />
+            <element signature="method#Actor#1;class#Actor#0" />
+            <element signature="method#Actor#2;class#Actor#0" />
+            <element signature="method#equals#0;class#Actor#0" />
+            <element signature="method#toString#0;class#Actor#0" />
+            <element signature="method#Proprietario#0;class#Proprietario#0" />
+            <element signature="method#Proprietario#1;class#Proprietario#0" />
+            <element signature="method#Proprietario#2;class#Proprietario#0" />
+            <element signature="method#toString#0;class#Proprietario#0" />
+            <element signature="method#equals#0;class#Proprietario#0" />
+            <element signature="method#Cliente#0;class#Cliente#0" />
+            <element signature="method#Cliente#1;class#Cliente#0" />
+            <element signature="method#Cliente#2;class#Cliente#0" />
+            <element signature="method#equals#0;class#Cliente#0" />
+            <element signature="method#toString#0;class#Cliente#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/master/Carro.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-587">
-          <caret line="46" column="5" lean-forward="true" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+        <state relative-caret-position="484">
+          <caret line="91" column="1" lean-forward="true" selection-start-line="91" selection-start-column="1" selection-end-line="91" selection-end-column="1" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#Carro#0;class#Carro#0" />
@@ -393,45 +428,6 @@
             <element signature="method#Hibrido#2;class#Hibrido#0" />
             <element signature="method#toString#0;class#Hibrido#0" />
             <element signature="method#equals#0;class#Hibrido#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/master/Actor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="154" column="6" selection-start-line="154" selection-start-column="6" selection-end-line="154" selection-end-column="6" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#Actor#0;class#Actor#0" />
-            <element signature="method#Actor#1;class#Actor#0" />
-            <element signature="method#Actor#2;class#Actor#0" />
-            <element signature="method#equals#0;class#Actor#0" />
-            <element signature="method#toString#0;class#Actor#0" />
-            <element signature="method#Proprietario#0;class#Proprietario#0" />
-            <element signature="method#Proprietario#1;class#Proprietario#0" />
-            <element signature="method#Proprietario#2;class#Proprietario#0" />
-            <element signature="method#toString#0;class#Proprietario#0" />
-            <element signature="method#equals#0;class#Proprietario#0" />
-            <element signature="method#Cliente#1;class#Cliente#0" />
-            <element signature="method#Cliente#2;class#Cliente#0" />
-            <element signature="method#equals#0;class#Cliente#0" />
-            <element signature="method#toString#0;class#Cliente#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/master/Aluguer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="688">
-          <caret line="70" column="5" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#Aluguer#0;class#Aluguer#0" />
-            <element signature="method#Aluguer#1;class#Aluguer#0" />
-            <element signature="method#Aluguer#2;class#Aluguer#0" />
-            <element signature="e#1862#1863#0" expanded="true" />
-            <element signature="e#1939#1940#0" expanded="true" />
           </folding>
         </state>
       </provider>

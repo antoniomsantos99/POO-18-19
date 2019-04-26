@@ -70,6 +70,6 @@ public class Aluguer {
                 localFinal.equals(aluguer.localFinal);
     }
     public Aluguer clone(){
-        return new Aluguer(this.getLocalAtual(),this.getLocalFinal());
+        return new Aluguer(this);
     }
 }

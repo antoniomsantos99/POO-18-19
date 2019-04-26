@@ -76,7 +76,7 @@ public class Actor {
     //IMPORTANTE - PERGUNTAR AO PROFESSOR ACERCA DO WARNING
 
     public Actor clone() {
-        return new Actor();
+        return new Actor(this);
     }
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -134,7 +134,7 @@ class Proprietario extends Actor{
         this.historial = historial;
     }
 
-    public Proprietario clone(){return new Proprietario();}
+    public Proprietario clone(){return new Proprietario(this);}
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append(super.toString());
@@ -160,7 +160,7 @@ class Cliente extends Actor{
 
     public Cliente(){
         super();
-        this.localizacao = new Pair(0,0);
+        this.localizacao = new Pair<>(0.0,0.0);
         this.historial = new ArrayList<Aluguer>();
     }
     public Cliente(String email, String nome, String password, String morada, String dataNascimento, Pair<Double,Double> localizacao, ArrayList<Aluguer> historial){
@@ -186,7 +186,7 @@ class Cliente extends Actor{
     }
     public void setHistorial(List<Aluguer> historial) { this.historial = historial; }
 
-    public Cliente clone(){return new Cliente();}
+    public Cliente clone(){return new Cliente(this);}
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || o.getClass() != this.getClass()) return false;
