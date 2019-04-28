@@ -74,10 +74,6 @@ public class Actor {
     }
 
     //IMPORTANTE - PERGUNTAR AO PROFESSOR ACERCA DO WARNING
-
-    public Actor clone() {
-        return new Actor(this);
-    }
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || o.getClass() != this.getClass()) return false;
@@ -97,6 +93,9 @@ public class Actor {
         sb.append(", morada: ").append(this.morada);
         sb.append(", data de nascimento: ").append(this.dataNascimento);
         return sb.toString();
+    }
+    public Actor clone() {
+        return new Actor(this);
     }
 }
 
@@ -134,7 +133,6 @@ class Proprietario extends Actor{
         this.historial = historial;
     }
 
-    public Proprietario clone(){return new Proprietario(this);}
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append(super.toString());
@@ -150,6 +148,7 @@ class Proprietario extends Actor{
         return super.equals(o) &&
                 this.classificacao == p.getClassificacao();
     }
+    public Proprietario clone(){return new Proprietario(this);}
 }
 
 class Cliente extends Actor{
@@ -186,7 +185,6 @@ class Cliente extends Actor{
     }
     public void setHistorial(List<Aluguer> historial) { this.historial = historial; }
 
-    public Cliente clone(){return new Cliente(this);}
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || o.getClass() != this.getClass()) return false;
@@ -201,4 +199,5 @@ class Cliente extends Actor{
         for(Aluguer a : this.historial) {sb.append(a);}
         return sb.toString();
     }
+    public Cliente clone(){return new Cliente(this);}
 }
