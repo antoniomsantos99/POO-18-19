@@ -1,8 +1,6 @@
 package master;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,7 +11,6 @@ import java.util.Map;
  * @author Pedro Oliveira
  * @version 28/04/2019
  */
-
 
 public class EstadoAtual {
 
@@ -32,7 +29,7 @@ public class EstadoAtual {
      * @param cliente recebe um cliente
      */
     public static void addCliente(Cliente cliente){
-        nrProprietarios++;
+        nrClientes++;
         listaClientes.put(cliente.getEmail(),cliente);
     }
 
@@ -129,4 +126,13 @@ public class EstadoAtual {
         return sb.toString();
     }
 
+    public static Map<String, Cliente> getListaClientes() {
+        return listaClientes;
+    }
+    public static Map<String, Proprietario> getListaProprietarios() {
+        return listaProprietarios;
+    }
+    public static Map<String, Carro> getListaCarros() {
+        return listaCarros;
+    }
 }

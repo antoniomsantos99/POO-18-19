@@ -53,7 +53,7 @@ public class IniciarEstado {
         opcao = sc.nextInt();
         switch (opcao) {
             case 1:
-                fileIO.writeFile("state");
+                fileIO.readFile("state");
                 break;
             case 2:
                 System.out.println("Introduza o nome do ficheiro que pretende carregar (-1 para cancelar)");
