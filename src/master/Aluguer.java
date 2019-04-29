@@ -15,7 +15,7 @@ import java.util.Objects;
  *
  * Exemplo de método - substitua este comentário pelo seu próprio
  *
- * @param  y   exemplo de um parâmetro de método
+ * //@param  y   exemplo de um parâmetro de método
  * //@return     a soma de x com y
  *
  *

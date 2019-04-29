@@ -86,7 +86,7 @@ public class Actor {
     }
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Dados do cliente: \n");
+        sb.append("\nDados do cliente: \n");
         sb.append("Email: ").append(this.email);
         sb.append(", nome: ").append(this.nome);
         sb.append(", password: ").append(this.password);
@@ -194,7 +194,8 @@ class Cliente extends Actor{
     }
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append(super.toString()).append(", localizacao: ").append(this.localizacao);
+        sb.append(super.toString());
+        sb.append(", localizacao: ").append(this.localizacao);
         sb.append(", historial: ");
         for(Aluguer a : this.historial) {sb.append(a);}
         return sb.toString();

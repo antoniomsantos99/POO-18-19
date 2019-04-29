@@ -39,10 +39,6 @@ public class Registo {
         }
         System.out.println("Introduza o seu nome de utilizador:");
         nome = sc.nextLine();
-        if(EstadoAtual.verificaCliente(nome)){
-            System.out.println("Nome de utilizador já existe.");
-            return null;
-        }
         System.out.println("Introduza a sua password:");
         password = sc.nextLine();
         System.out.println("Introduza a sua morada:");
@@ -72,6 +68,10 @@ public class Registo {
         System.out.println("Introduza as informações seguites para se registar como Proprietario:");
         System.out.println("Introduza o seu e-mail:");
         email = sc.nextLine();
+        if(EstadoAtual.verificaProprietario(email)){
+            System.out.println("Email já existe.");
+            return null;
+        }
         System.out.println("Introduza o seu nome de utilizador:");
         nome = sc.nextLine();
         System.out.println("Introduza a sua password:");

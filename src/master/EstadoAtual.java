@@ -1,7 +1,9 @@
 package master;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Classe da interface de texto
@@ -18,9 +20,9 @@ public class EstadoAtual {
     /**
      * Declarações de variaveis globais para guardar todos os objetos
      */
-    private static List<Cliente> listaClientes = new ArrayList();
-    private static List<Proprietario> listaProprietarios = new ArrayList();
-    private static List<Carro> listaCarros = new ArrayList();
+    private static Map<String,Cliente> listaClientes = new HashMap();
+    private static Map<String,Proprietario> listaProprietarios = new HashMap();
+    private static Map<String,Carro> listaCarros = new HashMap();
     private static int nrClientes;
     private static int nrProprietarios;
     private static int nrCarros;
@@ -31,7 +33,7 @@ public class EstadoAtual {
      */
     public static void addCliente(Cliente cliente){
         nrProprietarios++;
-        listaClientes.add(cliente);
+        listaClientes.put(cliente.getEmail(),cliente);
     }
 
     /**
@@ -40,7 +42,7 @@ public class EstadoAtual {
      */
     public static void addProprietario(Proprietario proprietario){
         nrProprietarios++;
-        listaProprietarios.add(proprietario);
+        listaProprietarios.put(proprietario.getEmail(),proprietario);
     }
 
     /**
@@ -50,69 +52,48 @@ public class EstadoAtual {
      */
     public static void addCarro(Carro carro){
         nrCarros++;
-        listaCarros.add(carro);
+        //vai dar enrro, alterar para algo idetificalvel
+        //listaCarros.put(carro.g,carro);
     }
 
     /**
      * verifica se um cliente com um nome ou email existe no sistema
-     * @param userOuEmail recebe o mail ou username
+     * @param email recebe o mail ou username
      * @return verdadeiro se existir, falso se não
      */
-    public static boolean verificaCliente(String userOuEmail){
-        for(Cliente c:listaClientes){
-            if(c.getNome().equals(userOuEmail)){return true;}
-            if(c.getEmail().equals(userOuEmail)){return true;}
-        }
-        return false;
+    public static boolean verificaCliente(String email){
+        return listaClientes.containsKey(email);
     }
 
     /**
      * verifica se um proprietario com um nome ou email existe no sistema
-     * @param userOuEmail recebe o mail ou username
+     * @param email recebe o mail ou username
      * @return verdadeiro se existir, falso se não
      */
-    public static boolean verificaProprietario(String userOuEmail){
-        for(Proprietario p:listaProprietarios){
-            if(p.getNome().equals(userOuEmail)){return true;}
-            if(p.getEmail().equals(userOuEmail)){return true;}
-        }
-        return false;
+    public static boolean verificaProprietario(String email){
+        return listaProprietarios.containsKey(email);
     }
 
     /**
      * tenta fazer o login com um email e uma password
-     * @param userOuEmail username ou email
+     * @param email username ou email
      * @param password password
      * @return verdadeiro se conseguir falso se não
      */
-    public static boolean tryLoginCliente(String userOuEmail, String password){
-        for(Cliente p:listaClientes){
-            if(p.getNome().equals(userOuEmail)){
-                return(p.getPassword().equals(password));
-            }
-            if(p.getEmail().equals(userOuEmail)){
-                return(p.getPassword().equals(password));
-            }
-        }
-        return false;
+    public static boolean tryLoginCliente(String email, String password){
+        Cliente c = listaClientes.get(email);
+        return c.getPassword().equals(password);
     }
 
     /**
      * tenta fazer o login com um email e uma password
-     * @param userOuEmail username ou email
+     * @param email username ou email
      * @param password password
      * @return verdadeiro se conseguir falso se não
      */
-    public static boolean tryLoginProprietario(String userOuEmail, String password){
-        for(Proprietario p:listaProprietarios){
-            if(p.getNome().equals(userOuEmail)){
-                return(p.getPassword().equals(password));
-            }
-            if(p.getEmail().equals(userOuEmail)){
-                return(p.getPassword().equals(password));
-            }
-        }
-        return false;
+    public static boolean tryLoginProprietario(String email, String password){
+        Proprietario p = listaProprietarios.get(email);
+        return p.getPassword().equals(password);
     }
 
     /**
@@ -126,6 +107,26 @@ public class EstadoAtual {
     }
     public static int getNrCarros() {
         return nrCarros;
+    }
+    public static Cliente getCliente(String email){
+        return listaClientes.get(email);
+    }
+    public static Proprietario getProprietario(String email){
+        return listaProprietarios.get(email);
+    }
+    //PARA DEBUG APENAS, DEPOIS REMOVER
+    public static String debugString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Map de Clientes:");
+        sb.append(listaClientes.toString());
+        sb.append("\nMap de Proprietarios:\n");
+        sb.append(listaProprietarios.toString());
+        sb.append("\nMap de Carros:\n");
+        sb.append(listaClientes.toString());
+        sb.append("\nNumero de Clientes:").append(nrClientes);
+        sb.append("\nNumero de Proprietarios:").append(nrProprietarios);
+        sb.append("\nNumero de Carros:").append(nrCarros);
+        return sb.toString();
     }
 
 }

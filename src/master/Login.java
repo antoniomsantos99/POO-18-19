@@ -12,7 +12,9 @@ import java.util.Scanner;
  */
 
 
-public class ValidarAcesso {
+public class Login {
+
+    private static Actor a = null;
 
     /**
      * Metodo estatico que valida username ou email e password
@@ -20,25 +22,27 @@ public class ValidarAcesso {
      * tem a opçao de retroceder escrevendo -1
      */
 
-    public static void validarAcessoCliente(){
-        String userOuEmail;
+    public static boolean loginCliente(){
+        String email;
         String password;
         Scanner sc = new Scanner(System.in);
-        System.out.println("Introduza nome de utilizador ou email (-1 para cancelar):");
-        userOuEmail = sc.nextLine();
-        if(userOuEmail.equals("-1")){return;}
-        if(EstadoAtual.verificaCliente(userOuEmail)){
+        System.out.println("Introduza o seu email (-1 para cancelar):");
+        email = sc.nextLine();
+        if(email.equals("-1")){return false;}
+        if(EstadoAtual.verificaCliente(email)){
             System.out.println("Introduza a sua password:");
             password = sc.nextLine();
-            if(EstadoAtual.tryLoginCliente(userOuEmail,password)){
+            if(EstadoAtual.tryLoginCliente(email,password)){
                 System.out.println("Login efetuado com sucesso");
-                //iniciar as features de ter feito o login
-            }else{System.out.println("password incorreta");validarAcessoCliente();}
+                a = EstadoAtual.getCliente(email);
+                return true;
+            }else{System.out.println("password incorreta");loginCliente();}
 
         }else{
             System.out.println("Nome de utilizador ou email não existe");
-            validarAcessoCliente();
+            loginCliente();
         }
+        return false;
     }
 
     /**
@@ -47,25 +51,27 @@ public class ValidarAcesso {
      * tem a opçao de retroceder escrevendo -1
      */
 
-    public static void validarAcessoProprietario(){
-        String userOuEmail;
+    public static boolean loginProprietario(){
+        String email;
         String password;
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduza nome de utilizador ou email (-1 para cancelar):");
-        userOuEmail = sc.nextLine();
-        if(userOuEmail.equals("-1")){return;}
-        if(EstadoAtual.verificaProprietario(userOuEmail)){
+        email = sc.nextLine();
+        if(email.equals("-1")){return false;}
+        if(EstadoAtual.verificaProprietario(email)){
             System.out.println("Introduza a sua password:");
             password = sc.nextLine();
-            if(EstadoAtual.tryLoginProprietario(userOuEmail,password)){
+            if(EstadoAtual.tryLoginProprietario(email,password)){
                 System.out.println("Login efetuado com sucesso");
-                //inciciar as features de ter feito o login
-            }else{System.out.println("password incorreta");validarAcessoProprietario();}
+                a = EstadoAtual.getProprietario(email);
+                return true;
+            }else{System.out.println("password incorreta");loginProprietario();}
 
         }else{
             System.out.println("Nome de utilizador ou email não existe");
-            validarAcessoProprietario();
+            loginProprietario();
         }
+        return false;
     }
 
     /**
@@ -75,7 +81,7 @@ public class ValidarAcesso {
      *
      */
 
-    public static void comecarValidarAcesso(){
+    public static void comecarLogin(){
         int opcao;
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduza a opção que pretende selecionar:");
@@ -85,20 +91,18 @@ public class ValidarAcesso {
         opcao = sc.nextInt();
         switch (opcao){
             case 1 :
-                validarAcessoCliente();
-                comecarValidarAcesso();
+                if(loginCliente()){Menu.menuCliente((Cliente) a);}
+                comecarLogin();
                 break;
-
             case 2 :
-                validarAcessoProprietario();
-                comecarValidarAcesso();
+                if(loginProprietario()){Menu.menuProprietario((Proprietario) a);}
+                comecarLogin();
                 break;
-
             case 3 :
                 break;
             default :
                 System.out.println("Erro: Introduza um valor válido.\n");
-                comecarValidarAcesso();
+                comecarLogin();
                 break;
         }
     }

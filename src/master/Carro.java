@@ -70,14 +70,15 @@ public class Carro
     }
 
     public String toString() {
-        StringBuilder st = new StringBuilder();
-        st.append("A velocidade média é ").append(this.velMed);
-        st.append("km/h, o preço por km é ").append(this.precoBase).append("euros por km");
-        st.append("Alugueres: ");
+        StringBuilder sb = new StringBuilder();
+        sb.append("\nDados do carro: \n");
+        sb.append("Velocidade: ").append(this.velMed);
+        sb.append(", Preço/km: ").append(this.precoBase);
+        sb.append(", Alugueres: ");
         for(Aluguer s : this.historico)
-            st.append(s);
-        st.append(", o histórico de alugueres é ").append(st).append(" e a Classificação é de ").append(this.classificacao).append(" valores");
-        return st.toString();
+            sb.append(s);
+        sb.append(", Classificacao: ").append(this.classificacao);
+        return sb.toString();
     }
 
     public boolean equals (Object o) {
