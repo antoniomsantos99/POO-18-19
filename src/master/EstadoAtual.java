@@ -93,24 +93,15 @@ public class EstadoAtual {
         return p.getPassword().equals(password);
     }
 
-    /**
-     * gets para debug principalmente
-     */
-    public static int getNrClientes() {
-        return nrClientes;
-    }
-    public static int getNrProprietarios() {
-        return nrProprietarios;
-    }
-    public static int getNrCarros() {
-        return nrCarros;
-    }
+
     public static Cliente getCliente(String email){
         return listaClientes.get(email);
     }
     public static Proprietario getProprietario(String email){
         return listaProprietarios.get(email);
     }
+
+
     //PARA DEBUG APENAS, DEPOIS REMOVER
     public static String debugString(){
         StringBuilder sb = new StringBuilder();
@@ -126,6 +117,20 @@ public class EstadoAtual {
         return sb.toString();
     }
 
+
+    /**
+     * gets para debug principalmente
+     */
+
+    public static int getNrClientes() {
+        return nrClientes;
+    }
+    public static int getNrProprietarios() {
+        return nrProprietarios;
+    }
+    public static int getNrCarros() {
+        return nrCarros;
+    }
     public static Map<String, Cliente> getListaClientes() {
         return listaClientes;
     }

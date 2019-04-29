@@ -12,6 +12,7 @@ import java.util.Scanner;
  */
 
 public class IniciarEstado {
+
     /**
      * Metodo estatico que Inicializa um novo estado
      * começa por preparar novos registos ou logins
@@ -43,6 +44,11 @@ public class IniciarEstado {
                 break;
         }
     }
+
+    /**
+     * metodo estatico que carrega um estado de um ficheiro
+     * (utiliza outros metodos)
+     */
     public static void carregarEstado(){
         int opcao;
         Scanner sc = new Scanner(System.in);
@@ -70,6 +76,11 @@ public class IniciarEstado {
                 break;
         }
     }
+
+    /**
+     * metooo que grava um estado num ficheiro
+     * (utilia outros metodos
+     */
     public static void gravarEstado(){
         int opcao;
         Scanner sc = new Scanner(System.in);
@@ -98,6 +109,10 @@ public class IniciarEstado {
                 break;
         }
     }
+
+    /**
+     * menu para escolher qual dos 3 metodos acima vai executar
+     */
     public static void start() {
         int opcao;
         Scanner sc = new Scanner(System.in);

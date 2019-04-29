@@ -2,11 +2,29 @@ package master;
 
 import java.util.Scanner;
 
+/**
+ * Classe da interface de texto
+ *
+ * metodos especialmente estaticos
+ *
+ * @author Pedro Oliveira
+ * @version 29/04/2019
+ */
+
 public class Menu{
+    /**
+     * Metodo que depois de feito o login dá print do estado
+     * @param a cliente ou proprietario que fez login
+     */
     public static void debug(Actor a){
         System.out.println(a.toString());
         System.out.println(EstadoAtual.debugString());
     }
+
+    /**
+     * menu customizado para um cliente
+     * @param c cliente que fez login e vai utilizar o menu
+     */
     public static void menuCliente(Cliente c){
         int opcao;
         Scanner sc = new Scanner(System.in);
@@ -40,6 +58,11 @@ public class Menu{
                 break;
         }
     }
+
+    /**
+     * menu customizado para um proprietario
+     * @param p proprietario que fez login e vai utilizar o menu
+     */
     public static void menuProprietario(Proprietario p){
         int opcao;
         Scanner sc = new Scanner(System.in);
