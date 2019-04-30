@@ -82,7 +82,6 @@ public class fileIO {
                 //buffEscritor.write(entry.getValue().getLocalizacao());
                 //buffEscritor.write(entry.getValue().getHistorial());
             }
-
             buffEscritor.close();
         }
         catch(IOException ex) {
