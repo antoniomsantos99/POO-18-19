@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="06dd8317-f02e-403b-8158-b34d387589cf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/master/Aluguer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/master/Aluguer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/master/fileIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/master/fileIO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/master/Carro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/master/Carro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/master/EstadoAtual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/master/EstadoAtual.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,13 +36,12 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/master/Aluguer.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="844">
-                  <caret line="152" lean-forward="true" selection-start-line="152" selection-end-line="152" />
+                <state relative-caret-position="1105">
+                  <caret line="150" lean-forward="true" selection-start-line="150" selection-end-line="150" />
                   <folding>
-                    <element signature="imports" expanded="true" />
                     <element signature="docComment;method#Aluguer#0;class#Aluguer#0" />
                     <element signature="method#Aluguer#0;class#Aluguer#0" />
                     <element signature="method#Aluguer#2;class#Aluguer#0" />
@@ -50,8 +49,72 @@
                     <element signature="docComment;method#setProprietario#0;class#Aluguer#0" />
                     <element signature="method#equals#0;class#Aluguer#0" />
                     <element signature="method#toString#0;class#Aluguer#0" />
-                    <element signature="e#4298#4299#0" expanded="true" />
-                    <element signature="e#4338#4339#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/master/Carro.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="187">
+                  <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="method#Carro#0;class#Carro#0" />
+                    <element signature="method#Carro#1;class#Carro#0" />
+                    <element signature="method#Carro#2;class#Carro#0" />
+                    <element signature="method#getHistorico#0;class#Carro#0" />
+                    <element signature="e#1240#1335#0" />
+                    <element signature="e#1488#1489#0" expanded="true" />
+                    <element signature="e#1529#1530#0" expanded="true" />
+                    <element signature="e#1571#1572#0" expanded="true" />
+                    <element signature="e#1607#1608#0" expanded="true" />
+                    <element signature="e#1654#1655#0" expanded="true" />
+                    <element signature="e#1696#1697#0" expanded="true" />
+                    <element signature="method#setHistorico#0;class#Carro#0" />
+                    <element signature="e#1892#1893#0" expanded="true" />
+                    <element signature="e#1942#1943#0" expanded="true" />
+                    <element signature="e#1993#1994#0" expanded="true" />
+                    <element signature="e#2031#2032#0" expanded="true" />
+                    <element signature="method#equals#0;class#Carro#0" />
+                    <element signature="method#Gasolina#0;class#Gasolina#0" />
+                    <element signature="method#Gasolina#1;class#Gasolina#0" />
+                    <element signature="method#Gasolina#2;class#Gasolina#0" />
+                    <element signature="e#3383#3384#0" expanded="true" />
+                    <element signature="e#3421#3422#0" expanded="true" />
+                    <element signature="e#3470#3471#0" expanded="true" />
+                    <element signature="e#3514#3515#0" expanded="true" />
+                    <element signature="e#3545#3546#0" expanded="true" />
+                    <element signature="e#3586#3587#0" expanded="true" />
+                    <element signature="method#toString#0;class#Gasolina#0" />
+                    <element signature="method#equals#0;class#Gasolina#0" />
+                    <element signature="method#Eletrico#0;class#Eletrico#0" />
+                    <element signature="method#Eletrico#1;class#Eletrico#0" />
+                    <element signature="method#Eletrico#2;class#Eletrico#0" />
+                    <element signature="e#4585#4586#0" expanded="true" />
+                    <element signature="e#4623#4624#0" expanded="true" />
+                    <element signature="e#4673#4674#0" expanded="true" />
+                    <element signature="e#4717#4718#0" expanded="true" />
+                    <element signature="e#4748#4749#0" expanded="true" />
+                    <element signature="e#4789#4790#0" expanded="true" />
+                    <element signature="method#toString#0;class#Eletrico#0" />
+                    <element signature="method#equals#0;class#Eletrico#0" />
+                    <element signature="method#Hibrido#0;class#Hibrido#0" />
+                    <element signature="method#Hibrido#1;class#Hibrido#0" />
+                    <element signature="method#Hibrido#2;class#Hibrido#0" />
+                    <element signature="e#5954#5955#0" expanded="true" />
+                    <element signature="e#5992#5993#0" expanded="true" />
+                    <element signature="e#6025#6026#0" expanded="true" />
+                    <element signature="e#6063#6064#0" expanded="true" />
+                    <element signature="e#6108#6109#0" expanded="true" />
+                    <element signature="e#6148#6149#0" expanded="true" />
+                    <element signature="e#6192#6193#0" expanded="true" />
+                    <element signature="e#6232#6233#0" expanded="true" />
+                    <element signature="e#6262#6263#0" expanded="true" />
+                    <element signature="e#6302#6303#0" expanded="true" />
+                    <element signature="method#toString#0;class#Hibrido#0" />
+                    <element signature="method#equals#0;class#Hibrido#0" />
                   </folding>
                 </state>
               </provider>
@@ -84,11 +147,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/master/EstadoAtual.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="521">
-                  <caret line="103" selection-start-line="103" selection-end-line="103" />
+                <state relative-caret-position="560">
+                  <caret line="105" column="38" selection-start-line="105" selection-start-column="38" selection-end-line="105" selection-end-column="38" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="docComment;field#listaClientes#0;class#EstadoAtual#0" />
@@ -111,10 +174,10 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/master/Actor.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="191">
+                <state relative-caret-position="527">
                   <caret line="76" column="36" lean-forward="true" selection-start-line="76" selection-start-column="36" selection-end-line="76" selection-end-column="36" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -175,12 +238,12 @@
         <option value="$PROJECT_DIR$/src/master/Login.java" />
         <option value="$PROJECT_DIR$/src/master/Actor.java" />
         <option value="$PROJECT_DIR$/src/master/Registo.java" />
-        <option value="$PROJECT_DIR$/src/master/Carro.java" />
         <option value="$PROJECT_DIR$/src/master/Menu.java" />
         <option value="$PROJECT_DIR$/src/master/IniciarEstado.java" />
-        <option value="$PROJECT_DIR$/src/master/EstadoAtual.java" />
         <option value="$PROJECT_DIR$/src/master/fileIO.java" />
         <option value="$PROJECT_DIR$/src/master/Aluguer.java" />
+        <option value="$PROJECT_DIR$/src/master/Carro.java" />
+        <option value="$PROJECT_DIR$/src/master/EstadoAtual.java" />
       </list>
     </option>
   </component>
@@ -220,13 +283,6 @@
               <item name="POO-18-19" type="2674bda8:ScopeViewTreeModel$GroupNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="master" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="POO-18-19" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="POO-18-19" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="master" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Actor.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </path>
           </expand>
           <select />
@@ -419,37 +475,6 @@
     <entry file="file://$PROJECT_DIR$/state.txt" />
     <entry file="file://$PROJECT_DIR$/state1.txt" />
     <entry file="file://$PROJECT_DIR$/saves/estado1.txt" />
-    <entry file="file://$PROJECT_DIR$/src/master/Carro.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#Carro#0;class#Carro#0" />
-            <element signature="method#Carro#1;class#Carro#0" />
-            <element signature="method#Carro#2;class#Carro#0" />
-            <element signature="method#getHistorico#0;class#Carro#0" />
-            <element signature="method#setHistorico#0;class#Carro#0" />
-            <element signature="method#equals#0;class#Carro#0" />
-            <element signature="method#Gasolina#0;class#Gasolina#0" />
-            <element signature="method#Gasolina#1;class#Gasolina#0" />
-            <element signature="method#Gasolina#2;class#Gasolina#0" />
-            <element signature="method#toString#0;class#Gasolina#0" />
-            <element signature="method#equals#0;class#Gasolina#0" />
-            <element signature="method#Eletrico#0;class#Eletrico#0" />
-            <element signature="method#Eletrico#1;class#Eletrico#0" />
-            <element signature="method#Eletrico#2;class#Eletrico#0" />
-            <element signature="method#toString#0;class#Eletrico#0" />
-            <element signature="method#equals#0;class#Eletrico#0" />
-            <element signature="method#Hibrido#0;class#Hibrido#0" />
-            <element signature="method#Hibrido#1;class#Hibrido#0" />
-            <element signature="method#Hibrido#2;class#Hibrido#0" />
-            <element signature="method#toString#0;class#Hibrido#0" />
-            <element signature="method#equals#0;class#Hibrido#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/master/Registo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="704">
@@ -488,9 +513,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/saves/state.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/master/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -506,31 +528,6 @@
             <element signature="method#debug#0;class#Menu#0" />
             <element signature="method#menuCliente#0;class#Menu#0" />
             <element signature="method#menuProprietario#0;class#Menu#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/master/EstadoAtual.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="103" selection-start-line="103" selection-end-line="103" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;field#listaClientes#0;class#EstadoAtual#0" />
-            <element signature="docComment;method#addCliente#0;class#EstadoAtual#0" />
-            <element signature="method#addCliente#0;class#EstadoAtual#0" />
-            <element signature="docComment;method#addProprietario#0;class#EstadoAtual#0" />
-            <element signature="method#addProprietario#0;class#EstadoAtual#0" />
-            <element signature="docComment;method#addCarro#0;class#EstadoAtual#0" />
-            <element signature="method#addCarro#0;class#EstadoAtual#0" />
-            <element signature="docComment;method#verificaCliente#0;class#EstadoAtual#0" />
-            <element signature="docComment;method#verificaProprietario#0;class#EstadoAtual#0" />
-            <element signature="docComment;method#tryLoginCliente#0;class#EstadoAtual#0" />
-            <element signature="method#tryLoginCliente#0;class#EstadoAtual#0" />
-            <element signature="docComment;method#tryLoginProprietario#0;class#EstadoAtual#0" />
-            <element signature="method#tryLoginProprietario#0;class#EstadoAtual#0" />
-            <element signature="method#debugString#0;class#EstadoAtual#0" />
-            <element signature="docComment;method#getNrClientes#0;class#EstadoAtual#0" />
           </folding>
         </state>
       </provider>
@@ -551,7 +548,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/master/Actor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
+        <state relative-caret-position="527">
           <caret line="76" column="36" lean-forward="true" selection-start-line="76" selection-start-column="36" selection-end-line="76" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -574,10 +571,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/master/Aluguer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="844">
-          <caret line="152" lean-forward="true" selection-start-line="152" selection-end-line="152" />
+        <state relative-caret-position="1105">
+          <caret line="150" lean-forward="true" selection-start-line="150" selection-end-line="150" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="docComment;method#Aluguer#0;class#Aluguer#0" />
             <element signature="method#Aluguer#0;class#Aluguer#0" />
             <element signature="method#Aluguer#2;class#Aluguer#0" />
@@ -585,8 +581,109 @@
             <element signature="docComment;method#setProprietario#0;class#Aluguer#0" />
             <element signature="method#equals#0;class#Aluguer#0" />
             <element signature="method#toString#0;class#Aluguer#0" />
-            <element signature="e#4298#4299#0" expanded="true" />
-            <element signature="e#4338#4339#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/saves/state.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/master/Carro.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Carro#0;class#Carro#0" />
+            <element signature="method#Carro#1;class#Carro#0" />
+            <element signature="method#Carro#2;class#Carro#0" />
+            <element signature="method#getHistorico#0;class#Carro#0" />
+            <element signature="e#1240#1335#0" />
+            <element signature="e#1488#1489#0" expanded="true" />
+            <element signature="e#1529#1530#0" expanded="true" />
+            <element signature="e#1571#1572#0" expanded="true" />
+            <element signature="e#1607#1608#0" expanded="true" />
+            <element signature="e#1654#1655#0" expanded="true" />
+            <element signature="e#1696#1697#0" expanded="true" />
+            <element signature="method#setHistorico#0;class#Carro#0" />
+            <element signature="e#1892#1893#0" expanded="true" />
+            <element signature="e#1942#1943#0" expanded="true" />
+            <element signature="e#1993#1994#0" expanded="true" />
+            <element signature="e#2031#2032#0" expanded="true" />
+            <element signature="method#equals#0;class#Carro#0" />
+            <element signature="method#Gasolina#0;class#Gasolina#0" />
+            <element signature="method#Gasolina#1;class#Gasolina#0" />
+            <element signature="method#Gasolina#2;class#Gasolina#0" />
+            <element signature="e#3383#3384#0" expanded="true" />
+            <element signature="e#3421#3422#0" expanded="true" />
+            <element signature="e#3470#3471#0" expanded="true" />
+            <element signature="e#3514#3515#0" expanded="true" />
+            <element signature="e#3545#3546#0" expanded="true" />
+            <element signature="e#3586#3587#0" expanded="true" />
+            <element signature="method#toString#0;class#Gasolina#0" />
+            <element signature="method#equals#0;class#Gasolina#0" />
+            <element signature="method#Eletrico#0;class#Eletrico#0" />
+            <element signature="method#Eletrico#1;class#Eletrico#0" />
+            <element signature="method#Eletrico#2;class#Eletrico#0" />
+            <element signature="e#4585#4586#0" expanded="true" />
+            <element signature="e#4623#4624#0" expanded="true" />
+            <element signature="e#4673#4674#0" expanded="true" />
+            <element signature="e#4717#4718#0" expanded="true" />
+            <element signature="e#4748#4749#0" expanded="true" />
+            <element signature="e#4789#4790#0" expanded="true" />
+            <element signature="method#toString#0;class#Eletrico#0" />
+            <element signature="method#equals#0;class#Eletrico#0" />
+            <element signature="method#Hibrido#0;class#Hibrido#0" />
+            <element signature="method#Hibrido#1;class#Hibrido#0" />
+            <element signature="method#Hibrido#2;class#Hibrido#0" />
+            <element signature="e#5954#5955#0" expanded="true" />
+            <element signature="e#5992#5993#0" expanded="true" />
+            <element signature="e#6025#6026#0" expanded="true" />
+            <element signature="e#6063#6064#0" expanded="true" />
+            <element signature="e#6108#6109#0" expanded="true" />
+            <element signature="e#6148#6149#0" expanded="true" />
+            <element signature="e#6192#6193#0" expanded="true" />
+            <element signature="e#6232#6233#0" expanded="true" />
+            <element signature="e#6262#6263#0" expanded="true" />
+            <element signature="e#6302#6303#0" expanded="true" />
+            <element signature="method#toString#0;class#Hibrido#0" />
+            <element signature="method#equals#0;class#Hibrido#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/master/EstadoAtual.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="105" column="38" selection-start-line="105" selection-start-column="38" selection-end-line="105" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;field#listaClientes#0;class#EstadoAtual#0" />
+            <element signature="docComment;method#addCliente#0;class#EstadoAtual#0" />
+            <element signature="method#addCliente#0;class#EstadoAtual#0" />
+            <element signature="docComment;method#addProprietario#0;class#EstadoAtual#0" />
+            <element signature="method#addProprietario#0;class#EstadoAtual#0" />
+            <element signature="docComment;method#addCarro#0;class#EstadoAtual#0" />
+            <element signature="method#addCarro#0;class#EstadoAtual#0" />
+            <element signature="docComment;method#verificaCliente#0;class#EstadoAtual#0" />
+            <element signature="docComment;method#verificaProprietario#0;class#EstadoAtual#0" />
+            <element signature="docComment;method#tryLoginCliente#0;class#EstadoAtual#0" />
+            <element signature="method#tryLoginCliente#0;class#EstadoAtual#0" />
+            <element signature="docComment;method#tryLoginProprietario#0;class#EstadoAtual#0" />
+            <element signature="method#tryLoginProprietario#0;class#EstadoAtual#0" />
+            <element signature="method#debugString#0;class#EstadoAtual#0" />
+            <element signature="docComment;method#getNrClientes#0;class#EstadoAtual#0" />
           </folding>
         </state>
       </provider>

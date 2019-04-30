@@ -4,6 +4,12 @@ import java.lang.*;
 import java.util.*;
 
 
+//DUVIDA CARRO TEM MATRICULA?
+//DUVIDA CARRO TEM PROPRIETARIO ASSICIADO?
+//DUVIDA PROPRIETARIO TEM LISTA DE CARROS ASSOCIADOS?
+//DUVIDA CLIENTE TEM CLASSIFICAÇÃO?
+//DUVIDAS NOS ENRROS
+
 public class Carro
 {
 
@@ -43,6 +49,10 @@ public class Carro
         return this.precoBase;
     }
     public List<Aluguer> getHistorico() {
+        /*
+        ArrayList<Aluguer> a = new ArrayList<>(this.historico);
+        return a;
+        */
         ArrayList<Aluguer> a = new ArrayList<>();
         a.addAll(this.historico);
         return a;

@@ -17,9 +17,9 @@ public class EstadoAtual {
     /**
      * Declarações de variaveis globais para guardar todos os objetos
      */
-    private static Map<String,Cliente> listaClientes = new HashMap();
-    private static Map<String,Proprietario> listaProprietarios = new HashMap();
-    private static Map<String,Carro> listaCarros = new HashMap();
+    private static Map<String,Cliente> listaClientes = new HashMap<>();
+    private static Map<String,Proprietario> listaProprietarios = new HashMap<>();
+    private static Map<String,Carro> listaCarros = new HashMap<>();
     private static int nrClientes;
     private static int nrProprietarios;
     private static int nrCarros;

@@ -2,8 +2,6 @@ package master;
 
 import javafx.util.Pair;
 
-import java.util.Objects;
-
 /**
  * Classe do objeto de aluguer
  *
