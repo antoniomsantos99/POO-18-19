@@ -10,23 +10,28 @@ import java.util.*;
 //DUVIDA CLIENTE TEM CLASSIFICAÇÃO?
 //DUVIDAS NOS ENRROS
 
-public class Carro
-{
+public class Carro {
 
     //eliminar então o tipo
     //aluguer vai ter coordenadas, cliente, propietario, avaliacao do veiculo e do propieatario
+    protected String matricula;
+    protected Proprietario proprietario;
     protected int velMed;
     protected int precoBase;
     protected List<Aluguer> historico;
     protected int classificacao;
 
     public Carro() {
+        this.matricula = "";
+        this.proprietario = null;
         this.velMed = 0;
         this.precoBase = 0;
         this.historico = new ArrayList<Aluguer>();
         this.classificacao = 0;
     }
-    public Carro(int velMed, int precoBase, List<Aluguer> historico, int classificacao) {
+    public Carro(String matricula, Proprietario proprietario, int velMed, int precoBase, List<Aluguer> historico, int classificacao) {
+        this.matricula = matricula;
+        this.proprietario = proprietario;
         this.velMed = velMed;
         this.precoBase = precoBase;
         this.historico = new ArrayList <>();
@@ -34,14 +39,20 @@ public class Carro
         this.classificacao = classificacao;
     }
     public Carro(Carro umCarro) {
+        this.matricula = umCarro.getMatricula();
+        this.proprietario = umCarro.getProprietario();
         this.velMed = umCarro.getVelMed();
         this.precoBase = umCarro.getPrecoBase();
         this.historico = umCarro.getHistorico();
         this.classificacao = umCarro.getClassificacao();
     }
 
-    //DUVIDA NO GETHISTORICO
-
+    public String getMatricula(){
+        return this.matricula;
+    }
+    public Proprietario getProprietario(){
+        return this.proprietario;
+    }
     public int getVelMed() {
         return this.velMed;
     }
@@ -49,18 +60,18 @@ public class Carro
         return this.precoBase;
     }
     public List<Aluguer> getHistorico() {
-        /*
-        ArrayList<Aluguer> a = new ArrayList<>(this.historico);
-        return a;
-        */
-        ArrayList<Aluguer> a = new ArrayList<>();
-        a.addAll(this.historico);
-        return a;
+        return new ArrayList<>(this.historico);
     }
     public int getClassificacao() {
         return this.classificacao;
     }
 
+    public void setMatricula (String matricula){
+        this.matricula = matricula;
+    }
+    public void setProprietario (Proprietario proprietario){
+        this.proprietario = proprietario;
+    }
     public void setVelMed (int velMed) {
         this.velMed = velMed;
     }
@@ -75,8 +86,6 @@ public class Carro
         this.classificacao = classificacao;
     }
 
-    //DUVIDA NO CLONE
-
     public Carro clone() {
         return new Carro(this);
     }
@@ -84,7 +93,9 @@ public class Carro
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("\nDados do carro: \n");
-        sb.append("Velocidade: ").append(this.velMed);
+        sb.append("Matricula: ").append(this.matricula);
+        sb.append(", Proprietario: \n").append(this.proprietario.toString());
+        sb.append(", Velocidade: ").append(this.velMed);
         sb.append(", Preço/km: ").append(this.precoBase);
         sb.append(", Alugueres: ");
         for(Aluguer s : this.historico)
@@ -97,12 +108,16 @@ public class Carro
         if(o==this) return true;
         if(o==null || o.getClass ()!= this.getClass()) return false;
         Carro aux = (Carro) o;
-        return aux.getVelMed() == this.velMed
-                && aux.getPrecoBase() == this.precoBase
-                && aux.getHistorico().equals(this.historico)
-                && aux.getClassificacao() == this.classificacao;
+        return  aux.getMatricula().equals(this.matricula) &&
+                aux.getProprietario().equals(this.proprietario) &&
+                aux.getVelMed() == this.velMed &&
+                aux.getPrecoBase() == this.precoBase &&
+                aux.getHistorico().equals(this.historico) &&
+                aux.getClassificacao() == this.classificacao;
     }
 }
+
+//DAR UPDATE AO EQUALS
 
 class Gasolina extends Carro {
     private int consumoGas;
@@ -111,8 +126,8 @@ class Gasolina extends Carro {
         super();
         this.consumoGas = 0;
     }
-    public Gasolina (int velMed, int precoBase, List<Aluguer> historico, int classificacao, int consumoGas) {
-        super(velMed,precoBase,historico,classificacao);
+    public Gasolina (String matricula, Proprietario proprietario, int velMed, int precoBase, List<Aluguer> historico, int classificacao, int consumoGas) {
+        super(matricula,proprietario,velMed,precoBase,historico,classificacao);
         this.consumoGas = consumoGas;
     }
     public Gasolina (Gasolina umGasolina) {
@@ -153,8 +168,8 @@ class Eletrico extends Carro {
         super();
         this.consumoBat = 0;
     }
-    public Eletrico (int velMed, int precoBase, List<Aluguer> historico, int classificacao, int consumoBat) {
-        super(velMed,precoBase,historico,classificacao);
+    public Eletrico (String matricula, Proprietario proprietario, int velMed, int precoBase, List<Aluguer> historico, int classificacao, int consumoBat) {
+        super(matricula,proprietario,velMed,precoBase,historico,classificacao);
         this.consumoBat = consumoBat;
     }
     public Eletrico (Eletrico umEletrico) {
@@ -197,8 +212,8 @@ class Hibrido extends Carro {
         this.consumoGas = 0;
         this.consumoBat = 0;
     }
-    public Hibrido (int velMed, int precoBase, List<Aluguer> historico, int classificacao, int consumoGas, int consumoBat) {
-        super(velMed,precoBase,historico,classificacao);
+    public Hibrido (String matricula, Proprietario proprietario, int velMed, int precoBase, List<Aluguer> historico, int classificacao, int consumoGas, int consumoBat) {
+        super(matricula,proprietario,velMed,precoBase,historico,classificacao);
         this.consumoGas = consumoGas;
         this.consumoBat = consumoBat;
     }

@@ -73,7 +73,6 @@ public class Actor {
         this.dataNascimento = d;
     }
 
-    //IMPORTANTE - PERGUNTAR AO PROFESSOR ACERCA DO WARNING
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || o.getClass() != this.getClass()) return false;
@@ -99,26 +98,33 @@ public class Actor {
     }
 }
 
+//DAR UPDATE AO EQUALS
+
 class Proprietario extends Actor{
+    private List<Carro> listaCarros;
     private int classificacao;
     private List<Aluguer> historial;
 
     public Proprietario(){
         super();
+        this.listaCarros = new ArrayList<Carro>();
         this.classificacao = -1;
         this.historial = new ArrayList<Aluguer>();
     }
-    public Proprietario(String email, String nome, String password, String morada, String dataDeNascimento, int classificacao, ArrayList<Aluguer> historial){
+    public Proprietario(ArrayList<Carro> listaCarros, String email, String nome, String password, String morada, String dataDeNascimento, int classificacao, ArrayList<Aluguer> historial){
         super(email,nome,password,morada,dataDeNascimento);
+        this.listaCarros = listaCarros;
         this.classificacao = classificacao;
         this.historial = historial;
     }
     public Proprietario(Proprietario p){
         super(p);
+        this.listaCarros = p.getListaCarros();
         this.classificacao = p.getClassificacao();
         this.historial = p.getHistorial();
     }
 
+    public List<Carro> getListaCarros() {return new ArrayList<>(this.listaCarros);}
     public int getClassificacao() {
         return this.classificacao;
     }
@@ -126,6 +132,10 @@ class Proprietario extends Actor{
         return this.historial;
     }
 
+    public void setListaCarros (ArrayList<Carro> listaCarros){
+        this.listaCarros = new ArrayList<Carro>();
+        this.listaCarros.addAll(listaCarros);
+    }
     public void setClassificacao(int classificacao) {
         this.classificacao = classificacao;
     }

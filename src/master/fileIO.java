@@ -10,6 +10,10 @@ import java.util.HashMap;
  * @version 29/04/2019
  */
 
+//SERIALIZABLE
+
+//MAYBE TENTAR TOSTRING()
+
 
 public class fileIO {
 
@@ -38,6 +42,9 @@ public class fileIO {
             System.out.println("Erro: Não foi possivel ler o ficheiro '" + fileName + "'");
         }
     }
+
+    //MAYBE TENTAR TOSTRING()
+
 
     /**
      * metodo estatico que escreve o estado atual num ficheiro
