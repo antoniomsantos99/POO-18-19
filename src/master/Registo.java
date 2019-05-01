@@ -48,7 +48,7 @@ public class Registo {
         System.out.println("Introduza a sua localizacao atual: (Primeiro X, depois Y)");
         locX = sc.nextDouble();
         locY = sc.nextDouble();
-        localizacao = new Pair(locX,locY);
+        localizacao = new Pair<>(locX,locY);
         Cliente c = new Cliente(email,nome,password,morada,dataNascimento,localizacao,new ArrayList<>());
         System.out.println("Cliente " + nome + " criado com sucesso!");
         return c;
