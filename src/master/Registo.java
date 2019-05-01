@@ -80,7 +80,7 @@ public class Registo {
         morada = sc.nextLine();
         System.out.println("Introduza a sua data de Nascimento (DD/MM/YYYY):");
         dataNascimento = sc.nextLine();
-        Proprietario p = new Proprietario(email,nome,password,morada,dataNascimento,0,new ArrayList<>());
+        Proprietario p = new Proprietario(new ArrayList<>(),email,nome,password,morada,dataNascimento,0,new ArrayList<>());
         System.out.println("Proprietario " + nome + " criado com sucesso!");
         return p;
 
