@@ -36,17 +36,17 @@ public class Login {
                 System.out.println("Login efetuado com sucesso");
                 a = EstadoAtual.getCliente(email);
                 return true;
-            }else{System.out.println("password incorreta");loginCliente();}
+            }else{System.out.println("password incorreta!");loginCliente();}
 
         }else{
-            System.out.println("Nome de utilizador ou email não existe");
+            System.out.println("Email não encontrado!");
             loginCliente();
         }
         return false;
     }
 
     /**
-     * Metodo estatico que valida username ou email e password
+     * Metodo estatico que valida email e password
      * se estiverem corretos dá login, se não pode tentar novamente
      * tem a opçao de retroceder escrevendo -1
      */
@@ -55,7 +55,7 @@ public class Login {
         String email;
         String password;
         Scanner sc = new Scanner(System.in);
-        System.out.println("Introduza nome de utilizador ou email (-1 para cancelar):");
+        System.out.println("Introduza o seu email (-1 para cancelar):");
         email = sc.nextLine();
         if(email.equals("-1")){return false;}
         if(EstadoAtual.verificaProprietario(email)){
@@ -65,10 +65,10 @@ public class Login {
                 System.out.println("Login efetuado com sucesso");
                 a = EstadoAtual.getProprietario(email);
                 return true;
-            }else{System.out.println("password incorreta");loginProprietario();}
+            }else{System.out.println("password incorreta!");loginProprietario();}
 
         }else{
-            System.out.println("Nome de utilizador ou email não existe");
+            System.out.println("Email não encontrado!");
             loginProprietario();
         }
         return false;
