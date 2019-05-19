@@ -2,6 +2,7 @@ package master;
 
 import java.lang.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 //DUVIDA CARRO TEM MATRICULA?
@@ -18,24 +19,29 @@ public class Carro {
     protected Proprietario proprietario;
     protected int velMed;
     protected int precoBase;
+    protected Ponto localizacao;
     protected List<Aluguer> historico;
-    protected int classificacao;
+    protected List<Integer> classificacao;
 
     public Carro() {
         this.matricula = "";
-        this.proprietario = null;
+        this.proprietario = new Proprietario();
         this.velMed = 0;
         this.precoBase = 0;
+        this.localizacao = new Ponto();
         this.historico = new ArrayList<Aluguer>();
-        this.classificacao = 0;
+        this.classificacao = new ArrayList<Integer>();
     }
-    public Carro(String matricula, Proprietario proprietario, int velMed, int precoBase, List<Aluguer> historico, int classificacao) {
+    public Carro(String matricula, Proprietario proprietario, int velMed, int precoBase, Ponto localizacao, List<Aluguer> historico, List<Integer> classificacao) {
         this.matricula = matricula;
-        this.proprietario = proprietario;
+        this.proprietario = proprietario.clone();
         this.velMed = velMed;
         this.precoBase = precoBase;
+        this.localizacao = localizacao.clone();
         this.historico = new ArrayList <>();
-        this.historico.addAll(historico);
+        for(Aluguer a:historico){
+            this.historico.add(a);
+        }
         this.classificacao = classificacao;
     }
     public Carro(Carro umCarro) {
@@ -43,6 +49,7 @@ public class Carro {
         this.proprietario = umCarro.getProprietario();
         this.velMed = umCarro.getVelMed();
         this.precoBase = umCarro.getPrecoBase();
+        this.localizacao = umCarro.getLocalizacao();
         this.historico = umCarro.getHistorico();
         this.classificacao = umCarro.getClassificacao();
     }
@@ -51,7 +58,7 @@ public class Carro {
         return this.matricula;
     }
     public Proprietario getProprietario(){
-        return this.proprietario;
+        return this.proprietario.clone();
     }
     public int getVelMed() {
         return this.velMed;
@@ -59,10 +66,11 @@ public class Carro {
     public int getPrecoBase() {
         return this.precoBase;
     }
+    public Ponto getLocalizacao(){return this.localizacao.clone();}
     public List<Aluguer> getHistorico() {
-        return new ArrayList<>(this.historico);
+        return this.historico.stream().map(Aluguer::clone).collect(Collectors.toList());
     }
-    public int getClassificacao() {
+    public List<Integer> getClassificacao() {
         return this.classificacao;
     }
 
@@ -78,22 +86,27 @@ public class Carro {
     public void setPrecoBase (int precoBase) {
         this.precoBase = precoBase;
     }
-    public void setHistorico (List<Aluguer> novoH) {
-        this.historico = new ArrayList<>();
-        this.historico.addAll(novoH);
+    public void setLocalizacao(Ponto localizacao){
+        this.localizacao = localizacao.clone();
     }
-    public void setClassificacao (int classificacao) {
+    public void setHistorico (List<Aluguer> historico) {
+        this.historico = new ArrayList<>();
+        for(Aluguer a : historico){
+            this.historico.add(a.clone());
+        }
+    }
+    public void setClassificacao (List<Integer> classificacao) {
         this.classificacao = classificacao;
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\nDados do carro: \n");
         sb.append("Matricula: ").append(this.matricula);
         sb.append(", Proprietario: \n").append(this.proprietario.toString());
         sb.append(", Velocidade: ").append(this.velMed);
         sb.append(", Preço/km: ").append(this.precoBase);
-        sb.append(", Alugueres: ");
+        sb.append(", Localizacao: ").append(this.localizacao.toString());
+        sb.append(", Historico: ");
         for(Aluguer s : this.historico)
             sb.append(s);
         sb.append(", Classificacao: ").append(this.classificacao);
@@ -107,13 +120,12 @@ public class Carro {
                 aux.getProprietario().equals(this.proprietario) &&
                 aux.getVelMed() == this.velMed &&
                 aux.getPrecoBase() == this.precoBase &&
+                aux.getLocalizacao().equals(this.localizacao) &&
                 aux.getHistorico().equals(this.historico) &&
-                aux.getClassificacao() == this.classificacao;
+                aux.getClassificacao().equals(this.classificacao);
     }
     public Carro clone(){return new Carro(this);}
 }
-
-//DAR UPDATE AO EQUALS
 
 class Gasolina extends Carro {
     private int consumoGas;
@@ -122,8 +134,8 @@ class Gasolina extends Carro {
         super();
         this.consumoGas = 0;
     }
-    public Gasolina (String matricula, Proprietario proprietario, int velMed, int precoBase, List<Aluguer> historico, int classificacao, int consumoGas) {
-        super(matricula,proprietario,velMed,precoBase,historico,classificacao);
+    public Gasolina (String matricula, Proprietario proprietario, int velMed, int precoBase, Ponto localizacao, List<Aluguer> historico, List<Integer> classificacao, int consumoGas) {
+        super(matricula,proprietario,velMed,precoBase,localizacao,historico,classificacao);
         this.consumoGas = consumoGas;
     }
     public Gasolina (Gasolina umGasolina) {
@@ -144,9 +156,11 @@ class Gasolina extends Carro {
     }
 
     public String toString() {
-        StringBuilder st = new StringBuilder();
-        st.append(super.toString()).append(", consumoGas é igual a ").append(this.consumoGas).append(" litros por km");
-        return st.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Gasolina: \n");
+        sb.append(super.toString());
+        sb.append(", consumoGas: ").append(this.consumoGas);
+        return sb.toString();
     }
 
     public boolean equals(Object o) {
@@ -164,8 +178,8 @@ class Eletrico extends Carro {
         super();
         this.consumoBat = 0;
     }
-    public Eletrico (String matricula, Proprietario proprietario, int velMed, int precoBase, List<Aluguer> historico, int classificacao, int consumoBat) {
-        super(matricula,proprietario,velMed,precoBase,historico,classificacao);
+    public Eletrico (String matricula, Proprietario proprietario, int velMed, int precoBase, Ponto localizacao, List<Aluguer> historico, List<Integer> classificacao, int consumoBat) {
+        super(matricula,proprietario,velMed,precoBase,localizacao,historico,classificacao);
         this.consumoBat = consumoBat;
     }
     public Eletrico (Eletrico umEletrico) {
@@ -186,9 +200,11 @@ class Eletrico extends Carro {
     }
 
     public String toString() {
-        StringBuilder st = new StringBuilder();
-        st.append(super.toString()).append(", consumoBat é igual a ").append(this.consumoBat).append(" volts por km");
-        return st.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Eletrico: \n");
+        sb.append(super.toString());
+        sb.append(", consumoBat: ").append(this.consumoBat);
+        return sb.toString();
     }
 
     public boolean equals(Object o) {
@@ -208,8 +224,8 @@ class Hibrido extends Carro {
         this.consumoGas = 0;
         this.consumoBat = 0;
     }
-    public Hibrido (String matricula, Proprietario proprietario, int velMed, int precoBase, List<Aluguer> historico, int classificacao, int consumoGas, int consumoBat) {
-        super(matricula,proprietario,velMed,precoBase,historico,classificacao);
+    public Hibrido (String matricula, Proprietario proprietario, int velMed, int precoBase, Ponto localizacao, List<Aluguer> historico, List<Integer> classificacao, int consumoGas, int consumoBat) {
+        super(matricula,proprietario,velMed,precoBase,localizacao,historico,classificacao);
         this.consumoGas = consumoGas;
         this.consumoBat = consumoBat;
     }
@@ -238,10 +254,12 @@ class Hibrido extends Carro {
     }
 
     public String toString() {
-        StringBuilder st = new StringBuilder();
-        st.append(super.toString()).append(", consumoGas é igual a ").append(this.consumoGas).append(" litros por km");
-        st.append(super.toString()).append(", consumoBat é igual a ").append(this.consumoBat).append(" energias por km");
-        return st.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Hibrido: \n");
+        sb.append(super.toString());
+        sb.append(", consumoGas: ").append(this.consumoGas);
+        sb.append(", consumoBat: ").append(this.consumoBat);
+        return sb.toString();
     }
 
     public boolean equals(Object o) {

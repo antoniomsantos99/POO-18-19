@@ -2,6 +2,8 @@ package master;
 
 import javafx.util.Pair;
 
+import java.awt.*;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,13 +24,14 @@ public class Registo {
      * @return Cliente novo
      */
     public static Cliente comecarRegistoCliente(){
+
         String email;
         String nome;
         String password;
         String morada;
         String dataNascimento;
         double locX, locY;
-        Pair<Double,Double> localizacao;
+        Ponto localizacao;
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduza as informações seguites para se registar como cliente:");
         System.out.println("Introduza o seu e-mail:");
@@ -48,8 +51,9 @@ public class Registo {
         System.out.println("Introduza a sua localizacao atual: (Primeiro X, depois Y)");
         locX = sc.nextDouble();
         locY = sc.nextDouble();
-        localizacao = new Pair<>(locX,locY);
-        Cliente c = new Cliente(email,nome,password,morada,dataNascimento,localizacao,new ArrayList<>());
+        localizacao = new Ponto(locX, locY);
+        //MUDAR NIF
+        Cliente c = new Cliente(nome,0,email,password,morada,dataNascimento,localizacao,new ArrayList<>(),new ArrayList<>());
         System.out.println("Cliente " + nome + " criado com sucesso!");
         return c;
     }
@@ -80,7 +84,8 @@ public class Registo {
         morada = sc.nextLine();
         System.out.println("Introduza a sua data de Nascimento (DD/MM/YYYY):");
         dataNascimento = sc.nextLine();
-        Proprietario p = new Proprietario(new ArrayList<>(),email,nome,password,morada,dataNascimento,0,new ArrayList<>());
+        //MUDAR NIF
+        Proprietario p = new Proprietario(nome,0,email,password,morada,dataNascimento,new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
         System.out.println("Proprietario " + nome + " criado com sucesso!");
         return p;
 

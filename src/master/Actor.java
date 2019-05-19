@@ -1,7 +1,7 @@
 package master;
 
-import javafx.util.Pair;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -96,7 +96,6 @@ public abstract class Actor {
     }
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\nDados do cliente: \n");
         sb.append("Nome: ").append(this.nome);
         sb.append(", NIF: ").append(this.NIF);
         sb.append(", email: ").append(this.email);
@@ -157,6 +156,7 @@ class Proprietario extends Actor{
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
+        sb.append("Proprietario:\n");
         sb.append(super.toString());
         sb.append(", listaCarros: ");
         for(Carro c : this.listaCarros){sb.append(c.toString());}
@@ -178,7 +178,7 @@ class Proprietario extends Actor{
 }
 // MAYBE CORRIGIR CONSTRUTORES
 class Cliente extends Actor{
-    private Pair<Double,Double> localizacao;
+    private Ponto localizacao;
     private List<Integer> classificacao;
     private List<Aluguer> historial;
 
@@ -186,13 +186,13 @@ class Cliente extends Actor{
 
     public Cliente(){
         super();
-        this.localizacao = new Pair<>(0.0,0.0);
+        this.localizacao = new Ponto(0.0,0.0);
         this.classificacao = new ArrayList<Integer>();
         this.historial = new ArrayList<Aluguer>();
     }
-    public Cliente( String nome, int NIF, String email, String password, String morada, String dataNascimento, Pair<Double,Double> localizacao, ArrayList<Integer> classificacao, ArrayList<Aluguer> historial){
+    public Cliente( String nome, int NIF, String email, String password, String morada, String dataNascimento, Ponto localizacao, ArrayList<Integer> classificacao, ArrayList<Aluguer> historial){
         super(nome,NIF,email,password,morada,dataNascimento);
-        this.localizacao = localizacao;
+        this.localizacao = localizacao.clone();
         this.classificacao = classificacao;
         this.historial = historial;
     }
@@ -202,22 +202,22 @@ class Cliente extends Actor{
         this.historial=c.getHistorial();
     }
 
-    public Pair<Double, Double> getLocalizacao() {
-        return this.localizacao;
+    public Ponto getLocalizacao() {
+        return this.localizacao.clone();
     }
     public List<Integer> getClassificacao(){return this.classificacao;}
     public List<Aluguer> getHistorial() {
         return this.historial.stream().map(Aluguer::clone).collect(Collectors.toList());
     }
 
-    public void setLocalizacao(Pair<Double, Double> localizacao) {
-        this.localizacao = localizacao;
+    public void setLocalizacao(Ponto localizacao) {
+        this.localizacao = localizacao.clone();
     }
     public void setClassificacao(List<Integer> classificacao){this.classificacao = classificacao;}
     public void setHistorial(List<Aluguer> historial) {
         this.historial = new ArrayList<Aluguer>();
         for(Aluguer a: historial){
-            this.historial.add(a);
+            this.historial.add(a.clone());
         }
     }
 
@@ -232,8 +232,9 @@ class Cliente extends Actor{
     }
     public String toString(){
         StringBuilder sb = new StringBuilder();
+        sb.append("Cliente:\n");
         sb.append(super.toString());
-        sb.append(", localizacao: ").append(this.localizacao);
+        sb.append(", localizacao: ").append(this.localizacao.toString());
         sb.append(", classificacao: ").append(this.classificacao);
         sb.append(", historial: ");
         for(Aluguer a : this.historial) {sb.append(a.toString());}

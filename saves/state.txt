@@ -1,9 +1,21 @@
-Nr Clientes: 0
-Nr Proprietarios: 1
+Nr Clientes: 1
+Cliente
+a
+a
+a
+a
+b
+Nr Proprietarios: 2
 Proprietario
 a
 a
 a
 a
 a
+Proprietario
+b
+b
+b
+b
+b
 Nr Carros: 0
