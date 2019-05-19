@@ -86,10 +86,6 @@ public class Carro {
         this.classificacao = classificacao;
     }
 
-    public Carro clone() {
-        return new Carro(this);
-    }
-
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("\nDados do carro: \n");
@@ -103,7 +99,6 @@ public class Carro {
         sb.append(", Classificacao: ").append(this.classificacao);
         return sb.toString();
     }
-
     public boolean equals (Object o) {
         if(o==this) return true;
         if(o==null || o.getClass ()!= this.getClass()) return false;
@@ -115,6 +110,7 @@ public class Carro {
                 aux.getHistorico().equals(this.historico) &&
                 aux.getClassificacao() == this.classificacao;
     }
+    public Carro clone(){return new Carro(this);}
 }
 
 //DAR UPDATE AO EQUALS

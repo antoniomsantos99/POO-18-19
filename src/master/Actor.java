@@ -2,6 +2,7 @@ package master;
 
 import javafx.util.Pair;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Classe Super do Cliente e do Proprietario
@@ -12,40 +13,45 @@ import java.util.*;
  * @version 25/04/2019
  */
 
-public class Actor {
-    protected String email;
+public abstract class Actor {
     protected String nome;
+    protected int NIF;
+    protected String email;
     protected String password;
     protected String morada;
     protected String dataNascimento;
 
     public Actor(){
-        this.email = "n/a";
         this.nome = "n/a";
+        this.NIF = 0;
+        this.email = "n/a";
         this.password = "n/a";
         this.morada = "n/a";
         this.dataNascimento ="n/a";
     }
-    public Actor(String email, String nome, String password, String morada, String dataNascimento) {
-        this.email = email;
+    public Actor(String nome, int NIF, String email, String password, String morada, String dataNascimento) {
         this.nome = nome;
+        this.NIF = NIF;
+        this.email = email;
         this.password = password;
         this.morada = morada;
         this.dataNascimento = dataNascimento;
     }
     public Actor(Actor umActor){
-        this.email = umActor.getEmail();
         this.nome = umActor.getNome();
+        this.NIF = umActor.getNIF();
+        this.email = umActor.getEmail();
         this.password = umActor.getPassword();
         this.morada = umActor.getMorada();
         this.dataNascimento = umActor.getDataNascimento();
     }
 
-    public String getEmail() {
-        return this.email;
-    }
     public String getNome() {
         return this.nome;
+    }
+    public int getNIF() { return this.NIF; }
+    public String getEmail() {
+        return this.email;
     }
     public String getPassword() {
         return this.password;
@@ -57,28 +63,33 @@ public class Actor {
         return this.dataNascimento;
     }
 
-    public void setEmail (String e) {
-        this.email = e;
+
+    public void setNome (String nome) {
+        this.nome = nome;
     }
-    public void setNome (String n) {
-        this.nome = n;
+    public void setEmail (String email) {
+        this.email = email;
     }
-    public void setPassword (String p) {
-        this.password = p;
+    public void setNIF (int nif) {
+        this.NIF = nif;
     }
-    public void setMorada (String m) {
-        this.morada = m;
+    public void setPassword (String password) {
+        this.password = password;
     }
-    public void setDataNascimento (String d) {
-        this.dataNascimento = d;
+    public void setMorada (String morada) {
+        this.morada = morada;
+    }
+    public void setDataNascimento (String dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || o.getClass() != this.getClass()) return false;
         Actor a = (Actor) o;
-        return  a.getEmail().equals(this.email) &&
-                a.getNome().equals(this.nome) &&
+        return  a.getNome().equals(this.nome) &&
+                a.getNIF() == this.NIF &&
+                a.getEmail().equals(this.email) &&
                 a.getPassword().equals(this.password) &&
                 a.getMorada().equals(this.morada) &&
                 a.getDataNascimento().equals(this.dataNascimento);
@@ -86,33 +97,29 @@ public class Actor {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("\nDados do cliente: \n");
-        sb.append("Email: ").append(this.email);
-        sb.append(", nome: ").append(this.nome);
+        sb.append("Nome: ").append(this.nome);
+        sb.append(", NIF: ").append(this.NIF);
+        sb.append(", email: ").append(this.email);
         sb.append(", password: ").append(this.password);
         sb.append(", morada: ").append(this.morada);
         sb.append(", data de nascimento: ").append(this.dataNascimento);
         return sb.toString();
     }
-    public Actor clone() {
-        return new Actor(this);
-    }
 }
-
-//DAR UPDATE AO EQUALS
-
+// MAYBE CORRIGIR CONSTRUTORES
 class Proprietario extends Actor{
     private List<Carro> listaCarros;
-    private int classificacao;
+    private List<Integer> classificacao;
     private List<Aluguer> historial;
 
     public Proprietario(){
         super();
         this.listaCarros = new ArrayList<Carro>();
-        this.classificacao = -1;
+        this.classificacao = new ArrayList<Integer>();
         this.historial = new ArrayList<Aluguer>();
     }
-    public Proprietario(ArrayList<Carro> listaCarros, String email, String nome, String password, String morada, String dataDeNascimento, int classificacao, ArrayList<Aluguer> historial){
-        super(email,nome,password,morada,dataDeNascimento);
+    public Proprietario(String nome, int NIF, String email, String password, String morada, String dataDeNascimento, List<Carro> listaCarros, List<Integer> classificacao, ArrayList<Aluguer> historial){
+        super(nome,NIF,email,password,morada,dataDeNascimento);
         this.listaCarros = listaCarros;
         this.classificacao = classificacao;
         this.historial = historial;
@@ -124,31 +131,38 @@ class Proprietario extends Actor{
         this.historial = p.getHistorial();
     }
 
-    public List<Carro> getListaCarros() {return new ArrayList<>(this.listaCarros);}
-    public int getClassificacao() {
+    public List<Carro> getListaCarros() {return this.listaCarros.stream().map(Carro::clone).collect(Collectors.toList());}
+    public List<Integer> getClassificacao() {
         return this.classificacao;
     }
     public List<Aluguer> getHistorial() {
-        return this.historial;
+        return this.historial.stream().map(Aluguer::clone).collect(Collectors.toList());
     }
 
     public void setListaCarros (ArrayList<Carro> listaCarros){
         this.listaCarros = new ArrayList<Carro>();
-        this.listaCarros.addAll(listaCarros);
+        for(Carro c:listaCarros){
+            this.listaCarros.add(c);
+        }
     }
-    public void setClassificacao(int classificacao) {
+    public void setClassificacao(List<Integer> classificacao) {
         this.classificacao = classificacao;
     }
     public void setHistorial(List<Aluguer> historial) {
-        this.historial = historial;
+        this.historial = new ArrayList<Aluguer>();
+        for(Aluguer a: historial){
+            this.historial.add(a);
+        }
     }
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append(super.toString());
+        sb.append(", listaCarros: ");
+        for(Carro c : this.listaCarros){sb.append(c.toString());}
         sb.append(", classificação: ").append(this.classificacao);
         sb.append(", historial: ");
-        for(Aluguer a : this.historial) {sb.append(a);}
+        for(Aluguer a : this.historial) {sb.append(a.toString());}
         return sb.toString();
     }
     public boolean equals(Object o) {
@@ -156,13 +170,16 @@ class Proprietario extends Actor{
         if (o == null || o.getClass() != this.getClass()) return false;
         Proprietario p = (Proprietario) o;
         return super.equals(o) &&
-                this.classificacao == p.getClassificacao();
+                this.listaCarros.equals(p.getListaCarros()) &&
+                this.classificacao.equals(p.getClassificacao()) &&
+                this.historial.equals(p.getHistorial());
     }
     public Proprietario clone(){return new Proprietario(this);}
 }
-
+// MAYBE CORRIGIR CONSTRUTORES
 class Cliente extends Actor{
     private Pair<Double,Double> localizacao;
+    private List<Integer> classificacao;
     private List<Aluguer> historial;
 
     //DUVIDA CLIENTE CONSTRUTOR
@@ -170,12 +187,14 @@ class Cliente extends Actor{
     public Cliente(){
         super();
         this.localizacao = new Pair<>(0.0,0.0);
+        this.classificacao = new ArrayList<Integer>();
         this.historial = new ArrayList<Aluguer>();
     }
-    public Cliente(String email, String nome, String password, String morada, String dataNascimento, Pair<Double,Double> localizacao, ArrayList<Aluguer> historial){
-        super(email,nome,password,morada,dataNascimento);
-        this.localizacao=localizacao;
-        this.historial=historial;
+    public Cliente( String nome, int NIF, String email, String password, String morada, String dataNascimento, Pair<Double,Double> localizacao, ArrayList<Integer> classificacao, ArrayList<Aluguer> historial){
+        super(nome,NIF,email,password,morada,dataNascimento);
+        this.localizacao = localizacao;
+        this.classificacao = classificacao;
+        this.historial = historial;
     }
     public Cliente(Cliente c){
         super(c);
@@ -186,28 +205,38 @@ class Cliente extends Actor{
     public Pair<Double, Double> getLocalizacao() {
         return this.localizacao;
     }
+    public List<Integer> getClassificacao(){return this.classificacao;}
     public List<Aluguer> getHistorial() {
-        return this.historial;
+        return this.historial.stream().map(Aluguer::clone).collect(Collectors.toList());
     }
 
     public void setLocalizacao(Pair<Double, Double> localizacao) {
         this.localizacao = localizacao;
     }
-    public void setHistorial(List<Aluguer> historial) { this.historial = historial; }
+    public void setClassificacao(List<Integer> classificacao){this.classificacao = classificacao;}
+    public void setHistorial(List<Aluguer> historial) {
+        this.historial = new ArrayList<Aluguer>();
+        for(Aluguer a: historial){
+            this.historial.add(a);
+        }
+    }
 
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || o.getClass() != this.getClass()) return false;
         Cliente p = (Cliente) o;
-        return super.equals(o) &&
-                (this.localizacao).equals(p.getLocalizacao());
+        return  super.equals(o) &&
+                this.localizacao.equals(p.getLocalizacao()) &&
+                this.classificacao.equals(p.getClassificacao()) &&
+                this.historial.equals(p.getHistorial());
     }
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append(super.toString());
         sb.append(", localizacao: ").append(this.localizacao);
+        sb.append(", classificacao: ").append(this.classificacao);
         sb.append(", historial: ");
-        for(Aluguer a : this.historial) {sb.append(a);}
+        for(Aluguer a : this.historial) {sb.append(a.toString());}
         return sb.toString();
     }
     public Cliente clone(){return new Cliente(this);}
