@@ -105,7 +105,7 @@ public abstract class Actor {
         return sb.toString();
     }
 }
-// MAYBE CORRIGIR CONSTRUTORES
+// CORRIGIR CONSTRUTORES
 class Proprietario extends Actor{
     private List<Carro> listaCarros;
     private List<Integer> classificacao;
@@ -176,7 +176,7 @@ class Proprietario extends Actor{
     }
     public Proprietario clone(){return new Proprietario(this);}
 }
-// MAYBE CORRIGIR CONSTRUTORES
+//CORRIGIR CONSTRUTORES
 class Cliente extends Actor{
     private Ponto localizacao;
     private List<Integer> classificacao;

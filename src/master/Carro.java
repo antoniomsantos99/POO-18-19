@@ -40,7 +40,7 @@ public class Carro {
         this.localizacao = localizacao.clone();
         this.historico = new ArrayList <>();
         for(Aluguer a:historico){
-            this.historico.add(a);
+            this.historico.add(a.clone());
         }
         this.classificacao = classificacao;
     }
