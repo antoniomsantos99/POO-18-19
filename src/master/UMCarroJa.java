@@ -27,15 +27,16 @@ public class UMCarroJa{
 
             switch (menuPrincipal.getOpcao()){
                 case 1:
-                    estado = new Estado();
+                    new LoginRegisto().run(estado);
                     break;
                 case 2:
                     estado.carregarEstado();
-                    System.out.println(estado.debugString());
+                    new LoginRegisto().run(estado);
+                    //System.out.println(estado.debugString());
                     break;
                 case 3:
                     estado.gravarEstado();
-                    System.out.println(estado.debugString());
+                    //System.out.println(estado.debugString());
                     break;
             }
         }while(menuPrincipal.getOpcao()!=0);

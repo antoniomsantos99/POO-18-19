@@ -1,7 +1,7 @@
 package master;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -18,6 +18,8 @@ public class Estado {
     /**
      * Declarações de variaveis globais para guardar todos os objetos
      */
+    private final String path = "saves/";
+
     private Map<String,Cliente> listaClientes;
     private Map<String,Proprietario> listaProprietarios;
     private Map<String,Carro> listaCarros;
@@ -115,24 +117,108 @@ public class Estado {
             m.executa();
             switch(m.getOpcao()){
                 case 1:
+                    try{
+                        lerCVC(path+"state.txt");
+                    }catch(FileNotFoundException e){
+                        System.out.println("Erro: Não foi possivel ler o ficheiro.");
+                    }catch(IOException io){
+                        System.out.println("Erro: Problema ao tentar ler");
+                    }
                     break;
                 case 2:
+                    Scanner is = new Scanner(System.in);
+                    System.out.print("Nome do Ficheiro que pretende carregar (.txt): ");
+                    String nomeFile = is.nextLine();
+                    try{
+                        lerCVC(path+nomeFile);
+                    }catch(FileNotFoundException e){
+                        System.out.println("Erro: Não foi possivel ler o ficheiro.");
+                    }catch(IOException io){
+                        System.out.println("Erro: Problema ao tentar ler");
+                    }
                     break;
             }
-        }while(m.getOpcao()!=0);
+        }while(m.getOpcao()<0);
 
     }
     public void gravarEstado(){
         String[] opcoes = {"Gravar Rápido","Gravar com Nome do ficheiro"};
         Menu m = new Menu(opcoes);
+        do{
+            m.executa();
+            switch(m.getOpcao()){
+                case 1:
+                    try{
+                        escreverFile(path+"state.txt");
+                    }catch(FileNotFoundException e){
+                        System.out.println("Erro: Não foi possivel guardar o ficheiro.");
+                    }
+                    break;
+                case 2:
+                    Scanner is = new Scanner(System.in);
+                    System.out.print("Nome do Ficheiro que pretende gravar (.txt): ");
+                    String nomeFile = is.nextLine();
+                    try{
+                        escreverFile(path+nomeFile);
+                    }catch(FileNotFoundException e){
+                        System.out.println("Erro: Não foi possivel guardar o ficheiro.");
+                    }
+                    break;
+            }
+        }while(m.getOpcao()<0);
 
     }
 
+    private void escreverFile(String file) throws FileNotFoundException {
+
+        PrintWriter fich = new PrintWriter(file);
+        for(Cliente c: this.listaClientes.values())
+            fich.println(c.toString());
+        for(Proprietario p: this.listaProprietarios.values())
+            fich.println(p.toString());
+        for(Carro c: this.listaCarros.values())
+            fich.println(c.toString());
+
+        fich.flush();
+        fich.close();
+    }
+
+    private void lerCVC(String file) throws FileNotFoundException, IOException {
+        List<String> linhas = new ArrayList<>();
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        String linha;
+
+        while( (linha = br.readLine()) != null ) {
+            linhas.add(linha);
+        }
+        br.close();
+        System.out.println(linhas);
+
+        linhas.forEach(s -> {
+            if(s.equals("NovoProp:")) CVC2Proprietario(s);
+            if(s.equals("NovoCliente:")) CVC2Cliente(s);
+            if(s.equals("NovoCarro:")) CVC2Carro(s);
+        });
+    }
+
+    //TODO
+    private void CVC2Cliente(String linha){
+        Cliente c = null;
+
+    }
+    private void CVC2Proprietario(String linha){
+        Proprietario p = null;
+
+    }
+    private void CVC2Carro(String linha){
+        Carro c = null;
+
+    }
 
     //PARA DEBUG APENAS, DEPOIS REMOVER
     public String debugString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Map de Clientes:");
+        sb.append("Map de Clientes:\n");
         sb.append(listaClientes.toString());
         sb.append("\nMap de Proprietarios:\n");
         sb.append(listaProprietarios.toString());
