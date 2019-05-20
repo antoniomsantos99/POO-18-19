@@ -4,14 +4,7 @@ import java.lang.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
-//DUVIDA CARRO TEM MATRICULA?
-//DUVIDA CARRO TEM PROPRIETARIO ASSICIADO?
-//DUVIDA PROPRIETARIO TEM LISTA DE CARROS ASSOCIADOS?
-//DUVIDA CLIENTE TEM CLASSIFICAÇÃO?
-//DUVIDAS NOS ENRROS
-
-public class Carro {
+public abstract class Carro {
 
     //eliminar então o tipo
     //aluguer vai ter coordenadas, cliente, propietario, avaliacao do veiculo e do propieatario
@@ -71,7 +64,11 @@ public class Carro {
         return this.historico.stream().map(Aluguer::clone).collect(Collectors.toList());
     }
     public List<Integer> getClassificacao() {
-        return this.classificacao;
+        List<Integer> lista = new ArrayList<Integer>();
+        for(Integer i:this.classificacao){
+            lista.add(i);
+        }
+        return lista;
     }
 
     public void setMatricula (String matricula){
@@ -96,13 +93,16 @@ public class Carro {
         }
     }
     public void setClassificacao (List<Integer> classificacao) {
-        this.classificacao = classificacao;
+        this.classificacao = new ArrayList<Integer>();
+        for(Integer i:classificacao){
+            this.classificacao.add(i);
+        }
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Matricula: ").append(this.matricula);
-        sb.append(", Proprietario: \n").append(this.proprietario.toString());
+        sb.append(", Proprietario: ").append(this.proprietario.toString());
         sb.append(", Velocidade: ").append(this.velMed);
         sb.append(", Preço/km: ").append(this.precoBase);
         sb.append(", Localizacao: ").append(this.localizacao.toString());
@@ -124,7 +124,7 @@ public class Carro {
                 aux.getHistorico().equals(this.historico) &&
                 aux.getClassificacao().equals(this.classificacao);
     }
-    public Carro clone(){return new Carro(this);}
+    public abstract Carro clone();
 }
 
 class Gasolina extends Carro {

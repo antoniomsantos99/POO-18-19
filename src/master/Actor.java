@@ -20,6 +20,8 @@ public abstract class Actor {
     protected String password;
     protected String morada;
     protected String dataNascimento;
+    private List<Aluguer> historial;
+    private List<Integer> classificacao;
 
     public Actor(){
         this.nome = "n/a";
@@ -29,13 +31,16 @@ public abstract class Actor {
         this.morada = "n/a";
         this.dataNascimento ="n/a";
     }
-    public Actor(String nome, int NIF, String email, String password, String morada, String dataNascimento) {
+    public Actor(String nome, int NIF, String email, String password, String morada, String dataNascimento, List<Aluguer> historial, List<Integer> classificacao) {
         this.nome = nome;
         this.NIF = NIF;
         this.email = email;
         this.password = password;
         this.morada = morada;
         this.dataNascimento = dataNascimento;
+        this.historial = historial.stream().map(Aluguer::clone).collect(Collectors.toList());
+        this.classificacao = new ArrayList<>();
+        for(Integer i:classificacao){this.classificacao.add(i);}
     }
     public Actor(Actor umActor){
         this.nome = umActor.getNome();
@@ -44,6 +49,8 @@ public abstract class Actor {
         this.password = umActor.getPassword();
         this.morada = umActor.getMorada();
         this.dataNascimento = umActor.getDataNascimento();
+        this.historial = umActor.getHistorial();
+        this.classificacao = umActor.getClassificacao();
     }
 
     public String getNome() {
@@ -61,6 +68,16 @@ public abstract class Actor {
     }
     public String getDataNascimento() {
         return this.dataNascimento;
+    }
+    public List<Aluguer> getHistorial(){
+        return this.historial.stream().map(Aluguer::clone).collect(Collectors.toList());
+    }
+    public List<Integer> getClassificacao(){
+        List<Integer> lista = new ArrayList<Integer>();
+        for(Integer i:this.classificacao){
+            lista.add(i);
+        }
+        return lista;
     }
 
 
@@ -82,6 +99,15 @@ public abstract class Actor {
     public void setDataNascimento (String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+    public void setHistorial (List<Aluguer> historial){
+        this.historial = historial.stream().map(Aluguer::clone).collect(Collectors.toList());
+    }
+    public void setClassificacao (List<Integer> classificacao){
+        this.classificacao = new ArrayList<Integer>();
+        for(Integer i:classificacao){
+            this.classificacao.add(i);
+        }
+    }
 
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -92,7 +118,9 @@ public abstract class Actor {
                 a.getEmail().equals(this.email) &&
                 a.getPassword().equals(this.password) &&
                 a.getMorada().equals(this.morada) &&
-                a.getDataNascimento().equals(this.dataNascimento);
+                a.getDataNascimento().equals(this.dataNascimento) &&
+                a.getHistorial().equals(this.historial) &&
+                a.getClassificacao().equals(this.classificacao);
     }
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -102,56 +130,34 @@ public abstract class Actor {
         sb.append(", password: ").append(this.password);
         sb.append(", morada: ").append(this.morada);
         sb.append(", data de nascimento: ").append(this.dataNascimento);
+        sb.append(", historial: ").append(this.historial);
+        sb.append(", classificacao: ").append(this.classificacao);
         return sb.toString();
     }
 }
-// CORRIGIR CONSTRUTORES
+
 class Proprietario extends Actor{
     private List<Carro> listaCarros;
-    private List<Integer> classificacao;
-    private List<Aluguer> historial;
 
     public Proprietario(){
         super();
         this.listaCarros = new ArrayList<Carro>();
-        this.classificacao = new ArrayList<Integer>();
-        this.historial = new ArrayList<Aluguer>();
     }
     public Proprietario(String nome, int NIF, String email, String password, String morada, String dataDeNascimento, List<Carro> listaCarros, List<Integer> classificacao, ArrayList<Aluguer> historial){
-        super(nome,NIF,email,password,morada,dataDeNascimento);
-        this.listaCarros = listaCarros;
-        this.classificacao = classificacao;
-        this.historial = historial;
+        super(nome,NIF,email,password,morada,dataDeNascimento,historial,classificacao);
+        this.listaCarros = listaCarros.stream().map(Carro::clone).collect(Collectors.toList());
     }
     public Proprietario(Proprietario p){
         super(p);
         this.listaCarros = p.getListaCarros();
-        this.classificacao = p.getClassificacao();
-        this.historial = p.getHistorial();
     }
 
-    public List<Carro> getListaCarros() {return this.listaCarros.stream().map(Carro::clone).collect(Collectors.toList());}
-    public List<Integer> getClassificacao() {
-        return this.classificacao;
-    }
-    public List<Aluguer> getHistorial() {
-        return this.historial.stream().map(Aluguer::clone).collect(Collectors.toList());
+    public List<Carro> getListaCarros() {
+        return this.listaCarros.stream().map(Carro::clone).collect(Collectors.toList());
     }
 
     public void setListaCarros (ArrayList<Carro> listaCarros){
-        this.listaCarros = new ArrayList<Carro>();
-        for(Carro c:listaCarros){
-            this.listaCarros.add(c);
-        }
-    }
-    public void setClassificacao(List<Integer> classificacao) {
-        this.classificacao = classificacao;
-    }
-    public void setHistorial(List<Aluguer> historial) {
-        this.historial = new ArrayList<Aluguer>();
-        for(Aluguer a: historial){
-            this.historial.add(a);
-        }
+        this.listaCarros = listaCarros.stream().map(Carro::clone).collect(Collectors.toList());
     }
 
     public String toString(){
@@ -160,9 +166,6 @@ class Proprietario extends Actor{
         sb.append(super.toString());
         sb.append(", listaCarros: ");
         for(Carro c : this.listaCarros){sb.append(c.toString());}
-        sb.append(", classificação: ").append(this.classificacao);
-        sb.append(", historial: ");
-        for(Aluguer a : this.historial) {sb.append(a.toString());}
         return sb.toString();
     }
     public boolean equals(Object o) {
@@ -170,55 +173,35 @@ class Proprietario extends Actor{
         if (o == null || o.getClass() != this.getClass()) return false;
         Proprietario p = (Proprietario) o;
         return super.equals(o) &&
-                this.listaCarros.equals(p.getListaCarros()) &&
-                this.classificacao.equals(p.getClassificacao()) &&
-                this.historial.equals(p.getHistorial());
+                this.listaCarros.equals(p.getListaCarros());
     }
     public Proprietario clone(){return new Proprietario(this);}
 }
-//CORRIGIR CONSTRUTORES
+
 class Cliente extends Actor{
     private Ponto localizacao;
-    private List<Integer> classificacao;
-    private List<Aluguer> historial;
 
     //DUVIDA CLIENTE CONSTRUTOR
 
     public Cliente(){
         super();
         this.localizacao = new Ponto(0.0,0.0);
-        this.classificacao = new ArrayList<Integer>();
-        this.historial = new ArrayList<Aluguer>();
     }
     public Cliente( String nome, int NIF, String email, String password, String morada, String dataNascimento, Ponto localizacao, ArrayList<Integer> classificacao, ArrayList<Aluguer> historial){
-        super(nome,NIF,email,password,morada,dataNascimento);
+        super(nome,NIF,email,password,morada,dataNascimento,historial,classificacao);
         this.localizacao = localizacao.clone();
-        this.classificacao = classificacao;
-        this.historial = historial;
     }
     public Cliente(Cliente c){
         super(c);
         this.localizacao=c.getLocalizacao();
-        this.historial=c.getHistorial();
     }
 
     public Ponto getLocalizacao() {
         return this.localizacao.clone();
     }
-    public List<Integer> getClassificacao(){return this.classificacao;}
-    public List<Aluguer> getHistorial() {
-        return this.historial.stream().map(Aluguer::clone).collect(Collectors.toList());
-    }
 
     public void setLocalizacao(Ponto localizacao) {
         this.localizacao = localizacao.clone();
-    }
-    public void setClassificacao(List<Integer> classificacao){this.classificacao = classificacao;}
-    public void setHistorial(List<Aluguer> historial) {
-        this.historial = new ArrayList<Aluguer>();
-        for(Aluguer a: historial){
-            this.historial.add(a.clone());
-        }
     }
 
     public boolean equals(Object o) {
@@ -226,18 +209,13 @@ class Cliente extends Actor{
         if (o == null || o.getClass() != this.getClass()) return false;
         Cliente p = (Cliente) o;
         return  super.equals(o) &&
-                this.localizacao.equals(p.getLocalizacao()) &&
-                this.classificacao.equals(p.getClassificacao()) &&
-                this.historial.equals(p.getHistorial());
+                this.localizacao.equals(p.getLocalizacao());
     }
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("Cliente:\n");
         sb.append(super.toString());
         sb.append(", localizacao: ").append(this.localizacao.toString());
-        sb.append(", classificacao: ").append(this.classificacao);
-        sb.append(", historial: ");
-        for(Aluguer a : this.historial) {sb.append(a.toString());}
         return sb.toString();
     }
     public Cliente clone(){return new Cliente(this);}

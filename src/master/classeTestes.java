@@ -1,6 +1,8 @@
 package master;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class classeTestes {
 
@@ -17,7 +19,26 @@ public class classeTestes {
     }
 
     public static void main(String[] args){
-        testeActor();
+        int x1 = 1;
+        int x2 = 2;
+        int x3 = 3;
+        List<Integer> listaInts = new ArrayList<>();
+        listaInts.add(x1);
+        listaInts.add(x2);
+        listaInts.add(x3);
+        System.out.println(listaInts.toString());
+        x1 = 4;
+        x2 = 5;
+        x3 = 6;
+        System.out.println((listaInts.toString()));
+        List<Integer> listaInts2 = listaInts.stream().collect(Collectors.toList());
+        listaInts2.add(x1);
+        listaInts2.add(x2);
+        listaInts2.add(x3);
+        System.out.println((listaInts2.toString()));
+        System.out.println((listaInts.toString()));
+
+        //testeActor();
     }
 
 }

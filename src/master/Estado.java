@@ -2,6 +2,7 @@ package master;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Classe da interface de texto
@@ -12,24 +13,32 @@ import java.util.Map;
  * @version 28/04/2019
  */
 
-public class EstadoAtual {
+public class Estado {
 
     /**
      * Declarações de variaveis globais para guardar todos os objetos
      */
-    private static Map<String,Cliente> listaClientes = new HashMap<>();
-    private static Map<String,Proprietario> listaProprietarios = new HashMap<>();
-    private static Map<String,Carro> listaCarros = new HashMap<>();
-    private static int nrClientes;
-    private static int nrProprietarios;
-    private static int nrCarros;
+    private Map<String,Cliente> listaClientes;
+    private Map<String,Proprietario> listaProprietarios;
+    private Map<String,Carro> listaCarros;
+
+    public Estado(){
+        this.listaClientes = new HashMap<>();
+        this.listaProprietarios = new HashMap<>();
+        this.listaCarros = new HashMap<>();
+    }
+
+    public Estado(Map<String,Cliente> listaClientes, Map<String,Proprietario> listaProprietarios, Map<String,Carro> listaCarros){
+        this.listaClientes = listaClientes.entrySet().stream().collect(Collectors.toMap(e->e.getKey(),e->e.getValue().clone()));
+        this.listaProprietarios = listaProprietarios.entrySet().stream().collect(Collectors.toMap(e->e.getKey(),e->e.getValue().clone()));
+        this.listaCarros = listaCarros.entrySet().stream().collect(Collectors.toMap(e->e.getKey(),e->e.getValue().clone()));
+    }
 
     /**
      * metodo estatico para adicionar clientes ao programa
      * @param cliente recebe um cliente
      */
-    public static void addCliente(Cliente cliente){
-        nrClientes++;
+    public void addCliente(Cliente cliente){
         listaClientes.put(cliente.getEmail(),cliente);
     }
 
@@ -37,8 +46,7 @@ public class EstadoAtual {
      * metodo estatico para adicionar proprietarios ao programa
      * @param proprietario recebe um proprietario
      */
-    public static void addProprietario(Proprietario proprietario){
-        nrProprietarios++;
+    public void addProprietario(Proprietario proprietario){
         listaProprietarios.put(proprietario.getEmail(),proprietario);
     }
 
@@ -47,37 +55,35 @@ public class EstadoAtual {
      * metodo estatico para adicionar um carro ao programa
      * @param carro carro
      */
-    public static void addCarro(Carro carro){
-        nrCarros++;
-        //vai dar enrro, alterar para algo idetificalvel
-        //listaCarros.put(carro.g,carro);
+    public void addCarro(Carro carro){
+        listaCarros.put(carro.matricula,carro);
     }
 
     /**
      * verifica se um cliente com um nome ou email existe no sistema
-     * @param email recebe o mail ou username
+     * @param email recebe o mail
      * @return verdadeiro se existir, falso se não
      */
-    public static boolean verificaCliente(String email){
+    public boolean verificaCliente(String email){
         return listaClientes.containsKey(email);
     }
 
     /**
      * verifica se um proprietario com um nome ou email existe no sistema
-     * @param email recebe o mail ou username
+     * @param email recebe o mail
      * @return verdadeiro se existir, falso se não
      */
-    public static boolean verificaProprietario(String email){
+    public boolean verificaProprietario(String email){
         return listaProprietarios.containsKey(email);
     }
 
     /**
      * tenta fazer o login com um email e uma password
-     * @param email username ou email
+     * @param email email
      * @param password password
      * @return verdadeiro se conseguir falso se não
      */
-    public static boolean tryLoginCliente(String email, String password){
+    public boolean tryLoginCliente(String email, String password){
         Cliente c = listaClientes.get(email);
         return c.getPassword().equals(password);
     }
@@ -88,22 +94,43 @@ public class EstadoAtual {
      * @param password password
      * @return verdadeiro se conseguir falso se não
      */
-    public static boolean tryLoginProprietario(String email, String password){
+    public boolean tryLoginProprietario(String email, String password){
         Proprietario p = listaProprietarios.get(email);
         return p.getPassword().equals(password);
     }
 
 
-    public static Cliente getCliente(String email){
+    public Cliente getCliente(String email){
         return listaClientes.get(email);
     }
-    public static Proprietario getProprietario(String email){
+    public Proprietario getProprietario(String email){
         return listaProprietarios.get(email);
+    }
+    public Carro getCarro(String matricula){return listaCarros.get(matricula);}
+
+    public void carregarEstado(){
+        String[] opcoes = {"Carregar Rápido","Carregar com Nome do ficheiro"};
+        Menu m = new Menu(opcoes);
+        do{
+            m.executa();
+            switch(m.getOpcao()){
+                case 1:
+                    break;
+                case 2:
+                    break;
+            }
+        }while(m.getOpcao()!=0);
+
+    }
+    public void gravarEstado(){
+        String[] opcoes = {"Gravar Rápido","Gravar com Nome do ficheiro"};
+        Menu m = new Menu(opcoes);
+
     }
 
 
     //PARA DEBUG APENAS, DEPOIS REMOVER
-    public static String debugString(){
+    public String debugString(){
         StringBuilder sb = new StringBuilder();
         sb.append("Map de Clientes:");
         sb.append(listaClientes.toString());
@@ -111,9 +138,6 @@ public class EstadoAtual {
         sb.append(listaProprietarios.toString());
         sb.append("\nMap de Carros:\n");
         sb.append(listaClientes.toString());
-        sb.append("\nNumero de Clientes:").append(nrClientes);
-        sb.append("\nNumero de Proprietarios:").append(nrProprietarios);
-        sb.append("\nNumero de Carros:").append(nrCarros);
         return sb.toString();
     }
 
@@ -122,22 +146,13 @@ public class EstadoAtual {
      * gets para debug principalmente
      */
 
-    public static int getNrClientes() {
-        return nrClientes;
-    }
-    public static int getNrProprietarios() {
-        return nrProprietarios;
-    }
-    public static int getNrCarros() {
-        return nrCarros;
-    }
-    public static Map<String, Cliente> getListaClientes() {
+    public Map<String, Cliente> getListaClientes() {
         return listaClientes;
     }
-    public static Map<String, Proprietario> getListaProprietarios() {
+    public Map<String, Proprietario> getListaProprietarios() {
         return listaProprietarios;
     }
-    public static Map<String, Carro> getListaCarros() {
+    public Map<String, Carro> getListaCarros() {
         return listaCarros;
     }
 }

@@ -1,6 +1,6 @@
 package master;
 
-import javafx.util.Pair;
+import java.lang.*;
 
 /**
  * Classe do objeto de aluguer
@@ -16,8 +16,8 @@ public class Aluguer {
     private Proprietario proprietario;
     private Cliente cliente;
     private Carro carro;
-    private Pair<Double,Double> localAtual;
-    private Pair<Double,Double> localFinal;
+    private Ponto localInicial;
+    private Ponto localFinal;
     private Double preco;
     private Double distancia;
     private Double tempo;
@@ -26,21 +26,21 @@ public class Aluguer {
      * Construtores
      */
     public Aluguer() {
-        this.proprietario = null;
-        this.cliente = null;
+        this.proprietario = new Proprietario();
+        this.cliente = new Cliente();
         this.carro = null;
-        this.localAtual = new Pair<>(0.0,0.0);
-        this.localFinal = new Pair<>(0.0,0.0);
-        this.preco = -1.0;
-        this.distancia = -1.0;
-        this.tempo = -1.0;
+        this.localInicial = new Ponto(0.0,0.0);
+        this.localFinal = new Ponto(0.0,0.0);
+        this.preco = 0.0;
+        this.distancia = 0.0;
+        this.tempo = 0.0;
     }
-    public Aluguer(Proprietario proprietario, Cliente cliente, Carro carro, Pair<Double, Double> localAtual, Pair<Double, Double> localFinal, Double preco, Double distancia, Double tempo) {
-        this.proprietario = proprietario;
-        this.cliente = cliente;
-        this.carro = carro;
-        this.localAtual = localAtual;
-        this.localFinal = localFinal;
+    public Aluguer(Proprietario proprietario, Cliente cliente, Carro carro, Ponto localAtual, Ponto localFinal, Double preco, Double distancia, Double tempo) {
+        this.proprietario = proprietario.clone();
+        this.cliente = cliente.clone();
+        this.carro = carro.clone();
+        this.localInicial = localAtual.clone();
+        this.localFinal = localFinal.clone();
         this.preco = preco;
         this.distancia = distancia;
         this.tempo = tempo;
@@ -49,7 +49,7 @@ public class Aluguer {
         this.proprietario = a.getProprietario();
         this.cliente = a.getCliente();
         this.carro = a.getCarro();
-        this.localAtual = a.getLocalAtual();
+        this.localInicial = a.getLocalInicial();
         this.localFinal = a.getLocalFinal();
         this.preco = a.getPreco();
         this.distancia = a.getDistancia();
@@ -62,19 +62,19 @@ public class Aluguer {
      */
 
     public Proprietario getProprietario() {
-        return proprietario;
+        return proprietario.clone();
     }
     public Cliente getCliente() {
-        return cliente;
+        return cliente.clone();
     }
     public Carro getCarro() {
-        return carro;
+        return carro.clone();
     }
-    public Pair<Double, Double> getLocalAtual() {
-        return localAtual;
+    public Ponto getLocalInicial() {
+        return localInicial.clone();
     }
-    public Pair<Double, Double> getLocalFinal() {
-        return localFinal;
+    public Ponto getLocalFinal() {
+        return localFinal.clone();
     }
     public Double getPreco() {
         return preco;
@@ -92,19 +92,19 @@ public class Aluguer {
      */
 
     public void setProprietario(Proprietario proprietario) {
-        this.proprietario = proprietario;
+        this.proprietario = proprietario.clone();
     }
     public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+        this.cliente = cliente.clone();
     }
     public void setCarro(Carro carro) {
-        this.carro = carro;
+        this.carro = carro.clone();
     }
-    public void setLocalAtual(Pair<Double, Double> localAtual) {
-        this.localAtual = localAtual;
+    public void setLocalInicial(Ponto localInicial) {
+        this.localInicial = localInicial.clone();
     }
-    public void setLocalFinal(Pair<Double, Double> localFinal) {
-        this.localFinal = localFinal;
+    public void setLocalFinal(Ponto localFinal) {
+        this.localFinal = localFinal.clone();
     }
     public void setPreco(Double preco) {
         this.preco = preco;
@@ -124,7 +124,7 @@ public class Aluguer {
         return  aluguer.getProprietario().equals(this.getProprietario()) &&
                 aluguer.getCliente().equals(this.getCliente()) &&
                 aluguer.getCarro().equals(this.getCarro()) &&
-                aluguer.getLocalAtual().equals(this.getLocalAtual()) &&
+                aluguer.getLocalInicial().equals(this.getLocalInicial()) &&
                 aluguer.getLocalFinal().equals(this.getLocalFinal()) &&
                 aluguer.getPreco().equals(this.getPreco()) &&
                 aluguer.getDistancia().equals(this.distancia) &&
@@ -133,16 +133,17 @@ public class Aluguer {
 
     }
     public String toString() {
-        return "Aluguer: [" +
-                "proprietario=" + proprietario +
-                ", cliente=" + cliente +
-                ", carro=" + carro +
-                ", localAtual=" + localAtual +
-                ", localFinal=" + localFinal +
-                ", preco=" + preco +
-                ", distancia=" + distancia +
-                ", tempo=" + tempo +
-                ']';
+        StringBuilder sb = new StringBuilder();
+        sb.append("Aluguer:\n");
+        sb.append("Proprietario: ").append(this.proprietario.toString());
+        sb.append(", Cliente: ").append(this.cliente.toString());
+        sb.append(", Carro").append(this.carro.toString());
+        sb.append(", LocalInicial: ").append(this.localInicial.toString());
+        sb.append(", LocalFinal: ").append(this.localFinal.toString());
+        sb.append(", Preco: ").append(this.preco);
+        sb.append(", Distancia: ").append(this.distancia);
+        sb.append(", Tempo: ").append(this.tempo);
+        return sb.toString();
     }
     public Aluguer clone(){
         return new Aluguer(this);
