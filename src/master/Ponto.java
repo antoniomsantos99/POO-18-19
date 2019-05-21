@@ -1,6 +1,8 @@
 package master;
 
 
+import java.io.Serializable;
+
 /**
  * Classe que implementa um Ponto num plano2D.
  * As coordenadas do Ponto sÃ£o inteiras.
@@ -8,7 +10,7 @@ package master;
  * @author  Pedro Oliveira
  * @version 19/05/2019
  */
-public class Ponto {
+public class Ponto implements Serializable {
 
     //variÃ¡veis de instÃ¢ncia
     private double x;

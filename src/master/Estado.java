@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
  * @version 28/04/2019
  */
 
-public class Estado {
+public class Estado implements Serializable{
 
     /**
      * Declarações de variaveis globais para guardar todos os objetos
      */
-    private final String path = "saves/";
+    private static final String path = "saves/";
 
     private Map<String, Cliente> listaClientes;
     private Map<String, Proprietario> listaProprietarios;
@@ -50,33 +50,59 @@ public class Estado {
     }
 
     /**
-     * metodo estatico para adicionar clientes ao programa
+     * tenta fazer o login com um email e uma password
      *
-     * @param cliente recebe um cliente
+     * @param email    email
+     * @param password password
+     * @return verdadeiro se conseguir falso se não
      */
-    public void addCliente(Cliente cliente) {
-        listaClientes.put(cliente.getEmail(), cliente);
+    private boolean tryLoginCliente(String email, String password) {
+        if(!listaClientes.containsKey(email)) return false;
+        Cliente c = listaClientes.get(email);
+        return c.getPassword().equals(password);
     }
 
     /**
-     * metodo estatico para adicionar proprietarios ao programa
+     * tenta fazer o login com um email e uma password
      *
-     * @param proprietario recebe um proprietario
+     * @param email    email
+     * @param password password
+     * @return verdadeiro se conseguir falso se não
      */
-    public void addProprietario(Proprietario proprietario) {
-        listaProprietarios.put(proprietario.getEmail(), proprietario);
+    private boolean tryLoginProprietario(String email, String password) {
+        if(!listaProprietarios.containsKey(email)) return false;
+        Proprietario p = listaProprietarios.get(email);
+        return p.getPassword().equals(password);
     }
 
-    /**
-     * por fazer mas:
-     * metodo estatico para adicionar um carro ao programa
-     *
-     * @param carro carro
-     */
-    public void addCarro(Carro carro) {
-        listaCarros.put(carro.matricula, carro);
+    public void login(){
+        String email,password;
+        do{
+            menuLogin.executa();
+            switch(menuLogin.getOpcao()){
+                case 1:
+                    System.out.println("Introduza as informações seguites para fazer login como Cliente:");
+                    email = lerString("Introduza o seu email:");
+                    password = lerString("Introduza a sua password:");
+                    if(tryLoginCliente(email,password)){
+                        System.out.println("Login cliente efetuado com sucesso!");
+                    }else{
+                        System.out.println("Email ou password erradas");
+                    }
+                    break;
+                case 2:
+                    System.out.println("Introduza as informações seguites para fazer login como Proprietario:");
+                    email = lerString("Introduza o seu email:");
+                    password = lerString("Introduza a sua password:");
+                    if(tryLoginProprietario(email,password)){
+                        System.out.println("Login proprietario efetuado com sucesso!");
+                    }else{
+                        System.out.println("Email ou password erradas.");
+                    }
+                    break;
+            }
+        }while(menuLogin.getOpcao()!=0);
     }
-
     /**
      * verifica se um cliente com um nome ou email existe no sistema
      *
@@ -97,113 +123,49 @@ public class Estado {
         return listaProprietarios.containsKey(email);
     }
 
-    public void login(){
-        do{
-            menuLogin.executa();
-            switch(menuLogin.getOpcao()){
-                case 1:
-                    System.out.println("Login Cliente");
-                    break;
-                case 2:
-                    System.out.println("Login Proprietario");
-                    break;
-            }
-        }while(menuLogin.getOpcao()!=0);
-    }
     public void registo(){
+        String nome,email,password,morada,dataNascimento;
+        int NIF;
+        double locX,locY;
+        Ponto localizacao;
         do{
             menuRegisto.executa();
-            String nome,email,password,morada,dataNascimento;
-            int NIF;
-            double locX, locY;
-            boolean existe;
-            Scanner sc = new Scanner(System.in);
             switch(menuRegisto.getOpcao()){
                 case 1:
-                    Ponto localizacao;
-                    System.out.println("Introduza as informações seguites para se registar como cliente:");
-                    System.out.println("Introduza o seu e-mail:");
-                    email = sc.nextLine();
-                    //loop até ser colocado um email válido;
-                    existe = true;
-                    while(existe){
-                        if(verificaCliente(email)){
-                            System.out.println("Email já existe, introduza um email valido:");
-                            email = sc.nextLine();
-                        }else{
-                            existe = false;
-                        }
+                    System.out.println("Introduza as informações seguites para se registar como Cliente:");
+                    email = lerString("Introduza o seu email:");
+                    while(verificaCliente(email)){
+                        email = lerString("Erro: Email já existe, introduza um email válido.");
                     }
-                    System.out.println("Introduza o seu nome de utilizador:");
-                    nome = sc.nextLine();
-                    System.out.println("Introduza o seu NIF:");
-                    NIF = sc.nextInt();
-                    System.out.println("Introduza a sua password:");
-                    password = sc.nextLine();
-                    System.out.println("Introduza a sua morada:");
-                    morada = sc.nextLine();
-                    System.out.println("Introduza a sua data de Nascimento (DD/MM/YYYY):");
-                    dataNascimento = sc.nextLine();
-                    System.out.println("Introduza a sua localizacao atual: (Primeiro X, depois Y)");
-                    locX = sc.nextDouble();
-                    locY = sc.nextDouble();
+                    nome = lerString("Introduza o seu nome:");
+                    NIF = lerInt("Introduza o seu NIF:");
+                    password = lerString("Introduza a sua password:");
+                    morada = lerString("Introduza a sua morada:");
+                    dataNascimento = lerString("Introduza a sua data de nascimento (DD/MM/YYYY):");
+                    locX = lerDouble("Introduza a sua localização (x)");
+                    locY = lerDouble("Introduza a sua localização (y)");
                     localizacao = new Ponto(locX,locY);
                     Cliente c = new Cliente(nome,NIF,email,password,morada,dataNascimento,localizacao,new ArrayList<Integer>(),new ArrayList<Aluguer>());
-                    System.out.println("Cliente " + nome + " registado com sucesso!");
+                    listaClientes.put(email,c);
+                    System.out.println("Cliente " + nome + " resgistado com sucesso!");
                     break;
                 case 2:
                     System.out.println("Introduza as informações seguites para se registar como Proprietario:");
-                    System.out.println("Introduza o seu e-mail:");
-                    email = sc.nextLine();
-                    //loop até ser colocado um email válido;
-                    existe = true;
-                    while(existe){
-                        if(verificaCliente(email)){
-                            System.out.println("Email já existe, introduza um email valido:");
-                            email = sc.nextLine();
-                        }else{
-                            existe = false;
-                        }
+                    nome = lerString("Introduza o seu nome:");
+                    email = lerString("Introduza o seu email:");
+                    while(verificaProprietario(email)){
+                        email = lerString("Erro: Email já existe, introduza um email válido.");
                     }
-                    System.out.println("Introduza o seu nome de utilizador:");
-                    nome = sc.nextLine();
-                    System.out.println("Introduza o seu NIF:");
-                    NIF = sc.nextInt();
-                    System.out.println("Introduza a sua password:");
-                    password = sc.nextLine();
-                    System.out.println("Introduza a sua morada:");
-                    morada = sc.nextLine();
-                    System.out.println("Introduza a sua data de Nascimento (DD/MM/YYYY):");
-                    dataNascimento = sc.nextLine();
+                    password = lerString("Introduza a sua password:");
+                    morada = lerString("Introduza a sua morada:");
+                    dataNascimento = lerString("Introduza a sua data de nascimento (DD/MM/YYYY):");
+                    NIF = lerInt("Introduza o seu NIF:");
                     Proprietario p = new Proprietario(nome,NIF,email,password,morada,dataNascimento,new ArrayList<Carro>(),new ArrayList<Integer>(),new ArrayList<Aluguer>());
+                    listaProprietarios.put(email,p);
                     System.out.println("Proprietario " + nome + " resgistado com sucesso!");
                     break;
             }
         }while(menuRegisto.getOpcao()<0);
-    }
-
-    /**
-     * tenta fazer o login com um email e uma password
-     *
-     * @param email    email
-     * @param password password
-     * @return verdadeiro se conseguir falso se não
-     */
-    private boolean tryLoginCliente(String email, String password) {
-        Cliente c = listaClientes.get(email);
-        return c.getPassword().equals(password);
-    }
-
-    /**
-     * tenta fazer o login com um email e uma password
-     *
-     * @param email    username ou email
-     * @param password password
-     * @return verdadeiro se conseguir falso se não
-     */
-    private boolean tryLoginProprietario(String email, String password) {
-        Proprietario p = listaProprietarios.get(email);
-        return p.getPassword().equals(password);
     }
 
     public Cliente getCliente(String email) {
@@ -328,9 +290,8 @@ public class Estado {
     /**
      * Método que guarda em ficheiro de objectos o objecto que recebe a mensagem.
      */
-    public void guardaEstado(String nomeFicheiro)
-            throws IOException {
-        FileOutputStream fos = new FileOutputStream(nomeFicheiro);
+    public void guardaEstado(String nomeFicheiro) throws FileNotFoundException,IOException {
+        FileOutputStream fos = new FileOutputStream(path+nomeFicheiro);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(this); //guarda-se o objecto de uma só vez
         oos.flush();
@@ -345,9 +306,8 @@ public class Estado {
      * @return objecto Estado inicializado
      */
 
-    public static Estado carregaEstado(String nomeFicheiro)
-            throws FileNotFoundException,IOException,ClassNotFoundException {
-        FileInputStream fis = new FileInputStream(nomeFicheiro);
+    public static Estado carregaEstado(String nomeFicheiro) throws FileNotFoundException,IOException,ClassNotFoundException {
+        FileInputStream fis = new FileInputStream(path+nomeFicheiro);
         ObjectInputStream ois = new ObjectInputStream(fis);
         Estado e = (Estado) ois.readObject();
         ois.close();
@@ -366,18 +326,64 @@ public class Estado {
         return sb.toString();
     }
 
-
     /**
-     * gets para debug principalmente
+     * le uma String
+     * @param s dá print do parametro que recebe
+     * @return devolve a string inicializada
      */
+    public String lerString(String s){
+        System.out.println(s);
+        Scanner sc = new Scanner(System.in);
+        String output;
+        do{
+            try{
+                output = sc.nextLine();
+            }catch(InputMismatchException e){
+                System.out.println("Erro: Introduza uma valor valido.");
+                output = "";
+            }
+        }while(output.equals(""));
+        return output;
+    }
+    /**
+     * le um int
+     * @param s dá print do parametro que recebe
+     * @return devolve o int inicializado
+     */
+    public int lerInt(String s){
+        System.out.println(s);
+        Scanner sc = new Scanner(System.in);
+        Integer output;
+        do{
+            try{
+                output = sc.nextInt();
+            }catch(InputMismatchException e){
+                System.out.println("Erro: Introduza um valor valido.");
+                output = null;
 
-    public Map<String, Cliente> getListaClientes() {
-        return listaClientes;
+            }
+        }while(output==null);
+        return output;
     }
-    public Map<String, Proprietario> getListaProprietarios() {
-        return listaProprietarios;
+    /**
+     * le um double
+     * @param s dá print do parametro que recebe
+     * @return devolve o double incializado
+     */
+    public double lerDouble(String s){
+        System.out.println(s);
+        Scanner sc = new Scanner(System.in);
+        Double output;
+        do{
+            try{
+                output = sc.nextDouble();
+            }catch(InputMismatchException e){
+                System.out.println("Erro: Introduza um valor valido.");
+                output = null;
+
+            }
+        }while(output==null);
+        return output;
     }
-    public Map<String, Carro> getListaCarros() {
-        return listaCarros;
-    }
+
 }

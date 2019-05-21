@@ -1,5 +1,6 @@
 package master;
 
+import java.io.Serializable;
 import java.lang.*;
 
 /**
@@ -11,7 +12,7 @@ import java.lang.*;
  */
 
 
-public class Aluguer {
+public class Aluguer implements Serializable {
     // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
     private Proprietario proprietario;
     private Cliente cliente;

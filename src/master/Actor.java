@@ -1,5 +1,6 @@
 package master;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
  * @version 25/04/2019
  */
 
-public abstract class Actor {
+public abstract class Actor implements Serializable {
     protected String nome;
     protected int NIF;
     protected String email;

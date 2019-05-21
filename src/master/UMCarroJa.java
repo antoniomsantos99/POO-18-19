@@ -1,7 +1,6 @@
 package master;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 public class UMCarroJa{
 
@@ -21,6 +20,10 @@ public class UMCarroJa{
     }
 
     public UMCarroJa(){
+        String[] opcoesMenuPrincipal = {"Continuar ->","Carregar Estado (.txt)","Gravar Estado (.txt)","Debug"};
+        String[] opcoesLogOuReg = {"Login","Registo"};
+        this.menuPrincipal = new Menu(opcoesMenuPrincipal);
+        this.menuLogOuReg = new Menu(opcoesLogOuReg);
         try{
             this.estado = Estado.carregaEstado("estado.obj");
         }catch(FileNotFoundException e){
@@ -28,15 +31,12 @@ public class UMCarroJa{
             this.estado = new Estado();
         }catch(IOException e){
             System.out.println("Erro ao tentar ler Estado.");
+            e.printStackTrace();
             this.estado = new Estado();
         }catch(ClassNotFoundException e){
             System.out.println("Formato do ficheiro de dados errado.");
             this.estado = new Estado();
         }
-        String[] opcoesMenuPrincipal = {"Continuar ->","Carregar Estado (.txt)","Gravar Estado (.txt)"};
-        String[] opcoesLogOuReg = {"Login","Registo"};
-        this.menuPrincipal = new Menu(opcoesMenuPrincipal);
-        this.menuLogOuReg = new Menu(opcoesLogOuReg);
     }
 
     private void run(){
@@ -45,6 +45,7 @@ public class UMCarroJa{
             switch (menuPrincipal.getOpcao()){
                 case 1:
                     loginOuRegisto();
+                    break;
                 case 2:
                     //WIP
                     estado.carregarEstadoTXT();
@@ -55,12 +56,17 @@ public class UMCarroJa{
                     estado.gravarEstadoTXT();
                     //System.out.println(estado.debugString());
                     break;
+                case 4:
+                    System.out.println(estado.debugString());
+                    break;
             }
         }while(menuPrincipal.getOpcao()!=0);
         try{
             this.estado.guardaEstado("estado.obj");
-        }catch(IOException e){
+        }
+        catch(IOException e){
             System.out.println("Erro ao tentar gravar Estado.");
+            e.printStackTrace();
         }
     }
 

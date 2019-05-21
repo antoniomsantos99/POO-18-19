@@ -1,11 +1,12 @@
 package master;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class Menu {
+public class Menu  implements Serializable {
 
     /** lista de opçoes que se pretendem apresentar*/
     private List<String> opcoes;

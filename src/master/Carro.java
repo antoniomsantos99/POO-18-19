@@ -1,10 +1,11 @@
 package master;
 
+import java.io.Serializable;
 import java.lang.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public abstract class Carro {
+public abstract class Carro implements Serializable {
 
     //eliminar então o tipo
     //aluguer vai ter coordenadas, cliente, propietario, avaliacao do veiculo e do propieatario
