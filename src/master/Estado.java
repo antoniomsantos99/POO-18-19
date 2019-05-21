@@ -102,8 +102,10 @@ public class Estado {
             menuLogin.executa();
             switch(menuLogin.getOpcao()){
                 case 1:
+                    System.out.println("Login Cliente");
                     break;
                 case 2:
+                    System.out.println("Login Proprietario");
                     break;
             }
         }while(menuLogin.getOpcao()!=0);
@@ -111,14 +113,73 @@ public class Estado {
     public void registo(){
         do{
             menuRegisto.executa();
+            String nome,email,password,morada,dataNascimento;
+            int NIF;
+            double locX, locY;
+            boolean existe;
+            Scanner sc = new Scanner(System.in);
             switch(menuRegisto.getOpcao()){
                 case 1:
+                    Ponto localizacao;
+                    System.out.println("Introduza as informações seguites para se registar como cliente:");
+                    System.out.println("Introduza o seu e-mail:");
+                    email = sc.nextLine();
+                    //loop até ser colocado um email válido;
+                    existe = true;
+                    while(existe){
+                        if(verificaCliente(email)){
+                            System.out.println("Email já existe, introduza um email valido:");
+                            email = sc.nextLine();
+                        }else{
+                            existe = false;
+                        }
+                    }
+                    System.out.println("Introduza o seu nome de utilizador:");
+                    nome = sc.nextLine();
+                    System.out.println("Introduza o seu NIF:");
+                    NIF = sc.nextInt();
+                    System.out.println("Introduza a sua password:");
+                    password = sc.nextLine();
+                    System.out.println("Introduza a sua morada:");
+                    morada = sc.nextLine();
+                    System.out.println("Introduza a sua data de Nascimento (DD/MM/YYYY):");
+                    dataNascimento = sc.nextLine();
+                    System.out.println("Introduza a sua localizacao atual: (Primeiro X, depois Y)");
+                    locX = sc.nextDouble();
+                    locY = sc.nextDouble();
+                    localizacao = new Ponto(locX,locY);
+                    Cliente c = new Cliente(nome,NIF,email,password,morada,dataNascimento,localizacao,new ArrayList<Integer>(),new ArrayList<Aluguer>());
+                    System.out.println("Cliente " + nome + " registado com sucesso!");
                     break;
                 case 2:
+                    System.out.println("Introduza as informações seguites para se registar como Proprietario:");
+                    System.out.println("Introduza o seu e-mail:");
+                    email = sc.nextLine();
+                    //loop até ser colocado um email válido;
+                    existe = true;
+                    while(existe){
+                        if(verificaCliente(email)){
+                            System.out.println("Email já existe, introduza um email valido:");
+                            email = sc.nextLine();
+                        }else{
+                            existe = false;
+                        }
+                    }
+                    System.out.println("Introduza o seu nome de utilizador:");
+                    nome = sc.nextLine();
+                    System.out.println("Introduza o seu NIF:");
+                    NIF = sc.nextInt();
+                    System.out.println("Introduza a sua password:");
+                    password = sc.nextLine();
+                    System.out.println("Introduza a sua morada:");
+                    morada = sc.nextLine();
+                    System.out.println("Introduza a sua data de Nascimento (DD/MM/YYYY):");
+                    dataNascimento = sc.nextLine();
+                    Proprietario p = new Proprietario(nome,NIF,email,password,morada,dataNascimento,new ArrayList<Carro>(),new ArrayList<Integer>(),new ArrayList<Aluguer>());
+                    System.out.println("Proprietario " + nome + " resgistado com sucesso!");
                     break;
             }
         }while(menuRegisto.getOpcao()<0);
-        System.out.println("Registo Efetuado com sucesso!");
     }
 
     /**
