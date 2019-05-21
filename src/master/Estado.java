@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class Estado implements Serializable{
 
     /**
-     * Declarações de variaveis globais para guardar todos os objetos
+     * Declarações de variaveis para guardar todos os objetos
      */
     private static final String path = "saves/";
 
@@ -27,6 +27,7 @@ public class Estado implements Serializable{
     private Menu menuLogin;
     private Menu menuRegisto;
 
+    /** construtor por omissao */
     public Estado() {
         String[] opcoesLogin = {"Login Cliente","Login Proprietario"};
         String[] opcoesRegisto = {"Registo Cliente","Registo Proprietario"};
@@ -38,6 +39,7 @@ public class Estado implements Serializable{
         this.listaCarros = new HashMap<>();
     }
 
+    /** construtor por agrumentos */
     public Estado(Map<String, Cliente> listaClientes, Map<String, Proprietario> listaProprietarios, Map<String, Carro> listaCarros) {
         String[] opcoesLogin = {"Login Cliente","Login Proprietario"};
         String[] opcoesRegisto = {"Registo Cliente","Registo Proprietario"};
@@ -75,6 +77,46 @@ public class Estado implements Serializable{
         return p.getPassword().equals(password);
     }
 
+    private void hubCliente(String email){
+        String[] options = {"solicitar o aluguer do carro mais próximo das suas coordenadas",
+                            "solicitar o aluguer do carro mais barato",
+                            "solicitar o aluguer do carro mais barato dentro de uma distância que esteja disposto a percorrer a pé",
+                            "solicitar o aluguer de um carro específco",
+                            "solicitar o aluguer de um carro com uma autonomia desejada"};
+        Menu menuHubCliente = new Menu(options);
+        do{
+            menuHubCliente.executa();
+            switch(menuHubCliente.getOpcao()){
+                case 1:
+                    break;
+            }
+        }while(menuHubCliente.getOpcao()!=0);
+    }
+    private void hubProprietario(String email){
+        String[] options = {"Adicionar novo Carro",
+                            "Sinalizar que um dos seus carros está disponível ou não para alugar",
+                            "Abastecer um veiculo",
+                            "Alterar o preço por km de um veiculo",
+                            "Aceitar/rejeitar o aluguer de um determinado cliente",
+                            "Registar quanto custou a viagem"};
+        Menu menuHubProprietario = new Menu(options);
+        do{
+            menuHubProprietario.executa();
+            switch(menuHubProprietario.getOpcao()){
+                case 1:
+                    Proprietario p = listaProprietarios.get(email);
+                    Carro c = registoCarro(email);
+                    listaCarros.put(c.getMatricula(),c.clone());
+                    p.adicionarCarro(c);
+                    listaProprietarios.put(p.getEmail(),p.clone());
+                    break;
+                case 2:
+                    break;
+            }
+        }while(menuHubProprietario.getOpcao()!=0);
+    }
+
+    /** realiza a operaçao de login */
     public void login(){
         String email,password;
         do{
@@ -85,7 +127,8 @@ public class Estado implements Serializable{
                     email = lerString("Introduza o seu email:");
                     password = lerString("Introduza a sua password:");
                     if(tryLoginCliente(email,password)){
-                        System.out.println("Login cliente efetuado com sucesso!");
+                        System.out.println("Login efetuado com sucesso!");
+                        hubCliente(email);
                     }else{
                         System.out.println("Email ou password erradas");
                     }
@@ -95,7 +138,8 @@ public class Estado implements Serializable{
                     email = lerString("Introduza o seu email:");
                     password = lerString("Introduza a sua password:");
                     if(tryLoginProprietario(email,password)){
-                        System.out.println("Login proprietario efetuado com sucesso!");
+                        System.out.println("Login efetuado com sucesso!");
+                        hubProprietario(email);
                     }else{
                         System.out.println("Email ou password erradas.");
                     }
@@ -122,7 +166,7 @@ public class Estado implements Serializable{
     public boolean verificaProprietario(String email) {
         return listaProprietarios.containsKey(email);
     }
-
+    /** realiza a operacao de registo*/
     public void registo(){
         String nome,email,password,morada,dataNascimento;
         int NIF;
@@ -135,7 +179,7 @@ public class Estado implements Serializable{
                     System.out.println("Introduza as informações seguites para se registar como Cliente:");
                     email = lerString("Introduza o seu email:");
                     while(verificaCliente(email)){
-                        email = lerString("Erro: Email já existe, introduza um email válido.");
+                        email = lerString("Erro: Email já existe, introduza um email válido:");
                     }
                     nome = lerString("Introduza o seu nome:");
                     NIF = lerInt("Introduza o seu NIF:");
@@ -154,7 +198,7 @@ public class Estado implements Serializable{
                     nome = lerString("Introduza o seu nome:");
                     email = lerString("Introduza o seu email:");
                     while(verificaProprietario(email)){
-                        email = lerString("Erro: Email já existe, introduza um email válido.");
+                        email = lerString("Erro: Email já existe, introduza um email válido:");
                     }
                     password = lerString("Introduza a sua password:");
                     morada = lerString("Introduza a sua morada:");
@@ -168,16 +212,71 @@ public class Estado implements Serializable{
         }while(menuRegisto.getOpcao()<0);
     }
 
-    public Cliente getCliente(String email) {
-        return listaClientes.get(email);
+
+    private boolean verificaCarro(String matricula){
+        return listaCarros.containsKey(matricula);
     }
 
-    public Proprietario getProprietario(String email) {
-        return listaProprietarios.get(email);
-    }
 
-    public Carro getCarro(String matricula) {
-        return listaCarros.get(matricula);
+    private Carro registoCarro(String email){
+        String[] options = {"Registar Eletrico","Registar Hibrido","Registar Gasolina"};
+        Menu menuCarro = new Menu(options);
+        Carro c = null;
+        String matricula;
+        Proprietario proprietario = listaProprietarios.get(email);
+        int velMed, precoBase;
+        int consumoBateria,consumoGas;
+        double locX,locY;
+        Ponto localizacao;
+        do{
+            menuCarro.executa();
+            switch(menuCarro.getOpcao()){
+                case 1:
+                    System.out.println("Introduza as informações seguintes para resgistar um Carro Eletrico:");
+                    matricula = lerString("Introduza a matricula do carro:");
+                    while(verificaCliente(matricula)){
+                        matricula = lerString("Erro: Matricula já existe, introduza uma matricula válida:");
+                    }
+                    velMed = lerInt("Introduza a velocidade media:");
+                    precoBase = lerInt("Introduza o preco base");
+                    locX = lerDouble("Introduza a sua localização (x)");
+                    locY = lerDouble("Introduza a sua localização (y)");
+                    localizacao = new Ponto(locX,locY);
+                    consumoBateria = lerInt("Introduza o consumo da bateria por km");
+                    c = new Eletrico(matricula,proprietario,velMed,precoBase,localizacao,new ArrayList<Aluguer>(),new ArrayList<Integer>(),consumoBateria);
+                    break;
+                case 2:
+                    System.out.println("Introduza as informações seguintes para resgistar um Carro Hibrido:");
+                    matricula = lerString("Introduza a matricula do carro:");
+                    while(verificaCliente(matricula)){
+                        matricula = lerString("Erro: Matricula já existe, introduza uma matricula válida:");
+                    }
+                    velMed = lerInt("Introduza a velocidade media:");
+                    precoBase = lerInt("Introduza o preco base");
+                    locX = lerDouble("Introduza a sua localização (x)");
+                    locY = lerDouble("Introduza a sua localização (y)");
+                    localizacao = new Ponto(locX,locY);
+                    consumoBateria = lerInt("Introduza o consumo da bateria por km");
+                    consumoGas = lerInt("Introduza o consumo de gas por km");
+                    c = new Hibrido(matricula,proprietario,velMed,precoBase,localizacao,new ArrayList<Aluguer>(),new ArrayList<Integer>(),consumoGas,consumoBateria);
+                    break;
+                case 3:
+                    System.out.println("Introduza as informações seguintes para resgistar um Carro a Gasolina:");
+                    matricula = lerString("Introduza a matricula do carro:");
+                    while(verificaCliente(matricula)){
+                        matricula = lerString("Erro: Matricula já existe, introduza uma matricula válida:");
+                    }
+                    velMed = lerInt("Introduza a velocidade media:");
+                    precoBase = lerInt("Introduza o preco base");
+                    locX = lerDouble("Introduza a sua localização (x)");
+                    locY = lerDouble("Introduza a sua localização (y)");
+                    localizacao = new Ponto(locX,locY);
+                    consumoGas = lerInt("Introduza o consumo de gas por km");
+                    c = new Gasolina(matricula,proprietario,velMed,precoBase,localizacao,new ArrayList<Aluguer>(),new ArrayList<Integer>(),consumoGas);
+                    break;
+            }
+        }while(menuCarro.getOpcao()!=0);
+        return c;
     }
 
     public void carregarEstadoTXT() {
@@ -278,11 +377,12 @@ public class Estado implements Serializable{
 
     }
 
+    //TODO
     private void CVC2Proprietario(String linha) {
         Proprietario p = null;
 
     }
-
+    //TODO
     private void CVC2Carro(String linha) {
         Carro c = null;
 
@@ -322,7 +422,7 @@ public class Estado implements Serializable{
         sb.append("\nMap de Proprietarios:\n");
         sb.append(listaProprietarios.toString());
         sb.append("\nMap de Carros:\n");
-        sb.append(listaClientes.toString());
+        sb.append(listaCarros.toString());
         return sb.toString();
     }
 
@@ -353,18 +453,26 @@ public class Estado implements Serializable{
     public int lerInt(String s){
         System.out.println(s);
         Scanner sc = new Scanner(System.in);
-        Integer output;
-        do{
-            try{
-                output = sc.nextInt();
-            }catch(InputMismatchException e){
-                System.out.println("Erro: Introduza um valor valido.");
-                output = null;
-
-            }
-        }while(output==null);
+        int output = Integer.MIN_VALUE;
+        while(output==Integer.MIN_VALUE){
+            output = lerIntAux();
+        }
         return output;
     }
+    private int lerIntAux(){
+        Scanner sc = new Scanner(System.in);
+        int i;
+        try{
+            i = sc.nextInt();
+        }catch(InputMismatchException e){
+            System.out.println("Erro: Introduza um valor valido.");
+            i = Integer.MIN_VALUE;
+
+        }
+        return i;
+    }
+
+
     /**
      * le um double
      * @param s dá print do parametro que recebe
@@ -372,18 +480,23 @@ public class Estado implements Serializable{
      */
     public double lerDouble(String s){
         System.out.println(s);
-        Scanner sc = new Scanner(System.in);
-        Double output;
-        do{
-            try{
-                output = sc.nextDouble();
-            }catch(InputMismatchException e){
-                System.out.println("Erro: Introduza um valor valido.");
-                output = null;
-
-            }
-        }while(output==null);
+        double output = Double.MIN_VALUE;
+        while(output==Double.MIN_VALUE){
+            output = lerDoubleAux();
+        }
         return output;
+    }
+    private double lerDoubleAux(){
+        Scanner sc = new Scanner(System.in);
+        double d;
+        try{
+            d = sc.nextDouble();
+        }catch(InputMismatchException e){
+            System.out.println("Erro: Introduza um valor valido.");
+            d = Double.MIN_VALUE;
+
+        }
+        return d;
     }
 
 }

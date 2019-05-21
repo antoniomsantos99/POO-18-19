@@ -161,6 +161,10 @@ class Proprietario extends Actor{
         this.listaCarros = listaCarros.stream().map(Carro::clone).collect(Collectors.toList());
     }
 
+    public void adicionarCarro (Carro c){
+        this.listaCarros.add(c.clone());
+    }
+
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("Proprietario:\n");
