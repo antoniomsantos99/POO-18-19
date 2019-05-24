@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6eae3ca2-9c8d-45e8-a2c3-a1d041439045" name="Default Changelist" comment="">
+    <list default="true" id="e7764de6-4e31-4d89-967a-d202844d760d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/src/master/Actor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/master/Actor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/master/Aluguer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/master/Aluguer.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/saves/logsPOO_carregamentoInicial.bak" beforeDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/src/master/Estado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/master/Estado.java" afterDir="false" />
     </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,8 +26,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/master/UMCarroJa.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1240">
+            <state relative-caret-position="930">
               <caret line="62" column="44" selection-start-line="62" selection-start-column="44" selection-end-line="62" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/master/Ponto.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -29,12 +44,18 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/master/Estado.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="495">
               <caret line="217" column="21" lean-forward="true" selection-start-line="217" selection-start-column="21" selection-end-line="217" selection-end-column="21" />
+=======
+            <state relative-caret-position="609">
+              <caret line="502" lean-forward="true" selection-start-line="502" selection-end-line="502" />
+>>>>>>> Stashed changes
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#Estado#0;class#Estado#0" />
                 <element signature="method#Estado#1;class#Estado#0" />
+<<<<<<< Updated upstream
                 <element signature="method#hubCliente#0;class#Estado#0" />
                 <element signature="method#login#0;class#Estado#0" />
                 <element signature="e#13422#13423#0" expanded="true" />
@@ -48,12 +69,21 @@
                 <element signature="method#escreverFile#0;class#Estado#0" />
                 <element signature="method#lerFile#0;class#Estado#0" />
                 <element signature="method#lerString#0;class#Estado#0" />
+=======
+                <element signature="e#10174#10175#0" expanded="true" />
+                <element signature="e#10229#10230#0" expanded="true" />
+                <element signature="e#10468#10469#0" expanded="true" />
+                <element signature="e#10528#10529#0" expanded="true" />
+                <element signature="e#13288#13289#0" expanded="true" />
+                <element signature="e#13345#13346#0" expanded="true" />
+>>>>>>> Stashed changes
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< Updated upstream
         <entry file="file://$PROJECT_DIR$/src/master/Aluguer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="661">
@@ -61,43 +91,37 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+=======
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/src.zip!/java/lang/System.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="780">
+              <caret line="92" column="24" selection-start-line="92" selection-start-column="24" selection-end-line="92" selection-end-column="24" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< Updated upstream
         <entry file="file://$PROJECT_DIR$/src/master/Carro.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="146">
               <caret line="11" column="27" lean-forward="true" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/master/classeTestes.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="480">
+              <caret line="34" column="83" selection-start-line="34" selection-start-column="83" selection-end-line="34" selection-end-column="83" />
+>>>>>>> Stashed changes
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2382#2383#0" expanded="true" />
-                <element signature="e#2416#2417#0" expanded="true" />
-                <element signature="e#2448#2449#0" expanded="true" />
-                <element signature="e#2485#2486#0" expanded="true" />
-                <element signature="method#getHistorico#0;class#Carro#0" />
-                <element signature="method#getClassificacao#0;class#Carro#0" />
-                <element signature="method#setHistorico#0;class#Carro#0" />
-                <element signature="method#setClassificacao#0;class#Carro#0" />
-                <element signature="method#toString#0;class#Carro#0" />
-                <element signature="method#equals#0;class#Carro#0" />
-                <element signature="method#Gasolina#1;class#Gasolina#0" />
-                <element signature="e#6543#6544#0" expanded="true" />
-                <element signature="e#6587#6588#0" expanded="true" />
-                <element signature="e#6495#6496#0" expanded="true" />
-                <element signature="e#6536#6537#0" expanded="true" />
-                <element signature="method#Eletrico#1;class#Eletrico#0" />
-                <element signature="e#7904#7905#0" expanded="true" />
-                <element signature="e#7945#7946#0" expanded="true" />
-                <element signature="e#9612#9613#0" expanded="true" />
-                <element signature="e#9652#9653#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< Updated upstream
         <entry file="file://$PROJECT_DIR$/saves/logsPOO_carregamentoInicial.bak">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="38700">
@@ -108,16 +132,24 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/master/classeTestes.java">
+=======
+        <entry file="file://$PROJECT_DIR$/src/master/Actor.java">
+>>>>>>> Stashed changes
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
+            <state relative-caret-position="1755">
+              <caret line="146" column="196" selection-start-line="146" selection-start-column="196" selection-end-line="146" selection-end-column="196" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="docComment;class#Actor#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/master/Actor.java">
+        <entry file="file://$PROJECT_DIR$/src/master/Aluguer.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="361">
               <caret line="139" column="33" selection-start-line="139" selection-start-column="33" selection-end-line="139" selection-end-column="33" />
               <folding>
@@ -136,6 +168,40 @@
                 <element signature="e#7220#7221#0" expanded="true" />
                 <element signature="e#7273#7274#0" expanded="true" />
                 <element signature="e#7327#7328#0" expanded="true" />
+=======
+            <state relative-caret-position="195">
+              <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="docComment;method#Aluguer#0;class#Aluguer#0" />
+                <element signature="docComment;method#getProprietario#0;class#Aluguer#0" />
+                <element signature="docComment;method#setProprietario#0;class#Aluguer#0" />
+                <element signature="method#equals#0;class#Aluguer#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/master/Carro.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3195">
+              <caret line="252" column="6" selection-start-line="252" selection-start-column="6" selection-end-line="252" selection-end-column="6" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/master/Menu.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="900">
+              <caret line="66" selection-start-line="66" selection-end-line="66" />
+              <folding>
+                <element signature="imports" expanded="true" />
+>>>>>>> Stashed changes
               </folding>
             </state>
           </provider>
@@ -147,6 +213,7 @@
     <findStrings>
       <find>lerInt</find>
       <find>int</find>
+      <find>txt</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -163,10 +230,17 @@
       </list>
     </option>
   </component>
+<<<<<<< Updated upstream
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
+=======
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1395" />
+    <option name="height" value="1337" />
+>>>>>>> Stashed changes
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -176,55 +250,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="POO-18-19" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="POO-18-19" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-            </path>
-            <path>
-              <item name="POO-18-19" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="POO-18-19" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="out" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="POO-18-19" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="POO-18-19" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="saves" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="POO-18-19" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="POO-18-19" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="POO-18-19" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="POO-18-19" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="master" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="POO-18-19" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="POO-18-19" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="master" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Actor.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </path>
-            <path>
-              <item name="POO-18-19" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="POO-18-19" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="master" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Carro.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="Scope" />
       <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
     </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -256,13 +288,20 @@
     <configuration />
   </component>
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e7764de6-4e31-4d89-967a-d202844d760d" name="Default Changelist" comment="" />
+      <created>1558727691626</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1558727691626</updated>
+    </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="0" y="23" width="1395" height="1337" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11727079" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.10051737" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -271,7 +310,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4989339" weight="0.24377032" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4989339" visible="true" weight="0.2433735" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -333,46 +372,87 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/master/Menu.java">
+    <entry file="file://$PROJECT_DIR$/saves/logsPOO_carregamentoInicial.bak">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
-          <caret line="35" column="45" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="45" />
+        <state relative-caret-position="38700">
+          <caret line="1935" column="61" selection-start-line="1935" selection-start-column="61" selection-end-line="1935" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/master/UMCarroJa.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="930">
+          <caret line="62" column="44" selection-start-line="62" selection-start-column="44" selection-end-line="62" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/master/Ponto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/src.zip!/java/lang/System.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="780">
+          <caret line="92" column="24" selection-start-line="92" selection-start-column="24" selection-end-line="92" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/master/classeTestes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="34" column="83" selection-start-line="34" selection-start-column="83" selection-end-line="34" selection-end-column="83" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< Updated upstream
+    <entry file="file://$PROJECT_DIR$/src/master/Carro.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="11" column="27" lean-forward="true" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/master/Actor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1755">
+          <caret line="146" column="196" selection-start-line="146" selection-start-column="196" selection-end-line="146" selection-end-column="196" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#Actor#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/master/Aluguer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;method#Aluguer#0;class#Aluguer#0" />
+            <element signature="docComment;method#getProprietario#0;class#Aluguer#0" />
+            <element signature="docComment;method#setProprietario#0;class#Aluguer#0" />
+            <element signature="method#equals#0;class#Aluguer#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/master/Carro.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="11" column="27" lean-forward="true" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+        <state relative-caret-position="3195">
+          <caret line="252" column="6" selection-start-line="252" selection-start-column="6" selection-end-line="252" selection-end-column="6" />
+>>>>>>> Stashed changes
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2382#2383#0" expanded="true" />
-            <element signature="e#2416#2417#0" expanded="true" />
-            <element signature="e#2448#2449#0" expanded="true" />
-            <element signature="e#2485#2486#0" expanded="true" />
-            <element signature="method#getHistorico#0;class#Carro#0" />
-            <element signature="method#getClassificacao#0;class#Carro#0" />
-            <element signature="method#setHistorico#0;class#Carro#0" />
-            <element signature="method#setClassificacao#0;class#Carro#0" />
-            <element signature="method#toString#0;class#Carro#0" />
-            <element signature="method#equals#0;class#Carro#0" />
-            <element signature="method#Gasolina#1;class#Gasolina#0" />
-            <element signature="e#6543#6544#0" expanded="true" />
-            <element signature="e#6587#6588#0" expanded="true" />
-            <element signature="e#6495#6496#0" expanded="true" />
-            <element signature="e#6536#6537#0" expanded="true" />
-            <element signature="method#Eletrico#1;class#Eletrico#0" />
-            <element signature="e#7904#7905#0" expanded="true" />
-            <element signature="e#7945#7946#0" expanded="true" />
-            <element signature="e#9612#9613#0" expanded="true" />
-            <element signature="e#9652#9653#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/src/master/Aluguer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="661">
@@ -417,18 +497,32 @@
             <element signature="e#7220#7221#0" expanded="true" />
             <element signature="e#7273#7274#0" expanded="true" />
             <element signature="e#7327#7328#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/master/Menu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="66" selection-start-line="66" selection-end-line="66" />
+          <folding>
+            <element signature="imports" expanded="true" />
+>>>>>>> Stashed changes
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/master/Estado.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="495">
           <caret line="217" column="21" lean-forward="true" selection-start-line="217" selection-start-column="21" selection-end-line="217" selection-end-column="21" />
+=======
+        <state relative-caret-position="609">
+          <caret line="502" lean-forward="true" selection-start-line="502" selection-end-line="502" />
+>>>>>>> Stashed changes
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#Estado#0;class#Estado#0" />
             <element signature="method#Estado#1;class#Estado#0" />
+<<<<<<< Updated upstream
             <element signature="method#hubCliente#0;class#Estado#0" />
             <element signature="method#login#0;class#Estado#0" />
             <element signature="e#13422#13423#0" expanded="true" />
@@ -442,6 +536,14 @@
             <element signature="method#escreverFile#0;class#Estado#0" />
             <element signature="method#lerFile#0;class#Estado#0" />
             <element signature="method#lerString#0;class#Estado#0" />
+=======
+            <element signature="e#10174#10175#0" expanded="true" />
+            <element signature="e#10229#10230#0" expanded="true" />
+            <element signature="e#10468#10469#0" expanded="true" />
+            <element signature="e#10528#10529#0" expanded="true" />
+            <element signature="e#13288#13289#0" expanded="true" />
+            <element signature="e#13345#13346#0" expanded="true" />
+>>>>>>> Stashed changes
           </folding>
         </state>
       </provider>

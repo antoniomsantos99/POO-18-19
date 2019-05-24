@@ -493,26 +493,63 @@ public class Estado implements Serializable{
         System.out.println(linhas);
 
         linhas.forEach(s -> {
-            if (s.equals("NovoProp:")) CVC2Proprietario(s);
-            if (s.equals("NovoCliente:")) CVC2Cliente(s);
-            if (s.equals("NovoCarro:")) CVC2Carro(s);
+            String[] parsed = s.split(":");
+            if (parsed[0].equals("NovoProp")) CVC2Proprietario(parsed[1]);
+            if (parsed[0].equals("NovoCliente")) CVC2Cliente(parsed[1]);
+            if (parsed[0].equals("NovoCarro")) CVC2Carro(parsed[1]);
         });
     }
 
     //TODO
     private void CVC2Cliente(String linha) {
-        Cliente c = null;
+        String[] parsed = linha.split(","); //[Nome,Nif,Email,Morada,X,Y]
+        Cliente c = new Cliente(parsed[0],
+                    parsed[1],
+                    parsed[2],
+                    parsed[1],
+                    parsed[3],
+                    "1/1/1970",
+                    new Ponto(Double.parseDouble(parsed[4]),Double.parseDouble(parsed[5])),
+                    new ArrayList<Integer>(),
+                    new ArrayList<Aluguer>());
+        listaClientes.put(c.getEmail(),c.clone());
+
 
     }
 
     //TODO
     private void CVC2Proprietario(String linha) {
-        Proprietario p = null;
+        String[] parsed = linha.split(","); //[Nome,Nif,Email,Morada]
+        Proprietario p = new Proprietario(parsed[0],
+                         parsed[1],
+                         parsed[2],
+                         parsed[1],
+                         parsed[3],
+                         "1/1/1970",
+                         new HashSet<Carro>(),
+                         new ArrayList<Integer>(),
+                         new ArrayList<Aluguer>());
+        listaProprietarios.put(p.getEmail(),p.clone());
+
 
     }
     //TODO
     private void CVC2Carro(String linha) {
-        Carro c = null;
+        //NovoCarro:Gasolina,Tata,CB-68-97,240536003,62,1.3717524,2.1782432,457,-95.34003,65.17136
+        Carro c;
+        String[] parsed = linha.split(","); //[Tipo,Marca,Matricula,Nif,VelMedia,PrecoProKm,ConsumoporKm,Autonomia,X,Y]
+
+        c = new Gasolina(parsed[1],
+                  parsed[2],
+                  parsed[3],
+                  Double.parseDouble(parsed[4]),
+                 100, //TODO Descobrir o preco base
+                  new Ponto(Double.parseDouble(parsed[8]),Double.parseDouble(parsed[9])),
+                  new ArrayList<Aluguer>(),
+                  new ArrayList<Integer>(),
+                  Double.parseDouble(parsed[6]),
+                  Double.parseDouble(parsed[7]),
+                 true);
 
     }
     /**
@@ -545,11 +582,11 @@ public class Estado implements Serializable{
     //PARA DEBUG APENAS, DEPOIS REMOVER
     public String debugString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Map de Clientes:\n");
+        sb.append("Map de Clientes:\n\n");
         sb.append(listaClientes.toString());
-        sb.append("\nMap de Proprietarios:\n");
+        sb.append("\nMap de Proprietarios:\n\n");
         sb.append(listaProprietarios.toString());
-        sb.append("\nMap de Carros:\n");
+        sb.append("\nMap de Carros:\n\n");
         sb.append(listaCarros.toString());
         return sb.toString();
     }
