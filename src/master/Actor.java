@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 public abstract class Actor implements Serializable {
     protected String nome;
-    protected int NIF;
+    protected String nif;
     protected String email;
     protected String password;
     protected String morada;
@@ -26,15 +26,15 @@ public abstract class Actor implements Serializable {
 
     public Actor(){
         this.nome = "n/a";
-        this.NIF = 0;
+        this.nif = "n/a";
         this.email = "n/a";
         this.password = "n/a";
         this.morada = "n/a";
         this.dataNascimento ="n/a";
     }
-    public Actor(String nome, int NIF, String email, String password, String morada, String dataNascimento, List<Aluguer> historial, List<Integer> classificacao) {
+    public Actor(String nome, String nif, String email, String password, String morada, String dataNascimento, List<Aluguer> historial, List<Integer> classificacao) {
         this.nome = nome;
-        this.NIF = NIF;
+        this.nif = nif;
         this.email = email;
         this.password = password;
         this.morada = morada;
@@ -45,7 +45,7 @@ public abstract class Actor implements Serializable {
     }
     public Actor(Actor umActor){
         this.nome = umActor.getNome();
-        this.NIF = umActor.getNIF();
+        this.nif = umActor.getNif();
         this.email = umActor.getEmail();
         this.password = umActor.getPassword();
         this.morada = umActor.getMorada();
@@ -57,7 +57,7 @@ public abstract class Actor implements Serializable {
     public String getNome() {
         return this.nome;
     }
-    public int getNIF() { return this.NIF; }
+    public String getNif() { return this.nif; }
     public String getEmail() {
         return this.email;
     }
@@ -88,8 +88,8 @@ public abstract class Actor implements Serializable {
     public void setEmail (String email) {
         this.email = email;
     }
-    public void setNIF (int nif) {
-        this.NIF = nif;
+    public void setNIF (String nif) {
+        this.nif = nif;
     }
     public void setPassword (String password) {
         this.password = password;
@@ -115,7 +115,7 @@ public abstract class Actor implements Serializable {
         if (o == null || o.getClass() != this.getClass()) return false;
         Actor a = (Actor) o;
         return  a.getNome().equals(this.nome) &&
-                a.getNIF() == this.NIF &&
+                a.getNif().equals(this.nif) &&
                 a.getEmail().equals(this.email) &&
                 a.getPassword().equals(this.password) &&
                 a.getMorada().equals(this.morada) &&
@@ -126,7 +126,7 @@ public abstract class Actor implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Nome: ").append(this.nome);
-        sb.append(", NIF: ").append(this.NIF);
+        sb.append(", nif: ").append(this.nif);
         sb.append(", email: ").append(this.email);
         sb.append(", password: ").append(this.password);
         sb.append(", morada: ").append(this.morada);
@@ -144,8 +144,8 @@ class Proprietario extends Actor{
         super();
         this.listaCarros = new ArrayList<Carro>();
     }
-    public Proprietario(String nome, int NIF, String email, String password, String morada, String dataDeNascimento, List<Carro> listaCarros, List<Integer> classificacao, ArrayList<Aluguer> historial){
-        super(nome,NIF,email,password,morada,dataDeNascimento,historial,classificacao);
+    public Proprietario(String nome, String nif, String email, String password, String morada, String dataDeNascimento, List<Carro> listaCarros, List<Integer> classificacao, ArrayList<Aluguer> historial){
+        super(nome,nif,email,password,morada,dataDeNascimento,historial,classificacao);
         this.listaCarros = listaCarros.stream().map(Carro::clone).collect(Collectors.toList());
     }
     public Proprietario(Proprietario p){
@@ -192,8 +192,8 @@ class Cliente extends Actor{
         super();
         this.localizacao = new Ponto(0.0,0.0);
     }
-    public Cliente( String nome, int NIF, String email, String password, String morada, String dataNascimento, Ponto localizacao, ArrayList<Integer> classificacao, ArrayList<Aluguer> historial){
-        super(nome,NIF,email,password,morada,dataNascimento,historial,classificacao);
+    public Cliente( String nome, String nif, String email, String password, String morada, String dataNascimento, Ponto localizacao, ArrayList<Integer> classificacao, ArrayList<Aluguer> historial){
+        super(nome,nif,email,password,morada,dataNascimento,historial,classificacao);
         this.localizacao = localizacao.clone();
     }
     public Cliente(Cliente c){

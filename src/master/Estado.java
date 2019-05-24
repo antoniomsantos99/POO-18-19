@@ -169,7 +169,7 @@ public class Estado implements Serializable{
     /** realiza a operacao de registo*/
     public void registo(){
         String nome,email,password,morada,dataNascimento;
-        int NIF;
+        String nif;
         double locX,locY;
         Ponto localizacao;
         do{
@@ -182,14 +182,14 @@ public class Estado implements Serializable{
                         email = lerString("Erro: Email já existe, introduza um email válido:");
                     }
                     nome = lerString("Introduza o seu nome:");
-                    NIF = lerInt("Introduza o seu NIF:");
+                    nif = lerString("Introduza o seu nif:");
                     password = lerString("Introduza a sua password:");
                     morada = lerString("Introduza a sua morada:");
                     dataNascimento = lerString("Introduza a sua data de nascimento (DD/MM/YYYY):");
                     locX = lerDouble("Introduza a sua localização (x)");
                     locY = lerDouble("Introduza a sua localização (y)");
                     localizacao = new Ponto(locX,locY);
-                    Cliente c = new Cliente(nome,NIF,email,password,morada,dataNascimento,localizacao,new ArrayList<Integer>(),new ArrayList<Aluguer>());
+                    Cliente c = new Cliente(nome,nif,email,password,morada,dataNascimento,localizacao,new ArrayList<Integer>(),new ArrayList<Aluguer>());
                     listaClientes.put(email,c);
                     System.out.println("Cliente " + nome + " resgistado com sucesso!");
                     break;
@@ -203,8 +203,8 @@ public class Estado implements Serializable{
                     password = lerString("Introduza a sua password:");
                     morada = lerString("Introduza a sua morada:");
                     dataNascimento = lerString("Introduza a sua data de nascimento (DD/MM/YYYY):");
-                    NIF = lerInt("Introduza o seu NIF:");
-                    Proprietario p = new Proprietario(nome,NIF,email,password,morada,dataNascimento,new ArrayList<Carro>(),new ArrayList<Integer>(),new ArrayList<Aluguer>());
+                    nif = lerString("Introduza o seu NIF:");
+                    Proprietario p = new Proprietario(nome,nif,email,password,morada,dataNascimento,new ArrayList<Carro>(),new ArrayList<Integer>(),new ArrayList<Aluguer>());
                     listaProprietarios.put(email,p);
                     System.out.println("Proprietario " + nome + " resgistado com sucesso!");
                     break;
@@ -222,11 +222,11 @@ public class Estado implements Serializable{
         String[] options = {"Registar Eletrico","Registar Hibrido","Registar Gasolina"};
         Menu menuCarro = new Menu(options);
         Carro c = null;
-        String matricula;
+        String marca, matricula;
         Proprietario proprietario = listaProprietarios.get(email);
         int velMed, precoBase;
         int consumoBateria,consumoGas;
-        double bateria,deposito;
+        double autonomia;
         double locX,locY;
         Ponto localizacao;
         boolean dispAlugar;
@@ -235,6 +235,7 @@ public class Estado implements Serializable{
             switch(menuCarro.getOpcao()){
                 case 1:
                     System.out.println("Introduza as informações seguintes para resgistar um Carro Eletrico:");
+                    marca = lerString("Introduza a marca do carro:");
                     matricula = lerString("Introduza a matricula do carro:");
                     while(verificaCliente(matricula)){
                         matricula = lerString("Erro: Matricula já existe, introduza uma matricula válida:");
@@ -245,12 +246,13 @@ public class Estado implements Serializable{
                     locY = lerDouble("Introduza a sua localização (y)");
                     localizacao = new Ponto(locX,locY);
                     consumoBateria = lerInt("Introduza o consumo da bateria por km");
-                    bateria = lerDouble("Bateria atual (em %)?");
+                    autonomia = lerDouble("Bateria atual (em %)?");
                     dispAlugar = lerBool("Inicialmente disponivel para alugar? (1- sim, 0- não)");
-                    c = new Eletrico(matricula,proprietario,velMed,precoBase,localizacao,new ArrayList<Aluguer>(),new ArrayList<Integer>(),consumoBateria,dispAlugar,bateria);
+                    c = new Eletrico(marca,matricula,proprietario.getNif(),velMed,precoBase,localizacao,new ArrayList<Aluguer>(),new ArrayList<Integer>(),consumoBateria,autonomia,dispAlugar);
                     break;
                 case 2:
                     System.out.println("Introduza as informações seguintes para resgistar um Carro Hibrido:");
+                    marca = lerString("Introduza a marca do carro:");
                     matricula = lerString("Introduza a matricula do carro:");
                     while(verificaCliente(matricula)){
                         matricula = lerString("Erro: Matricula já existe, introduza uma matricula válida:");
@@ -262,13 +264,13 @@ public class Estado implements Serializable{
                     localizacao = new Ponto(locX,locY);
                     consumoBateria = lerInt("Introduza o consumo da bateria por km");
                     consumoGas = lerInt("Introduza o consumo de gas por km");
-                    bateria = lerDouble("Bateria atual (em %)?");
-                    deposito = lerDouble("Combustivel atual (em %)?");
+                    autonomia = lerDouble("Autonomia atual?");
                     dispAlugar = lerBool("Inicialmente disponivel para alugar? (1- sim, 0- não)");
-                    c = new Hibrido(matricula,proprietario,velMed,precoBase,localizacao,new ArrayList<Aluguer>(),new ArrayList<Integer>(),consumoGas,consumoBateria,dispAlugar,bateria,deposito);
+                    c = new Hibrido(marca,matricula,proprietario.getNif(),velMed,precoBase,localizacao,new ArrayList<Aluguer>(),new ArrayList<Integer>(),consumoGas,consumoBateria,autonomia,dispAlugar);
                     break;
                 case 3:
                     System.out.println("Introduza as informações seguintes para resgistar um Carro a Gasolina:");
+                    marca = lerString("Introduza a marca do carro:");
                     matricula = lerString("Introduza a matricula do carro:");
                     while(verificaCliente(matricula)){
                         matricula = lerString("Erro: Matricula já existe, introduza uma matricula válida:");
@@ -279,9 +281,9 @@ public class Estado implements Serializable{
                     locY = lerDouble("Introduza a sua localização (y)");
                     localizacao = new Ponto(locX,locY);
                     consumoGas = lerInt("Introduza o consumo de gas por km");
-                    deposito = lerDouble("Combustivel atual (em %)?");
+                    autonomia = lerDouble("Autonomia atual?");
                     dispAlugar = lerBool("Inicialmente disponivel para alugar? (1- sim, 0- não)");
-                    c = new Gasolina(matricula,proprietario,velMed,precoBase,localizacao,new ArrayList<Aluguer>(),new ArrayList<Integer>(),consumoGas,dispAlugar,deposito);
+                    c = new Gasolina(marca,matricula,proprietario.getNif(),velMed,precoBase,localizacao,new ArrayList<Aluguer>(),new ArrayList<Integer>(),consumoGas,autonomia,dispAlugar);
                     break;
             }
         }while(menuCarro.getOpcao()!=0);

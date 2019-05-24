@@ -9,28 +9,33 @@ public abstract class Carro implements Serializable {
 
     //eliminar então o tipo
     //aluguer vai ter coordenadas, cliente, propietario, avaliacao do veiculo e do propieatario
+    protected String marca;
     protected String matricula;
-    protected Proprietario proprietario;
+    protected String nif;
     protected int velMed;
     protected int precoBase;
     protected Ponto localizacao;
     protected List<Aluguer> historico;
     protected List<Integer> classificacao;
+    protected double autonomia;
     protected boolean dispAlugar;
 
     public Carro() {
-        this.matricula = "";
-        this.proprietario = new Proprietario();
+        this.marca = "n/a";
+        this.matricula = "n/a";
+        this.nif = "n/a";
         this.velMed = 0;
         this.precoBase = 0;
         this.localizacao = new Ponto();
         this.historico = new ArrayList<Aluguer>();
         this.classificacao = new ArrayList<Integer>();
+        this.autonomia = 0;
         this.dispAlugar = false;
     }
-    public Carro(String matricula, Proprietario proprietario, int velMed, int precoBase, Ponto localizacao, List<Aluguer> historico, List<Integer> classificacao, boolean dispAlugar) {
+    public Carro(String marca, String matricula, String nif, int velMed, int precoBase, Ponto localizacao, List<Aluguer> historico, List<Integer> classificacao, double autonomia, boolean dispAlugar) {
+        this.marca = marca;
         this.matricula = matricula;
-        this.proprietario = proprietario.clone();
+        this.nif = nif;
         this.velMed = velMed;
         this.precoBase = precoBase;
         this.localizacao = localizacao.clone();
@@ -39,24 +44,28 @@ public abstract class Carro implements Serializable {
             this.historico.add(a.clone());
         }
         this.classificacao = classificacao;
+        this.autonomia = autonomia;
         this.dispAlugar = dispAlugar;
     }
     public Carro(Carro umCarro) {
+        this.marca = umCarro.getMarca();
         this.matricula = umCarro.getMatricula();
-        this.proprietario = umCarro.getProprietario();
+        this.nif = umCarro.getNif();
         this.velMed = umCarro.getVelMed();
         this.precoBase = umCarro.getPrecoBase();
         this.localizacao = umCarro.getLocalizacao();
         this.historico = umCarro.getHistorico();
         this.classificacao = umCarro.getClassificacao();
+        this.autonomia = umCarro.getAutonomia();
         this.dispAlugar = umCarro.getDispAlugar();
     }
 
+    public String getMarca(){return this.marca;}
     public String getMatricula(){
         return this.matricula;
     }
-    public Proprietario getProprietario(){
-        return this.proprietario.clone();
+    public String getNif(){
+        return this.nif;
     }
     public int getVelMed() {
         return this.velMed;
@@ -75,15 +84,17 @@ public abstract class Carro implements Serializable {
         }
         return lista;
     }
+    public double getAutonomia(){return this.autonomia;}
     public boolean getDispAlugar(){
         return this.dispAlugar;
     }
 
+    public void setMarca(String marca){this.marca = marca;}
     public void setMatricula (String matricula){
         this.matricula = matricula;
     }
-    public void setProprietario (Proprietario proprietario){
-        this.proprietario = proprietario;
+    public void setNIF (String nif){
+        this.nif = nif;
     }
     public void setVelMed (int velMed) {
         this.velMed = velMed;
@@ -106,14 +117,18 @@ public abstract class Carro implements Serializable {
             this.classificacao.add(i);
         }
     }
+    public void setAutonomia(double autonomia){
+        this.autonomia = autonomia;
+    }
     public void setDispAlugar(boolean dispAlugar){
         this.dispAlugar = dispAlugar;
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Matricula: ").append(this.matricula);
-        sb.append(", Proprietario: ").append(this.proprietario.toString());
+        sb.append("Marca: ").append(this.marca);
+        sb.append(", Matricula: ").append(this.matricula);
+        sb.append(", nif: ").append(this.nif);
         sb.append(", Velocidade: ").append(this.velMed);
         sb.append(", Preço/km: ").append(this.precoBase);
         sb.append(", Localizacao: ").append(this.localizacao.toString());
@@ -121,20 +136,23 @@ public abstract class Carro implements Serializable {
         for(Aluguer s : this.historico)
             sb.append(s);
         sb.append(", Classificacao: ").append(this.classificacao);
-        sb.append(", disponivelAlugar: ").append(this.dispAlugar);
+        sb.append(", Autonomia: ").append(this.autonomia);
+        sb.append(", DisponivelAlugar: ").append(this.dispAlugar);
         return sb.toString();
     }
     public boolean equals (Object o) {
         if(o==this) return true;
         if(o==null || o.getClass ()!= this.getClass()) return false;
         Carro aux = (Carro) o;
-        return  aux.getMatricula().equals(this.matricula) &&
-                aux.getProprietario().equals(this.proprietario) &&
+        return  aux.getMarca().equals(this.marca) &&
+                aux.getMatricula().equals(this.matricula) &&
+                aux.getNif().equals(this.nif) &&
                 aux.getVelMed() == this.velMed &&
                 aux.getPrecoBase() == this.precoBase &&
                 aux.getLocalizacao().equals(this.localizacao) &&
                 aux.getHistorico().equals(this.historico) &&
                 aux.getClassificacao().equals(this.classificacao) &&
+                aux.getAutonomia()==this.autonomia &&
                 aux.getDispAlugar()==this.dispAlugar;
     }
     public abstract Carro clone();
@@ -142,33 +160,27 @@ public abstract class Carro implements Serializable {
 
 class Gasolina extends Carro {
     private int consumoGas;
-    private double deposito;
 
     public Gasolina() {
         super();
         this.consumoGas = 0;
-        this.deposito = 0.0;
     }
-    public Gasolina (String matricula, Proprietario proprietario, int velMed, int precoBase, Ponto localizacao, List<Aluguer> historico, List<Integer> classificacao, int consumoGas,boolean dispAlugar,double deposito) {
-        super(matricula,proprietario,velMed,precoBase,localizacao,historico,classificacao,dispAlugar);
+    public Gasolina (String marca, String matricula, String nif, int velMed, int precoBase, Ponto localizacao, List<Aluguer> historico, List<Integer> classificacao, int consumoGas, double autonomia, boolean dispAlugar) {
+        super(marca,matricula,nif,velMed,precoBase,localizacao,historico,classificacao,autonomia,dispAlugar);
         this.consumoGas = consumoGas;
-        this.deposito = deposito;
     }
     public Gasolina (Gasolina umGasolina) {
         super(umGasolina);
         this.consumoGas = umGasolina.getConsumoGas();
-        this.deposito = umGasolina.getDeposito();
     }
 
     public int getConsumoGas() {
         return this.consumoGas;
     }
-    public double getDeposito(){return this.deposito;}
 
     public void setConsumoGas(int consumoGas) {
         this.consumoGas = consumoGas;
     }
-    public void setDeposito(double deposito){this.deposito = deposito;}
 
     public Gasolina clone() {
         return new Gasolina(this);
@@ -179,7 +191,6 @@ class Gasolina extends Carro {
         sb.append("Gasolina: \n");
         sb.append(super.toString());
         sb.append(", consumoGas: ").append(this.consumoGas);
-        sb.append(", deposito: ").append(this.deposito);
         return sb.toString();
     }
 
@@ -188,41 +199,32 @@ class Gasolina extends Carro {
         else if(o==null || o.getClass()!=this.getClass()) return false;
         Gasolina aux = (Gasolina) o;
         return super.equals(o) &&
-                aux.getConsumoGas() == this.consumoGas &&
-                aux.getDeposito()   == this.deposito;
+                aux.getConsumoGas() == this.consumoGas;
     }
 }
 
 class Eletrico extends Carro {
     private int consumoBat;
-    private double bateria;
 
     public Eletrico() {
         super();
         this.consumoBat = 0;
-        this.bateria = 0.0;
     }
-    public Eletrico (String matricula, Proprietario proprietario, int velMed, int precoBase, Ponto localizacao, List<Aluguer> historico, List<Integer> classificacao, int consumoBat,boolean dispAlugar,double bateria) {
-        super(matricula,proprietario,velMed,precoBase,localizacao,historico,classificacao,dispAlugar);
+    public Eletrico (String marca, String matricula, String nif, int velMed, int precoBase, Ponto localizacao, List<Aluguer> historico, List<Integer> classificacao, int consumoBat, double autonomia, boolean dispAlugar) {
+        super(marca,matricula,nif,velMed,precoBase,localizacao,historico,classificacao,autonomia,dispAlugar);
         this.consumoBat = consumoBat;
-        this.bateria = bateria;
     }
     public Eletrico (Eletrico umEletrico) {
         super(umEletrico);
         this.consumoBat = umEletrico.getConsumoBat();
-        this.bateria = umEletrico.getBateria();
     }
 
     public int getConsumoBat() {
         return this.consumoBat;
     }
-    public double getBateria(){return this.bateria;}
 
     public void setConsumoBat (int consumoBat) {
         this.consumoBat = consumoBat;
-    }
-    public void setBateria(double bateria){
-        this.bateria = bateria;
     }
 
     public Eletrico clone() {
@@ -234,7 +236,6 @@ class Eletrico extends Carro {
         sb.append("Eletrico: \n");
         sb.append(super.toString());
         sb.append(", consumoBat: ").append(this.consumoBat);
-        sb.append(", bateria: ").append(this.bateria);
         return sb.toString();
     }
 
@@ -243,36 +244,28 @@ class Eletrico extends Carro {
         else if(o==null || o.getClass()!=this.getClass()) return false;
         Eletrico aux = (Eletrico) o;
         return super.equals(o) &&
-                aux.getConsumoBat()==this.consumoBat &&
-                aux.getBateria()==this.bateria;
+                aux.getConsumoBat()==this.consumoBat;
     }
 }
 
 class Hibrido extends Carro {
     private int consumoGas;
     private int consumoBat;
-    private double deposito,bateria;
 
     public Hibrido() {
         super();
         this.consumoGas = 0;
         this.consumoBat = 0;
-        this.bateria = 0.0;
-        this.deposito = 0.0;
     }
-    public Hibrido (String matricula, Proprietario proprietario, int velMed, int precoBase, Ponto localizacao, List<Aluguer> historico, List<Integer> classificacao, int consumoGas, int consumoBat, boolean dispAlugar, double bateria, double deposito) {
-        super(matricula,proprietario,velMed,precoBase,localizacao,historico,classificacao,dispAlugar);
+    public Hibrido (String marca, String matricula, String nif, int velMed, int precoBase, Ponto localizacao, List<Aluguer> historico, List<Integer> classificacao, int consumoGas, int consumoBat, double autonomia, boolean dispAlugar) {
+        super(marca,matricula,nif,velMed,precoBase,localizacao,historico,classificacao,autonomia,dispAlugar);
         this.consumoGas = consumoGas;
         this.consumoBat = consumoBat;
-        this.bateria= bateria;
-        this.deposito= deposito;
     }
     public Hibrido (Hibrido umHibrido) {
         super(umHibrido);
         this.consumoGas = umHibrido.getConsumoGas();
         this.consumoBat = umHibrido.getConsumoBat();
-        this.bateria = umHibrido.getBateria();
-        this.deposito = umHibrido.getDeposito();
     }
 
     public int getConsumoGas() {
@@ -281,8 +274,6 @@ class Hibrido extends Carro {
     public int getConsumoBat() {
         return this.consumoBat;
     }
-    public double getDeposito(){return this.deposito;}
-    public double getBateria(){return this.bateria;}
 
     public void setConsumoGas(int novoc1) {
         this.consumoGas = novoc1;
@@ -290,8 +281,6 @@ class Hibrido extends Carro {
     public void setConsumoBat(int novoc1) {
         this.consumoBat = novoc1;
     }
-    public void setDeposito(double deposito){this.deposito = deposito;}
-    public void setBateria(double bateria){this.bateria = bateria;}
 
     public Hibrido clone() {
         return new Hibrido(this);
@@ -303,8 +292,6 @@ class Hibrido extends Carro {
         sb.append(super.toString());
         sb.append(", consumoGas: ").append(this.consumoGas);
         sb.append(", consumoBat: ").append(this.consumoBat);
-        sb.append(", deposito: ").append(this.deposito);
-        sb.append(", bateria: ").append(this.bateria);
         return sb.toString();
     }
 
@@ -314,8 +301,6 @@ class Hibrido extends Carro {
         Hibrido aux = (Hibrido) o;
         return super.equals(o) &&
                 aux.getConsumoGas()==this.consumoGas &&
-                aux.getConsumoBat()==this.consumoBat &&
-                aux.getBateria()==this.bateria &&
-                aux.getDeposito()==this.deposito;
+                aux.getConsumoBat()==this.consumoBat;
     }
 }
