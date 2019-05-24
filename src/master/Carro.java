@@ -156,6 +156,8 @@ public abstract class Carro implements Serializable {
                 aux.getDispAlugar()==this.dispAlugar;
     }
     public abstract Carro clone();
+
+    public void abastecer(double quantidade){this.autonomia+=quantidade;}
 }
 
 class Gasolina extends Carro {
@@ -191,7 +193,7 @@ class Gasolina extends Carro {
         sb.append("Gasolina: \n");
         sb.append(super.toString());
         sb.append(", consumoGas: ").append(this.consumoGas);
-        return sb.toString();
+        return sb.toString()+'\n';
     }
 
     public boolean equals(Object o) {
@@ -236,7 +238,7 @@ class Eletrico extends Carro {
         sb.append("Eletrico: \n");
         sb.append(super.toString());
         sb.append(", consumoBat: ").append(this.consumoBat);
-        return sb.toString();
+        return sb.toString()+'\n';
     }
 
     public boolean equals(Object o) {
@@ -292,7 +294,7 @@ class Hibrido extends Carro {
         sb.append(super.toString());
         sb.append(", consumoGas: ").append(this.consumoGas);
         sb.append(", consumoBat: ").append(this.consumoBat);
-        return sb.toString();
+        return sb.toString()+'\n';
     }
 
     public boolean equals(Object o) {

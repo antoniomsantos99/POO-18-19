@@ -138,31 +138,33 @@ public abstract class Actor implements Serializable {
 }
 
 class Proprietario extends Actor{
-    private List<Carro> listaCarros;
+    private Set<Carro> listaCarros;
 
     public Proprietario(){
         super();
-        this.listaCarros = new ArrayList<Carro>();
+        this.listaCarros = new HashSet<Carro>();//TODO comparador
     }
-    public Proprietario(String nome, String nif, String email, String password, String morada, String dataDeNascimento, List<Carro> listaCarros, List<Integer> classificacao, ArrayList<Aluguer> historial){
+    public Proprietario(String nome, String nif, String email, String password, String morada, String dataDeNascimento, Set<Carro> listaCarros, List<Integer> classificacao, ArrayList<Aluguer> historial){
         super(nome,nif,email,password,morada,dataDeNascimento,historial,classificacao);
-        this.listaCarros = listaCarros.stream().map(Carro::clone).collect(Collectors.toList());
+        this.listaCarros = listaCarros.stream().map(Carro::clone).collect(Collectors.toSet());
     }
     public Proprietario(Proprietario p){
         super(p);
-        this.listaCarros = p.getListaCarros();
+        this.listaCarros = p.getSetCarros();
     }
 
-    public List<Carro> getListaCarros() {
-        return this.listaCarros.stream().map(Carro::clone).collect(Collectors.toList());
+    public Set<Carro> getSetCarros() {
+        return this.listaCarros.stream().map(Carro::clone).collect(Collectors.toSet());
     }
 
-    public void setListaCarros (ArrayList<Carro> listaCarros){
-        this.listaCarros = listaCarros.stream().map(Carro::clone).collect(Collectors.toList());
+    public void setSetCarros (ArrayList<Carro> listaCarros){
+        this.listaCarros = listaCarros.stream().map(Carro::clone).collect(Collectors.toSet());
     }
 
-    public void adicionarCarro (Carro c){
-        this.listaCarros.add(c.clone());
+    /** troca o carro no set se já tiver essa matricula, se não adiciona*/
+    public void trocarCarro (Carro c){
+        this.listaCarros = this.listaCarros.stream().filter(carro -> !carro.getMatricula().equals(c.getMatricula())).collect(Collectors.toSet());
+        this.listaCarros.add(c);
     }
 
     public String toString(){
@@ -178,7 +180,7 @@ class Proprietario extends Actor{
         if (o == null || o.getClass() != this.getClass()) return false;
         Proprietario p = (Proprietario) o;
         return super.equals(o) &&
-                this.listaCarros.equals(p.getListaCarros());
+                this.listaCarros.equals(p.getSetCarros());
     }
     public Proprietario clone(){return new Proprietario(this);}
 }
