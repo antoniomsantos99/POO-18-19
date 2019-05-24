@@ -2,6 +2,7 @@ package master;
 
 import java.io.Serializable;
 import java.lang.*;
+import java.time.LocalDateTime;
 
 /**
  * Classe do objeto de aluguer
@@ -14,137 +15,160 @@ import java.lang.*;
 
 public class Aluguer implements Serializable {
     // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
-    private Proprietario proprietario;
-    private Cliente cliente;
-    private Carro carro;
+    private String nifProp;
+    private String nifCliente;
+    private String matricula;
     private Ponto localInicial;
     private Ponto localFinal;
-    private Double preco;
-    private Double distancia;
-    private Double tempo;
+    private double preco;
+    private double distancia;
+    private LocalDateTime inicio;
+    private LocalDateTime fim;
+    private String combustivel;
+    private String preferencia;
 
     /**
      * Construtores
      */
     public Aluguer() {
-        this.proprietario = new Proprietario();
-        this.cliente = new Cliente();
-        this.carro = null;
+        this.nifProp = "n/a";
+        this.nifCliente = "n/a";
+        this.matricula = "n/a";
         this.localInicial = new Ponto(0.0,0.0);
         this.localFinal = new Ponto(0.0,0.0);
         this.preco = 0.0;
         this.distancia = 0.0;
-        this.tempo = 0.0;
+        this.inicio = LocalDateTime.now();
+        this.fim = LocalDateTime.now();
+        this.combustivel = "n/a";
+        this.preferencia = "n/a";
     }
-    public Aluguer(Proprietario proprietario, Cliente cliente, Carro carro, Ponto localAtual, Ponto localFinal, Double preco, Double distancia, Double tempo) {
-        this.proprietario = proprietario.clone();
-        this.cliente = cliente.clone();
-        this.carro = carro.clone();
-        this.localInicial = localAtual.clone();
-        this.localFinal = localFinal.clone();
+    public Aluguer(String nifProp, String nifCliente, String matricula, Ponto lI, Ponto lF, double preco, double distancia, LocalDateTime inicio, LocalDateTime fim, String combustivel, String preferencia) {
+        this.nifProp = nifProp;
+        this.nifCliente = nifCliente;
+        this.matricula = matricula;
+        this.localInicial = lI.clone();
+        this.localFinal = lF.clone();
         this.preco = preco;
         this.distancia = distancia;
-        this.tempo = tempo;
+        this.inicio = inicio;
+        this.fim = fim;
+        this.combustivel = combustivel;
+        this.preferencia = preferencia;
     }
     public Aluguer(Aluguer a){
-        this.proprietario = a.getProprietario();
-        this.cliente = a.getCliente();
-        this.carro = a.getCarro();
+        this.nifProp = a.getNifProp();
+        this.nifCliente = a.getNifCliente();
+        this.matricula = a.getMatricula();
         this.localInicial = a.getLocalInicial();
         this.localFinal = a.getLocalFinal();
         this.preco = a.getPreco();
         this.distancia = a.getDistancia();
-        this.tempo = a.getTempo();
+        this.inicio = a.getInicio();
+        this.fim = a.getFim();
+        this.combustivel = a.getCombustivel();
+        this.preferencia = a.getPreferencia();
     }
 
-    /**
-     * definicao dos gets
-     * @return return do que é pedido
-     */
-
-    public Proprietario getProprietario() {
-        return proprietario.clone();
+    public String getNifProp() {
+        return this.nifProp;
     }
-    public Cliente getCliente() {
-        return cliente.clone();
+    public void setNifProp(String nifProp) {
+        this.nifProp = nifProp;
     }
-    public Carro getCarro() {
-        return carro.clone();
+    public String getNifCliente() {
+        return this.nifCliente;
+    }
+    public void setNifCliente(String nifCliente) {
+        this.nifCliente = nifCliente;
+    }
+    public String getMatricula() {
+        return this.matricula;
+    }
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
     public Ponto getLocalInicial() {
-        return localInicial.clone();
-    }
-    public Ponto getLocalFinal() {
-        return localFinal.clone();
-    }
-    public Double getPreco() {
-        return preco;
-    }
-    public Double getDistancia() {
-        return distancia;
-    }
-    public Double getTempo() {
-        return tempo;
-    }
-
-    /**
-     * Defenicao dos sets
-     * Da set do q for pedido
-     */
-
-    public void setProprietario(Proprietario proprietario) {
-        this.proprietario = proprietario.clone();
-    }
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente.clone();
-    }
-    public void setCarro(Carro carro) {
-        this.carro = carro.clone();
+        return this.localInicial.clone();
     }
     public void setLocalInicial(Ponto localInicial) {
         this.localInicial = localInicial.clone();
     }
+    public Ponto getLocalFinal() {
+        return this.localFinal.clone();
+    }
     public void setLocalFinal(Ponto localFinal) {
         this.localFinal = localFinal.clone();
+    }
+    public Double getPreco() {
+        return this.preco;
     }
     public void setPreco(Double preco) {
         this.preco = preco;
     }
+    public Double getDistancia() {
+        return this.distancia;
+    }
     public void setDistancia(Double distancia) {
         this.distancia = distancia;
     }
-    public void setTempo(Double tempo) {
-        this.tempo = tempo;
+    public LocalDateTime getInicio() {
+        return this.inicio;
     }
-
+    public void setInicio(LocalDateTime inicio) {
+        this.inicio = inicio;
+    }
+    public LocalDateTime getFim() {
+        return this.fim;
+    }
+    public void setFim(LocalDateTime fim) {
+        this.fim = fim;
+    }
+    public String getCombustivel() {
+        return this.combustivel;
+    }
+    public void setCombustivel(String combustivel) {
+        this.combustivel = combustivel;
+    }
+    public String getPreferencia() {
+        return this.preferencia;
+    }
+    public void setPreferencia(String preferencia) {
+        this.preferencia = preferencia;
+    }
 
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || this.getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Aluguer aluguer = (Aluguer) o;
-        return  aluguer.getProprietario().equals(this.getProprietario()) &&
-                aluguer.getCliente().equals(this.getCliente()) &&
-                aluguer.getCarro().equals(this.getCarro()) &&
-                aluguer.getLocalInicial().equals(this.getLocalInicial()) &&
-                aluguer.getLocalFinal().equals(this.getLocalFinal()) &&
-                aluguer.getPreco().equals(this.getPreco()) &&
-                aluguer.getDistancia().equals(this.distancia) &&
-                aluguer.getTempo().equals(this.tempo);
-
-
+        return  this.nifProp.equals(aluguer.nifProp) &&
+                this.nifCliente.equals(aluguer.nifCliente) &&
+                this.matricula.equals(aluguer.matricula) &&
+                this.localInicial.equals(aluguer.localInicial) &&
+                this.localFinal.equals(aluguer.localFinal) &&
+                this.preco == aluguer.preco &&
+                this.distancia == aluguer.distancia &&
+                this.inicio.equals(aluguer.inicio) &&
+                this.fim.equals(aluguer.fim) &&
+                this.combustivel.equals(aluguer.combustivel) &&
+                this.preferencia.equals(aluguer.preferencia);
     }
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Aluguer:\n");
-        sb.append("Proprietario: ").append(this.proprietario.toString());
-        sb.append(", Cliente: ").append(this.cliente.toString());
-        sb.append(", Carro").append(this.carro.toString());
+        sb.append("Aluguer: ");
+        sb.append("{NifProp: ").append(this.nifProp);
+        sb.append(", NifCliente: ").append(this.nifCliente);
+        sb.append(", Matricula").append(this.matricula);
         sb.append(", LocalInicial: ").append(this.localInicial.toString());
         sb.append(", LocalFinal: ").append(this.localFinal.toString());
         sb.append(", Preco: ").append(this.preco);
         sb.append(", Distancia: ").append(this.distancia);
-        sb.append(", Tempo: ").append(this.tempo);
-        return sb.toString();
+        sb.append(", TempoInicio: ").append(this.inicio.toString());
+        sb.append(", TempoFim: ").append(this.fim.toString());
+        sb.append(", Combustivel: ").append(this.combustivel);
+        sb.append(", Preferencia: ").append(this.preferencia);
+        return sb.toString()+"}\n";
     }
     public Aluguer clone(){
         return new Aluguer(this);

@@ -102,10 +102,13 @@ public class Estado implements Serializable{
         Menu menuHubProprietario = new Menu(options);
         do{
             Proprietario p;
+            Cliente cliente;
             Carro c;
+            Aluguer a;
             menuHubProprietario.executa();
             Set<Carro> lsC;
             String matricula;
+            int escolha;
             switch(menuHubProprietario.getOpcao()){
                 case 1:
                     p = listaProprietarios.get(email);
@@ -119,18 +122,19 @@ public class Estado implements Serializable{
                 case 2:
                     p = listaProprietarios.get(email);
                     lsC = p.getSetCarros();
-                    if(lsC.isEmpty()){System.out.println("Erro: Parece que ainda não tem nenhum carro.");}
+                    if(lsC.isEmpty()){System.out.println("Erro: Parece que ainda não tem nenhum carro.");break;}
                     for(Carro carro:lsC){
                         System.out.println("Matricula: " + carro.getMatricula() + " - Disponivel para alugar: " + carro.getDispAlugar());
                     }
                     matricula = lerString("Introduza a matricula do carro que pretende sinalizar: (-1 para cancelar)");
                     if(matricula.equals("-1")) break;
                     while(!listaCarros.containsKey(matricula)){
-                        matricula = lerString("Erro: Matricula não existe, introduza uma matricula válida:");
+                        matricula = lerString("Erro: Matricula não existe, introduza uma matricula válida: (-1 para cancelar)");
+                        if(matricula.equals("-1")) break;
                     }
                     p = listaProprietarios.get(email);
                     c = listaCarros.get(matricula);
-                    boolean disponivel = lerBool("1- Sinalizar disponivel para alugar.\n0- Sinalizar não disponivel para alugar?");
+                    boolean disponivel = lerBool("1- Sinalizar disponivel para alugar.\n0- Sinalizar não disponivel para alugar.");
                     c.setDispAlugar(disponivel);
                     p.trocarCarro(c.clone());
                     listaCarros.put(c.getMatricula(),c.clone());
@@ -139,14 +143,15 @@ public class Estado implements Serializable{
                 case 3:
                     p = listaProprietarios.get(email);
                     lsC = p.getSetCarros();
-                    if(lsC.isEmpty()){System.out.println("Erro: Parece que ainda não tem nenhum carro.");}
+                    if(lsC.isEmpty()){System.out.println("Erro: Parece que ainda não tem nenhum carro.");break;}
                     for(Carro carro:lsC){
                         System.out.println("Matricula: " + carro.getMatricula() + " - Autonomia: " + carro.getAutonomia());
                     }
                     matricula = lerString("Introduza a matricula do carro que pretende abastecer: (-1 para cancelar)");
                     if(matricula.equals("-1")) break;
                     while(!listaCarros.containsKey(matricula)){
-                        matricula = lerString("Erro: Matricula não existe, introduza uma matricula válida:");
+                        matricula = lerString("Erro: Matricula não existe, introduza uma matricula válida: (-1 para cancelar)");
+                        if(matricula.equals("-1")) break;
                     }
                     p = listaProprietarios.get(email);
                     c = listaCarros.get(matricula);
@@ -159,14 +164,15 @@ public class Estado implements Serializable{
                 case 4:
                     p = listaProprietarios.get(email);
                     lsC = p.getSetCarros();
-                    if(lsC.isEmpty()){System.out.println("Erro: Parece que ainda não tem nenhum carro.");}
+                    if(lsC.isEmpty()){System.out.println("Erro: Parece que ainda não tem nenhum carro.");break;}
                     for(Carro carro:lsC){
                         System.out.println("Matricula: " + carro.getMatricula() + " - Preço/km: " + carro.getPrecoBase());
                     }
                     matricula = lerString("Introduza a matricula do carro que pretende alterar o preço/km: (-1 para cancelar)");
                     if(matricula.equals("-1")) break;
                     while(!listaCarros.containsKey(matricula)){
-                        matricula = lerString("Erro: Matricula não existe, introduza uma matricula válida:");
+                        matricula = lerString("Erro: Matricula não existe, introduza uma matricula válida: (-1 para cancelar)");
+                        if(matricula.equals("-1")) break;
                     }
                     p = listaProprietarios.get(email);
                     c = listaCarros.get(matricula);
@@ -175,6 +181,50 @@ public class Estado implements Serializable{
                     p.trocarCarro(c.clone());
                     listaCarros.put(c.getMatricula(),c.clone());
                     listaProprietarios.put(p.getEmail(),p.clone());
+                    break;
+                case 5://TODO FIX
+                    p = listaProprietarios.get(email);
+                    List<Aluguer> pending = p.getPending();
+                    if(pending.isEmpty()){System.out.println("Erro: Parece que não tem alugueres pendentes.");break;}
+                    for(int i=0;i<pending.size();i++){
+                        System.out.println((i+1)+" - "+pending.get(i).toString());
+                    }
+                    escolha = lerInt("Introduza o aluguer que pretende aceitar ou regeitar: (-1 para cancelar)");
+                    if(escolha == -1) break;
+                    while(escolha<1||escolha>pending.size()){
+                        escolha = lerInt("Erro: Aluguer não existe, introduza um aluguer válido: (-1 para cancelar)");
+                        if(escolha == -1) break;
+                    }
+                    p = listaProprietarios.get(email);
+                    a = pending.get(escolha);
+                    boolean aceite = lerBool("1- Aceitar pedido.\n0- Rejeitar pedido.");
+                    if(aceite){//TODO
+                        p.confirmAluguer(a);
+                        List<Cliente> listaC = this.listaClientes.values().stream().filter(cl -> cl.getNif().equals(a.getNifCliente())).collect(Collectors.toList());
+                        cliente = listaC.get(0);
+                        cliente.confirmAluguer(a);
+                        //c = this.listaCarros.get(a.getMatricula());  TODO mudar o veiculo de antes da viagem para o veiculo de depois da viagem
+                        //c.updateAluguer(a);  TODO mudar o veiculo de antes da viagem para o veiculo de depois da viagem
+                    }else{
+                        p.removerPending(escolha);
+                    }
+                    break;
+                case 6://TODO FIX
+                    p = listaProprietarios.get(email);
+                    List<Aluguer> alugueres = p.getHistorial();
+                    if(alugueres.isEmpty()){System.out.println("Erro: Parece que não tem alugueres.");break;}
+                    for(int i=0;i<alugueres.size();i++){
+                        System.out.println((i+1)+" - "+alugueres.get(i).toString());
+                    }
+                    escolha = lerInt("Introduza o aluguer que pretende registar: (-1 para cancelar)");
+                    if(escolha == -1) break;
+                    while(escolha<1||escolha>alugueres.size()){
+                        escolha = lerInt("Erro: Aluguer não existe, introduza um aluguer válido: (-1 para cancelar)");
+                        if(escolha == -1) break;
+                    }
+                    //p = listaProprietarios.get(email);
+                    a = alugueres.get(escolha);
+                    System.out.println(a.toString());//TODO faço a minima do que é resgistar o valor, mas já tenho o aluguer certo...
                     break;
             }
         }while(menuHubProprietario.getOpcao()!=0);
@@ -268,7 +318,7 @@ public class Estado implements Serializable{
                     morada = lerString("Introduza a sua morada:");
                     dataNascimento = lerString("Introduza a sua data de nascimento (DD/MM/YYYY):");
                     nif = lerString("Introduza o seu NIF:");
-                    Proprietario p = new Proprietario(nome,nif,email,password,morada,dataNascimento,new HashSet<Carro>(),new ArrayList<Integer>(),new ArrayList<Aluguer>()); //TODO alterar hashset
+                    Proprietario p = new Proprietario(nome,nif,email,password,morada,dataNascimento,new HashSet<Carro>(),new ArrayList<Integer>(),new ArrayList<Aluguer>(),new ArrayList<Aluguer>()); //TODO alterar hashset
                     listaProprietarios.put(email,p);
                     System.out.println("Proprietario " + nome + " resgistado com sucesso!");
                     break;
@@ -549,6 +599,28 @@ public class Estado implements Serializable{
         }
         return d;
     }
+
+    public int lerInt(String s){
+        System.out.println(s);
+        Integer output = Integer.MIN_VALUE;
+        while(output==Integer.MIN_VALUE){
+            output = lerIntAux();
+        }
+        return output;
+    }
+    private int lerIntAux(){
+        Scanner sc = new Scanner(System.in);
+        int d;
+        try{
+            d = sc.nextInt();
+        }catch(InputMismatchException e){
+            System.out.println("Erro: Introduza um valor valido.");
+            d = Integer.MIN_VALUE;
+
+        }
+        return d;
+    }
+
     private boolean lerBool(String s){
         System.out.println(s);
         boolean lido = false;

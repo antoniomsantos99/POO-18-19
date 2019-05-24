@@ -135,30 +135,44 @@ public abstract class Actor implements Serializable {
         sb.append(", classificacao: ").append(this.classificacao);
         return sb.toString();
     }
+
+    public void confirmAluguer(Aluguer a){
+        historial.add(a.clone());
+    }
 }
 
 class Proprietario extends Actor{
     private Set<Carro> listaCarros;
+    private List<Aluguer> pending;
 
     public Proprietario(){
         super();
         this.listaCarros = new HashSet<Carro>();//TODO comparador
+        this.pending = new ArrayList<Aluguer>();
     }
-    public Proprietario(String nome, String nif, String email, String password, String morada, String dataDeNascimento, Set<Carro> listaCarros, List<Integer> classificacao, ArrayList<Aluguer> historial){
+    public Proprietario(String nome, String nif, String email, String password, String morada, String dataDeNascimento, Set<Carro> listaCarros, List<Integer> classificacao, ArrayList<Aluguer> historial, ArrayList<Aluguer> pending){
         super(nome,nif,email,password,morada,dataDeNascimento,historial,classificacao);
         this.listaCarros = listaCarros.stream().map(Carro::clone).collect(Collectors.toSet());
+        this.pending = pending.stream().map(Aluguer::clone).collect(Collectors.toList());
     }
     public Proprietario(Proprietario p){
         super(p);
         this.listaCarros = p.getSetCarros();
+        p.getPending();
     }
 
     public Set<Carro> getSetCarros() {
         return this.listaCarros.stream().map(Carro::clone).collect(Collectors.toSet());
     }
+    public List<Aluguer> getPending() {
+        return this.pending.stream().map(Aluguer::clone).collect(Collectors.toList());
+    }
 
-    public void setSetCarros (ArrayList<Carro> listaCarros){
+    public void setSetCarros (Set<Carro> listaCarros){
         this.listaCarros = listaCarros.stream().map(Carro::clone).collect(Collectors.toSet());
+    }
+    public void setPending(List<Aluguer> pending){
+        this.pending = pending.stream().map(Aluguer::clone).collect(Collectors.toList());
     }
 
     /** troca o carro no set se já tiver essa matricula, se não adiciona*/
@@ -169,6 +183,9 @@ class Proprietario extends Actor{
     public boolean verificaCarro(String s){
         return this.listaCarros.stream().anyMatch(c->c.getMatricula().equals(s));
     }
+    public void removerPending(int index){
+        this.pending.remove(index);
+    }
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
@@ -176,6 +193,8 @@ class Proprietario extends Actor{
         sb.append(super.toString());
         sb.append(", listaCarros: ");
         for(Carro c : this.listaCarros){sb.append(c.toString());}
+        sb.append(", pending: ");
+        for(Aluguer a : this.pending){sb.append(a.toString());}
         return sb.toString();
     }
     public boolean equals(Object o) {
@@ -183,7 +202,8 @@ class Proprietario extends Actor{
         if (o == null || o.getClass() != this.getClass()) return false;
         Proprietario p = (Proprietario) o;
         return super.equals(o) &&
-                this.listaCarros.equals(p.getSetCarros());
+                this.listaCarros.equals(p.getSetCarros()) &&
+                this.pending.equals(p.getPending());
     }
     public Proprietario clone(){return new Proprietario(this);}
 }
