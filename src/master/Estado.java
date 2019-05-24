@@ -279,6 +279,7 @@ public class Estado implements Serializable{
         return c;
     }
 
+    //TODO
     public void carregarEstadoTXT() {
         String[] opcoes = {"Carregar Rápido", "Carregar com Nome do ficheiro"};
         Menu m = new Menu(opcoes);
@@ -311,6 +312,7 @@ public class Estado implements Serializable{
 
     }
 
+    //TODO
     public void gravarEstadoTXT() {
         String[] opcoes = {"Gravar Rápido", "Gravar com Nome do ficheiro"};
         Menu m = new Menu(opcoes);
@@ -338,7 +340,7 @@ public class Estado implements Serializable{
         } while (m.getOpcao() < 0);
 
     }
-
+    //TODO
     private void escreverFile(String file) throws FileNotFoundException {
 
         PrintWriter fich = new PrintWriter(file);
@@ -353,6 +355,7 @@ public class Estado implements Serializable{
         fich.close();
     }
 
+    //TODO
     private void lerFile(String file) throws FileNotFoundException, IOException {
         List<String> linhas = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(file));
