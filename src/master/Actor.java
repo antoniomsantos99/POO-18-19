@@ -158,6 +158,7 @@ class Proprietario extends Actor{
     public Proprietario(Proprietario p){
         super(p);
         this.listaCarros = p.getSetCarros();
+        this.pending = p.getPending();
         p.getPending();
     }
 
@@ -189,13 +190,12 @@ class Proprietario extends Actor{
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Proprietario:\n");
         sb.append(super.toString());
         sb.append(", listaCarros: ");
         for(Carro c : this.listaCarros){sb.append(c.toString());}
         sb.append(", pending: ");
         for(Aluguer a : this.pending){sb.append(a.toString());}
-        return sb.toString();
+        return sb.toString()+'\n';
     }
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -243,10 +243,9 @@ class Cliente extends Actor{
     }
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Cliente:\n");
         sb.append(super.toString());
         sb.append(", localizacao: ").append(this.localizacao.toString());
-        return sb.toString();
+        return sb.toString()+'\n';
     }
     public Cliente clone(){return new Cliente(this);}
 }

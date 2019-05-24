@@ -1,6 +1,7 @@
 package master;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -521,15 +522,16 @@ public class Estado implements Serializable{
     private void CVC2Proprietario(String linha) {
         String[] parsed = linha.split(","); //[Nome,Nif,Email,Morada]
         Proprietario p = new Proprietario(parsed[0],
-                         parsed[1],
-                         parsed[2],
-                         parsed[1],
-                         parsed[3],
-                         "1/1/1970",
-                         new HashSet<Carro>(),
-                         new ArrayList<Integer>(),
-                         new ArrayList<Aluguer>());
-        listaProprietarios.put(p.getEmail(),p.clone());
+                parsed[1],
+                parsed[2],
+                parsed[1],
+                parsed[3],
+                "1/1/1970",
+                new HashSet<Carro>(),
+                new ArrayList<Integer>(),
+                new ArrayList<Aluguer>(),
+                new ArrayList<Aluguer>());
+        listaProprietarios.put(p.getEmail(), p.clone());
 
 
     }
