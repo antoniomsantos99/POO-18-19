@@ -12,8 +12,8 @@ public abstract class Carro implements Serializable {
     protected String marca;
     protected String matricula;
     protected String nif;
-    protected int velMed;
-    protected int precoBase;
+    protected double velMed;
+    protected double precoBase;
     protected Ponto localizacao;
     protected List<Aluguer> historico;
     protected List<Integer> classificacao;
@@ -24,15 +24,15 @@ public abstract class Carro implements Serializable {
         this.marca = "n/a";
         this.matricula = "n/a";
         this.nif = "n/a";
-        this.velMed = 0;
-        this.precoBase = 0;
+        this.velMed = 0.0;
+        this.precoBase = 0.0;
         this.localizacao = new Ponto();
         this.historico = new ArrayList<Aluguer>();
         this.classificacao = new ArrayList<Integer>();
-        this.autonomia = 0;
+        this.autonomia = 0.0;
         this.dispAlugar = false;
     }
-    public Carro(String marca, String matricula, String nif, int velMed, int precoBase, Ponto localizacao, List<Aluguer> historico, List<Integer> classificacao, double autonomia, boolean dispAlugar) {
+    public Carro(String marca, String matricula, String nif, double velMed, double precoBase, Ponto localizacao, List<Aluguer> historico, List<Integer> classificacao, double autonomia, boolean dispAlugar) {
         this.marca = marca;
         this.matricula = matricula;
         this.nif = nif;
@@ -67,10 +67,10 @@ public abstract class Carro implements Serializable {
     public String getNif(){
         return this.nif;
     }
-    public int getVelMed() {
+    public double getVelMed() {
         return this.velMed;
     }
-    public int getPrecoBase() {
+    public double getPrecoBase() {
         return this.precoBase;
     }
     public Ponto getLocalizacao(){return this.localizacao.clone();}
@@ -96,10 +96,10 @@ public abstract class Carro implements Serializable {
     public void setNIF (String nif){
         this.nif = nif;
     }
-    public void setVelMed (int velMed) {
+    public void setVelMed (double velMed) {
         this.velMed = velMed;
     }
-    public void setPrecoBase (int precoBase) {
+    public void setPrecoBase (double precoBase) {
         this.precoBase = precoBase;
     }
     public void setLocalizacao(Ponto localizacao){
@@ -161,13 +161,13 @@ public abstract class Carro implements Serializable {
 }
 
 class Gasolina extends Carro {
-    private int consumoGas;
+    private double consumoGas;
 
     public Gasolina() {
         super();
         this.consumoGas = 0;
     }
-    public Gasolina (String marca, String matricula, String nif, int velMed, int precoBase, Ponto localizacao, List<Aluguer> historico, List<Integer> classificacao, int consumoGas, double autonomia, boolean dispAlugar) {
+    public Gasolina (String marca, String matricula, String nif, double velMed, double precoBase, Ponto localizacao, List<Aluguer> historico, List<Integer> classificacao, double consumoGas, double autonomia, boolean dispAlugar) {
         super(marca,matricula,nif,velMed,precoBase,localizacao,historico,classificacao,autonomia,dispAlugar);
         this.consumoGas = consumoGas;
     }
@@ -176,11 +176,11 @@ class Gasolina extends Carro {
         this.consumoGas = umGasolina.getConsumoGas();
     }
 
-    public int getConsumoGas() {
+    public double getConsumoGas() {
         return this.consumoGas;
     }
 
-    public void setConsumoGas(int consumoGas) {
+    public void setConsumoGas(double consumoGas) {
         this.consumoGas = consumoGas;
     }
 
@@ -206,13 +206,13 @@ class Gasolina extends Carro {
 }
 
 class Eletrico extends Carro {
-    private int consumoBat;
+    private double consumoBat;
 
     public Eletrico() {
         super();
         this.consumoBat = 0;
     }
-    public Eletrico (String marca, String matricula, String nif, int velMed, int precoBase, Ponto localizacao, List<Aluguer> historico, List<Integer> classificacao, int consumoBat, double autonomia, boolean dispAlugar) {
+    public Eletrico (String marca, String matricula, String nif, double velMed, double precoBase, Ponto localizacao, List<Aluguer> historico, List<Integer> classificacao, double consumoBat, double autonomia, boolean dispAlugar) {
         super(marca,matricula,nif,velMed,precoBase,localizacao,historico,classificacao,autonomia,dispAlugar);
         this.consumoBat = consumoBat;
     }
@@ -221,11 +221,11 @@ class Eletrico extends Carro {
         this.consumoBat = umEletrico.getConsumoBat();
     }
 
-    public int getConsumoBat() {
+    public double getConsumoBat() {
         return this.consumoBat;
     }
 
-    public void setConsumoBat (int consumoBat) {
+    public void setConsumoBat (double consumoBat) {
         this.consumoBat = consumoBat;
     }
 
@@ -251,15 +251,15 @@ class Eletrico extends Carro {
 }
 
 class Hibrido extends Carro {
-    private int consumoGas;
-    private int consumoBat;
+    private double consumoGas;
+    private double consumoBat;
 
     public Hibrido() {
         super();
         this.consumoGas = 0;
         this.consumoBat = 0;
     }
-    public Hibrido (String marca, String matricula, String nif, int velMed, int precoBase, Ponto localizacao, List<Aluguer> historico, List<Integer> classificacao, int consumoGas, int consumoBat, double autonomia, boolean dispAlugar) {
+    public Hibrido (String marca, String matricula, String nif, double velMed, double precoBase, Ponto localizacao, List<Aluguer> historico, List<Integer> classificacao, double consumoGas, double consumoBat, double autonomia, boolean dispAlugar) {
         super(marca,matricula,nif,velMed,precoBase,localizacao,historico,classificacao,autonomia,dispAlugar);
         this.consumoGas = consumoGas;
         this.consumoBat = consumoBat;
@@ -270,17 +270,17 @@ class Hibrido extends Carro {
         this.consumoBat = umHibrido.getConsumoBat();
     }
 
-    public int getConsumoGas() {
+    public double getConsumoGas() {
         return this.consumoGas;
     }
-    public int getConsumoBat() {
+    public double getConsumoBat() {
         return this.consumoBat;
     }
 
-    public void setConsumoGas(int novoc1) {
+    public void setConsumoGas(double novoc1) {
         this.consumoGas = novoc1;
     }
-    public void setConsumoBat(int novoc1) {
+    public void setConsumoBat(double novoc1) {
         this.consumoBat = novoc1;
     }
 

@@ -166,6 +166,9 @@ class Proprietario extends Actor{
         this.listaCarros = this.listaCarros.stream().filter(carro -> !carro.getMatricula().equals(c.getMatricula())).collect(Collectors.toSet());
         this.listaCarros.add(c);
     }
+    public boolean verificaCarro(String s){
+        return this.listaCarros.stream().anyMatch(c->c.getMatricula().equals(s));
+    }
 
     public String toString(){
         StringBuilder sb = new StringBuilder();

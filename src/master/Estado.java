@@ -123,7 +123,8 @@ public class Estado implements Serializable{
                     for(Carro carro:lsC){
                         System.out.println("Matricula: " + carro.getMatricula() + " - Disponivel para alugar: " + carro.getDispAlugar());
                     }
-                    matricula = lerString("Introduza a matricula do carro que pretende sinalizar:");
+                    matricula = lerString("Introduza a matricula do carro que pretende sinalizar: (-1 para cancelar)");
+                    if(matricula.equals("-1")) break;
                     while(!listaCarros.containsKey(matricula)){
                         matricula = lerString("Erro: Matricula não existe, introduza uma matricula válida:");
                     }
@@ -133,7 +134,7 @@ public class Estado implements Serializable{
                     c.setDispAlugar(disponivel);
                     p.trocarCarro(c.clone());
                     listaCarros.put(c.getMatricula(),c.clone());
-                    listaProprietarios.put(p.getNif(),p.clone());
+                    listaProprietarios.put(p.getEmail(),p.clone());
                     break;
                 case 3:
                     p = listaProprietarios.get(email);
@@ -142,7 +143,8 @@ public class Estado implements Serializable{
                     for(Carro carro:lsC){
                         System.out.println("Matricula: " + carro.getMatricula() + " - Autonomia: " + carro.getAutonomia());
                     }
-                    matricula = lerString("Introduza a matricula do carro que pretende abastecer:");
+                    matricula = lerString("Introduza a matricula do carro que pretende abastecer: (-1 para cancelar)");
+                    if(matricula.equals("-1")) break;
                     while(!listaCarros.containsKey(matricula)){
                         matricula = lerString("Erro: Matricula não existe, introduza uma matricula válida:");
                     }
@@ -152,7 +154,27 @@ public class Estado implements Serializable{
                     c.abastecer(valorAbatecer);
                     p.trocarCarro(c.clone());
                     listaCarros.put(c.getMatricula(),c.clone());
-                    listaProprietarios.put(p.getNif(),p.clone());
+                    listaProprietarios.put(p.getEmail(),p.clone());
+                    break;
+                case 4:
+                    p = listaProprietarios.get(email);
+                    lsC = p.getSetCarros();
+                    if(lsC.isEmpty()){System.out.println("Erro: Parece que ainda não tem nenhum carro.");}
+                    for(Carro carro:lsC){
+                        System.out.println("Matricula: " + carro.getMatricula() + " - Preço/km: " + carro.getPrecoBase());
+                    }
+                    matricula = lerString("Introduza a matricula do carro que pretende alterar o preço/km: (-1 para cancelar)");
+                    if(matricula.equals("-1")) break;
+                    while(!listaCarros.containsKey(matricula)){
+                        matricula = lerString("Erro: Matricula não existe, introduza uma matricula válida:");
+                    }
+                    p = listaProprietarios.get(email);
+                    c = listaCarros.get(matricula);
+                    double precoKm = lerDouble("Introduza o novo preço/km:");
+                    c.setPrecoBase(precoKm);
+                    p.trocarCarro(c.clone());
+                    listaCarros.put(c.getMatricula(),c.clone());
+                    listaProprietarios.put(p.getEmail(),p.clone());
                     break;
             }
         }while(menuHubProprietario.getOpcao()!=0);
@@ -267,8 +289,8 @@ public class Estado implements Serializable{
             Carro c;
             String marca, matricula;
             Proprietario proprietario = listaProprietarios.get(email);
-            int velMed, precoBase;
-            int consumoBateria,consumoGas;
+            double velMed, precoBase;
+            double consumoBateria,consumoGas;
             double autonomia;
             double locX,locY;
             Ponto localizacao;
@@ -282,12 +304,12 @@ public class Estado implements Serializable{
                     while(verificaCarro(matricula)){
                         matricula = lerString("Erro: Matricula já existe, introduza uma matricula válida:");
                     }
-                    velMed = lerInt("Introduza a velocidade media:");
-                    precoBase = lerInt("Introduza o preco base");
+                    velMed = lerDouble("Introduza a velocidade media:");
+                    precoBase = lerDouble("Introduza o preco base");
                     locX = lerDouble("Introduza a sua localização (x)");
                     locY = lerDouble("Introduza a sua localização (y)");
                     localizacao = new Ponto(locX,locY);
-                    consumoBateria = lerInt("Introduza o consumo da bateria por km");
+                    consumoBateria = lerDouble("Introduza o consumo da bateria por km");
                     autonomia = lerDouble("Bateria atual (em %)?");
                     dispAlugar = lerBool("Inicialmente disponivel para alugar? (1- sim, 0- não)");
                     c = new Eletrico(marca,matricula,proprietario.getNif(),velMed,precoBase,localizacao,new ArrayList<Aluguer>(),new ArrayList<Integer>(),consumoBateria,autonomia,dispAlugar);
@@ -299,13 +321,13 @@ public class Estado implements Serializable{
                     while(verificaCarro(matricula)){
                         matricula = lerString("Erro: Matricula já existe, introduza uma matricula válida:");
                     }
-                    velMed = lerInt("Introduza a velocidade media:");
-                    precoBase = lerInt("Introduza o preco base");
+                    velMed = lerDouble("Introduza a velocidade media:");
+                    precoBase = lerDouble("Introduza o preco base");
                     locX = lerDouble("Introduza a sua localização (x)");
                     locY = lerDouble("Introduza a sua localização (y)");
                     localizacao = new Ponto(locX,locY);
-                    consumoBateria = lerInt("Introduza o consumo da bateria por km");
-                    consumoGas = lerInt("Introduza o consumo de gas por km");
+                    consumoBateria = lerDouble("Introduza o consumo da bateria por km");
+                    consumoGas = lerDouble("Introduza o consumo de gas por km");
                     autonomia = lerDouble("Autonomia atual?");
                     dispAlugar = lerBool("Inicialmente disponivel para alugar? (1- sim, 0- não)");
                     c = new Hibrido(marca,matricula,proprietario.getNif(),velMed,precoBase,localizacao,new ArrayList<Aluguer>(),new ArrayList<Integer>(),consumoGas,consumoBateria,autonomia,dispAlugar);
@@ -317,12 +339,12 @@ public class Estado implements Serializable{
                     while(verificaCarro(matricula)){
                         matricula = lerString("Erro: Matricula já existe, introduza uma matricula válida:");
                     }
-                    velMed = lerInt("Introduza a velocidade media:");
-                    precoBase = lerInt("Introduza o preco base");
+                    velMed = lerDouble("Introduza a velocidade media:");
+                    precoBase = lerDouble("Introduza o preco base");
                     locX = lerDouble("Introduza a sua localização (x)");
                     locY = lerDouble("Introduza a sua localização (y)");
                     localizacao = new Ponto(locX,locY);
-                    consumoGas = lerInt("Introduza o consumo de gas por km");
+                    consumoGas = lerDouble("Introduza o consumo de gas por km");
                     autonomia = lerDouble("Autonomia atual?");
                     dispAlugar = lerBool("Inicialmente disponivel para alugar? (1- sim, 0- não)");
                     c = new Gasolina(marca,matricula,proprietario.getNif(),velMed,precoBase,localizacao,new ArrayList<Aluguer>(),new ArrayList<Integer>(),consumoGas,autonomia,dispAlugar);
@@ -501,33 +523,6 @@ public class Estado implements Serializable{
         }while(output.equals(""));
         return output;
     }
-    /**
-     * le um int
-     * @param s dá print do parametro que recebe
-     * @return devolve o int inicializado
-     */
-    public int lerInt(String s){
-        System.out.println(s);
-        Scanner sc = new Scanner(System.in);
-        int output = Integer.MIN_VALUE;
-        while(output==Integer.MIN_VALUE){
-            output = lerIntAux();
-        }
-        return output;
-    }
-    private int lerIntAux(){
-        Scanner sc = new Scanner(System.in);
-        int i;
-        try{
-            i = sc.nextInt();
-        }catch(InputMismatchException e){
-            System.out.println("Erro: Introduza um valor valido.");
-            i = Integer.MIN_VALUE;
-
-        }
-        return i;
-    }
-
 
     /**
      * le um double
@@ -559,10 +554,23 @@ public class Estado implements Serializable{
         boolean lido = false;
         boolean output = false;
         while(!lido){
-            int i = lerIntAux();
+            int i = lerBoolAux();
             if(i==1){output=true;lido=true;}else if(i==0){lido=true;}
         }
         return output;
+    }
+
+    private int lerBoolAux(){
+        Scanner sc = new Scanner(System.in);
+        int i;
+        try{
+            i = sc.nextInt();
+        }catch(InputMismatchException e){
+            System.out.println("Erro: Introduza um valor valido.");
+            i = Integer.MIN_VALUE;
+
+        }
+        return i;
     }
 
 }
