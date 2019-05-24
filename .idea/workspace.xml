@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="06dd8317-f02e-403b-8158-b34d387589cf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/estado.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/master/Carro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/master/Carro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/master/Estado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/master/Estado.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,11 +28,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/master/Estado.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6400">
-              <caret line="424" column="29" selection-start-line="424" selection-start-column="29" selection-end-line="424" selection-end-column="29" />
+            <state relative-caret-position="596">
+              <caret line="103" column="42" lean-forward="true" selection-start-line="103" selection-start-column="42" selection-end-line="103" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#Estado#0;class#Estado#0" />
@@ -47,27 +50,35 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/master/Carro.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="835">
-              <caret line="217" selection-start-line="217" selection-end-line="217" />
+            <state relative-caret-position="260">
+              <caret line="250" column="17" selection-start-line="250" selection-start-column="17" selection-end-line="250" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="class#Carro#0" />
                 <element signature="method#Carro#0;class#Carro#0" />
                 <element signature="method#Carro#1;class#Carro#0" />
                 <element signature="method#Carro#2;class#Carro#0" />
                 <element signature="method#getHistorico#0;class#Carro#0" />
+                <element signature="e#2708#2709#0" expanded="true" />
+                <element signature="e#2726#2727#0" expanded="true" />
                 <element signature="method#setHistorico#0;class#Carro#0" />
+                <element signature="method#toString#0;class#Carro#0" />
+                <element signature="method#equals#0;class#Carro#0" />
                 <element signature="class#Gasolina#0" />
-                <element signature="method#Gasolina#0;class#Gasolina#0" />
-                <element signature="method#Gasolina#2;class#Gasolina#0" />
+                <element signature="e#6235#6236#0" expanded="true" />
                 <element signature="class#Eletrico#0" />
+                <element signature="method#Eletrico#0;class#Eletrico#0" />
                 <element signature="method#Eletrico#1;class#Eletrico#0" />
                 <element signature="method#Eletrico#2;class#Eletrico#0" />
+                <element signature="e#8018#8019#0" expanded="true" />
                 <element signature="class#Hibrido#0" />
-                <element signature="method#Hibrido#0;class#Hibrido#0" />
-                <element signature="method#Hibrido#2;class#Hibrido#0" />
+                <element signature="e#9774#9815#1" />
+                <element signature="e#10131#10132#0" expanded="true" />
+                <element signature="e#10341#10342#0" expanded="true" />
+                <element signature="method#toString#0;class#Hibrido#0" />
               </folding>
             </state>
           </provider>
@@ -143,9 +154,9 @@
         <option value="$PROJECT_DIR$/src/master/UMCarroJa.java" />
         <option value="$PROJECT_DIR$/src/master/Aluguer.java" />
         <option value="$PROJECT_DIR$/src/master/Ponto.java" />
-        <option value="$PROJECT_DIR$/src/master/Carro.java" />
         <option value="$PROJECT_DIR$/src/master/LoginRegisto.java" />
         <option value="$PROJECT_DIR$/src/master/Actor.java" />
+        <option value="$PROJECT_DIR$/src/master/Carro.java" />
         <option value="$PROJECT_DIR$/src/master/Estado.java" />
       </list>
     </option>
@@ -193,13 +204,6 @@
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="master" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="Actor.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </path>
-            <path>
-              <item name="POO-18-19" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="POO-18-19" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="master" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Carro.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </path>
           </expand>
           <select />
@@ -280,7 +284,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.116204694" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11727079" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -296,7 +300,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298731" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.33586133" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50074625" side_tool="true" weight="0.32827735" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32936078" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49925372" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -477,26 +481,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/master/Estado.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6400">
-          <caret line="424" column="29" selection-start-line="424" selection-start-column="29" selection-end-line="424" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#Estado#0;class#Estado#0" />
-            <element signature="method#Estado#1;class#Estado#0" />
-            <element signature="method#login#0;class#Estado#0" />
-            <element signature="e#6292#6293#0" expanded="true" />
-            <element signature="e#6347#6348#0" expanded="true" />
-            <element signature="e#6586#6587#0" expanded="true" />
-            <element signature="e#6646#6647#0" expanded="true" />
-            <element signature="method#registo#0;class#Estado#0" />
-            <element signature="method#escreverFile#0;class#Estado#0" />
-            <element signature="method#lerString#0;class#Estado#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/master/Menu.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="580">
@@ -516,24 +500,52 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/master/Carro.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="835">
-          <caret line="217" selection-start-line="217" selection-end-line="217" />
+        <state relative-caret-position="260">
+          <caret line="250" column="17" selection-start-line="250" selection-start-column="17" selection-end-line="250" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="class#Carro#0" />
             <element signature="method#Carro#0;class#Carro#0" />
             <element signature="method#Carro#1;class#Carro#0" />
             <element signature="method#Carro#2;class#Carro#0" />
             <element signature="method#getHistorico#0;class#Carro#0" />
+            <element signature="e#2708#2709#0" expanded="true" />
+            <element signature="e#2726#2727#0" expanded="true" />
             <element signature="method#setHistorico#0;class#Carro#0" />
+            <element signature="method#toString#0;class#Carro#0" />
+            <element signature="method#equals#0;class#Carro#0" />
             <element signature="class#Gasolina#0" />
-            <element signature="method#Gasolina#0;class#Gasolina#0" />
-            <element signature="method#Gasolina#2;class#Gasolina#0" />
+            <element signature="e#6235#6236#0" expanded="true" />
             <element signature="class#Eletrico#0" />
+            <element signature="method#Eletrico#0;class#Eletrico#0" />
             <element signature="method#Eletrico#1;class#Eletrico#0" />
             <element signature="method#Eletrico#2;class#Eletrico#0" />
+            <element signature="e#8018#8019#0" expanded="true" />
             <element signature="class#Hibrido#0" />
-            <element signature="method#Hibrido#0;class#Hibrido#0" />
-            <element signature="method#Hibrido#2;class#Hibrido#0" />
+            <element signature="e#9774#9815#1" />
+            <element signature="e#10131#10132#0" expanded="true" />
+            <element signature="e#10341#10342#0" expanded="true" />
+            <element signature="method#toString#0;class#Hibrido#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/master/Estado.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="596">
+          <caret line="103" column="42" lean-forward="true" selection-start-line="103" selection-start-column="42" selection-end-line="103" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Estado#0;class#Estado#0" />
+            <element signature="method#Estado#1;class#Estado#0" />
+            <element signature="method#login#0;class#Estado#0" />
+            <element signature="e#6292#6293#0" expanded="true" />
+            <element signature="e#6347#6348#0" expanded="true" />
+            <element signature="e#6586#6587#0" expanded="true" />
+            <element signature="e#6646#6647#0" expanded="true" />
+            <element signature="method#registo#0;class#Estado#0" />
+            <element signature="method#escreverFile#0;class#Estado#0" />
+            <element signature="method#lerString#0;class#Estado#0" />
           </folding>
         </state>
       </provider>

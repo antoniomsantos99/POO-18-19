@@ -93,7 +93,7 @@ public class Estado implements Serializable{
         }while(menuHubCliente.getOpcao()!=0);
     }
     private void hubProprietario(String email){
-        String[] options = {"Adicionar novo Carro",
+        String[] options = {"Registar novo Carro",
                             "Sinalizar que um dos seus carros está disponível ou não para alugar",
                             "Abastecer um veiculo",
                             "Alterar o preço por km de um veiculo",
@@ -226,8 +226,10 @@ public class Estado implements Serializable{
         Proprietario proprietario = listaProprietarios.get(email);
         int velMed, precoBase;
         int consumoBateria,consumoGas;
+        double bateria,deposito;
         double locX,locY;
         Ponto localizacao;
+        boolean dispAlugar;
         do{
             menuCarro.executa();
             switch(menuCarro.getOpcao()){
@@ -243,7 +245,9 @@ public class Estado implements Serializable{
                     locY = lerDouble("Introduza a sua localização (y)");
                     localizacao = new Ponto(locX,locY);
                     consumoBateria = lerInt("Introduza o consumo da bateria por km");
-                    c = new Eletrico(matricula,proprietario,velMed,precoBase,localizacao,new ArrayList<Aluguer>(),new ArrayList<Integer>(),consumoBateria);
+                    bateria = lerDouble("Bateria atual (em %)?");
+                    dispAlugar = lerBool("Inicialmente disponivel para alugar? (1- sim, 0- não)");
+                    c = new Eletrico(matricula,proprietario,velMed,precoBase,localizacao,new ArrayList<Aluguer>(),new ArrayList<Integer>(),consumoBateria,dispAlugar,bateria);
                     break;
                 case 2:
                     System.out.println("Introduza as informações seguintes para resgistar um Carro Hibrido:");
@@ -258,7 +262,10 @@ public class Estado implements Serializable{
                     localizacao = new Ponto(locX,locY);
                     consumoBateria = lerInt("Introduza o consumo da bateria por km");
                     consumoGas = lerInt("Introduza o consumo de gas por km");
-                    c = new Hibrido(matricula,proprietario,velMed,precoBase,localizacao,new ArrayList<Aluguer>(),new ArrayList<Integer>(),consumoGas,consumoBateria);
+                    bateria = lerDouble("Bateria atual (em %)?");
+                    deposito = lerDouble("Combustivel atual (em %)?");
+                    dispAlugar = lerBool("Inicialmente disponivel para alugar? (1- sim, 0- não)");
+                    c = new Hibrido(matricula,proprietario,velMed,precoBase,localizacao,new ArrayList<Aluguer>(),new ArrayList<Integer>(),consumoGas,consumoBateria,dispAlugar,bateria,deposito);
                     break;
                 case 3:
                     System.out.println("Introduza as informações seguintes para resgistar um Carro a Gasolina:");
@@ -272,7 +279,9 @@ public class Estado implements Serializable{
                     locY = lerDouble("Introduza a sua localização (y)");
                     localizacao = new Ponto(locX,locY);
                     consumoGas = lerInt("Introduza o consumo de gas por km");
-                    c = new Gasolina(matricula,proprietario,velMed,precoBase,localizacao,new ArrayList<Aluguer>(),new ArrayList<Integer>(),consumoGas);
+                    deposito = lerDouble("Combustivel atual (em %)?");
+                    dispAlugar = lerBool("Inicialmente disponivel para alugar? (1- sim, 0- não)");
+                    c = new Gasolina(matricula,proprietario,velMed,precoBase,localizacao,new ArrayList<Aluguer>(),new ArrayList<Integer>(),consumoGas,dispAlugar,deposito);
                     break;
             }
         }while(menuCarro.getOpcao()!=0);
@@ -500,6 +509,16 @@ public class Estado implements Serializable{
 
         }
         return d;
+    }
+    private boolean lerBool(String s){
+        System.out.println(s);
+        boolean lido = false;
+        boolean output = false;
+        while(!lido){
+            int i = lerIntAux();
+            if(i==1){output=true;lido=true;}else if(i==0){lido=true;}
+        }
+        return output;
     }
 
 }
