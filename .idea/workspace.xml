@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="06dd8317-f02e-403b-8158-b34d387589cf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/saves/estado.obj" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/master/Carro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/master/Carro.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/master/Estado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/master/Estado.java" afterDir="false" />
     </list>
+=======
+    <list default="true" id="06dd8317-f02e-403b-8158-b34d387589cf" name="Default Changelist" comment="" />
+>>>>>>> Stashed changes
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,8 +26,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/master/UMCarroJa.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="1240">
               <caret line="62" column="44" selection-start-line="62" selection-start-column="44" selection-end-line="62" selection-end-column="44" />
+=======
+            <state relative-caret-position="733">
+              <caret line="62" column="44" selection-start-line="62" selection-start-column="44" selection-end-line="62" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/master/Ponto.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
@@ -31,8 +49,18 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/master/Estado.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="596">
               <caret line="103" column="42" lean-forward="true" selection-start-line="103" selection-start-column="42" selection-end-line="103" selection-end-column="42" />
+=======
+<<<<<<< Updated upstream
+            <state relative-caret-position="6400">
+              <caret line="424" column="29" selection-start-line="424" selection-start-column="29" selection-end-line="424" selection-end-column="29" />
+=======
+            <state relative-caret-position="718">
+              <caret line="476" column="19" lean-forward="true" selection-start-line="476" selection-start-column="19" selection-end-line="476" selection-end-column="19" />
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#Estado#0;class#Estado#0" />
@@ -50,11 +78,76 @@
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/master/Carro.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="260">
               <caret line="250" column="17" selection-start-line="250" selection-start-column="17" selection-end-line="250" selection-end-column="17" />
+=======
+<<<<<<< Updated upstream
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/master/Carro.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="835">
+              <caret line="217" selection-start-line="217" selection-end-line="217" />
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/master/classeTestes.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="495">
+              <caret line="33" column="83" selection-start-line="33" selection-start-column="83" selection-end-line="33" selection-end-column="83" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/master/Actor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="553">
+              <caret line="185" column="6" selection-start-line="185" selection-start-column="6" selection-end-line="185" selection-end-column="6" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="docComment;class#Actor#0" />
+                <element signature="method#Actor#0;class#Actor#0" />
+                <element signature="method#Actor#1;class#Actor#0" />
+                <element signature="method#Actor#2;class#Actor#0" />
+                <element signature="method#getHistorial#0;class#Actor#0" />
+                <element signature="method#setHistorial#0;class#Actor#0" />
+                <element signature="method#Proprietario#1;class#Proprietario#0" />
+                <element signature="method#getListaCarros#0;class#Proprietario#0" />
+                <element signature="method#setListaCarros#0;class#Proprietario#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/master/Aluguer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="115">
+              <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="docComment;method#Aluguer#0;class#Aluguer#0" />
+                <element signature="docComment;method#getProprietario#0;class#Aluguer#0" />
+                <element signature="docComment;method#setProprietario#0;class#Aluguer#0" />
+                <element signature="method#equals#0;class#Aluguer#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/master/Carro.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1108">
+              <caret line="218" column="6" selection-start-line="218" selection-start-column="6" selection-end-line="218" selection-end-column="6" />
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="class#Carro#0" />
@@ -65,6 +158,7 @@
                 <element signature="e#2708#2709#0" expanded="true" />
                 <element signature="e#2726#2727#0" expanded="true" />
                 <element signature="method#setHistorico#0;class#Carro#0" />
+<<<<<<< Updated upstream
                 <element signature="method#toString#0;class#Carro#0" />
                 <element signature="method#equals#0;class#Carro#0" />
                 <element signature="class#Gasolina#0" />
@@ -79,6 +173,14 @@
                 <element signature="e#10131#10132#0" expanded="true" />
                 <element signature="e#10341#10342#0" expanded="true" />
                 <element signature="method#toString#0;class#Hibrido#0" />
+=======
+                <element signature="method#Gasolina#0;class#Gasolina#0" />
+                <element signature="method#Gasolina#2;class#Gasolina#0" />
+                <element signature="method#Eletrico#1;class#Eletrico#0" />
+                <element signature="method#Eletrico#2;class#Eletrico#0" />
+                <element signature="method#Hibrido#0;class#Hibrido#0" />
+                <element signature="method#Hibrido#2;class#Hibrido#0" />
+>>>>>>> Stashed changes
               </folding>
             </state>
           </provider>
@@ -87,7 +189,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/master/Menu.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="580">
+=======
+            <state relative-caret-position="495">
+>>>>>>> Stashed changes
               <caret line="35" column="45" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -99,7 +205,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/logsPOO_carregamentoInicial.bak">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="8800">
+=======
+            <state relative-caret-position="6600">
+>>>>>>> Stashed changes
               <caret line="440" column="75" selection-start-line="440" selection-start-column="75" selection-end-line="440" selection-end-column="84" />
             </state>
           </provider>
@@ -162,9 +272,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
+    <option name="x" value="-3" />
+    <option name="y" value="23" />
+    <option name="width" value="1969" />
+    <option name="height" value="1229" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -174,7 +285,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< Updated upstream
       <pane id="PackagesPane" />
+=======
+>>>>>>> Stashed changes
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -209,6 +323,10 @@
           <select />
         </subPane>
       </pane>
+<<<<<<< Updated upstream
+=======
+      <pane id="PackagesPane" />
+>>>>>>> Stashed changes
       <pane id="ProjectPane" />
     </panes>
   </component>
@@ -217,7 +335,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="Groovy JUnit" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Groovy JUnit" value="groovy.util.GroovyTestCase" />
     <property name="create.test.in.the.same.root" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../PedroLearns" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -281,10 +399,18 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="0" y="23" width="2560" height="1337" extended-state="6" />
     <editor active="true" />
     <layout>
+<<<<<<< Updated upstream
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11727079" />
+=======
+<<<<<<< Updated upstream
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.116204694" />
+=======
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11596505" />
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -406,16 +532,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/master/classeTestes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="33" column="83" selection-start-line="33" selection-start-column="83" selection-end-line="33" selection-end-column="83" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/branchForTesting/Registo.java" />
     <entry file="file://$PROJECT_DIR$/src/branchForTesting/Menu.java" />
     <entry file="file://$PROJECT_DIR$/src/branchForTesting/Login.java" />
@@ -431,10 +547,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/estado.obj" />
     <entry file="file://$PROJECT_DIR$/src/master/Input.java" />
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/src/master/Ponto.java">
+=======
+    <entry file="file://$PROJECT_DIR$/src/master/LoginRegisto.java" />
+    <entry file="file://$PROJECT_DIR$/logsPOO_carregamentoInicial.bak">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+        <state relative-caret-position="6600">
+          <caret line="440" column="75" selection-start-line="440" selection-start-column="75" selection-end-line="440" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/master/Actor.java">
+>>>>>>> Stashed changes
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="553">
+          <caret line="185" column="6" selection-start-line="185" selection-start-column="6" selection-end-line="185" selection-end-column="6" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#Actor#0" />
+            <element signature="method#Actor#0;class#Actor#0" />
+            <element signature="method#Actor#1;class#Actor#0" />
+            <element signature="method#Actor#2;class#Actor#0" />
+            <element signature="method#getHistorial#0;class#Actor#0" />
+            <element signature="method#setHistorial#0;class#Actor#0" />
+            <element signature="method#Proprietario#1;class#Proprietario#0" />
+            <element signature="method#getListaCarros#0;class#Proprietario#0" />
+            <element signature="method#setListaCarros#0;class#Proprietario#0" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -452,28 +592,26 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/src/master/LoginRegisto.java" />
     <entry file="file://$PROJECT_DIR$/src/master/Actor.java">
+=======
+    <entry file="file://$PROJECT_DIR$/src/master/UMCarroJa.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="164" column="37" selection-start-line="164" selection-start-column="37" selection-end-line="164" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;class#Actor#0" />
-            <element signature="method#Actor#0;class#Actor#0" />
-            <element signature="method#Actor#1;class#Actor#0" />
-            <element signature="method#Actor#2;class#Actor#0" />
-            <element signature="method#getHistorial#0;class#Actor#0" />
-            <element signature="method#setHistorial#0;class#Actor#0" />
-            <element signature="method#Proprietario#1;class#Proprietario#0" />
-            <element signature="method#getListaCarros#0;class#Proprietario#0" />
-            <element signature="method#setListaCarros#0;class#Proprietario#0" />
-            <element signature="e#5583#5584#0" expanded="true" />
-            <element signature="e#5614#5615#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="733">
+          <caret line="62" column="44" selection-start-line="62" selection-start-column="44" selection-end-line="62" selection-end-column="44" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/master/Ponto.java">
+>>>>>>> Stashed changes
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/src/master/UMCarroJa.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1240">
@@ -485,6 +623,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="580">
           <caret line="35" column="45" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="45" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/master/classeTestes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" column="83" selection-start-line="33" selection-start-column="83" selection-end-line="33" selection-end-column="83" />
+>>>>>>> Stashed changes
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -500,8 +644,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/master/Carro.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="260">
           <caret line="250" column="17" selection-start-line="250" selection-start-column="17" selection-end-line="250" selection-end-column="17" />
+=======
+<<<<<<< Updated upstream
+        <state relative-caret-position="835">
+          <caret line="217" selection-start-line="217" selection-end-line="217" />
+=======
+        <state relative-caret-position="1108">
+          <caret line="218" column="6" selection-start-line="218" selection-start-column="6" selection-end-line="218" selection-end-column="6" />
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="class#Carro#0" />
@@ -512,6 +666,7 @@
             <element signature="e#2708#2709#0" expanded="true" />
             <element signature="e#2726#2727#0" expanded="true" />
             <element signature="method#setHistorico#0;class#Carro#0" />
+<<<<<<< Updated upstream
             <element signature="method#toString#0;class#Carro#0" />
             <element signature="method#equals#0;class#Carro#0" />
             <element signature="class#Gasolina#0" />
@@ -546,10 +701,51 @@
             <element signature="method#registo#0;class#Estado#0" />
             <element signature="method#escreverFile#0;class#Estado#0" />
             <element signature="method#lerString#0;class#Estado#0" />
+=======
+            <element signature="method#Gasolina#0;class#Gasolina#0" />
+            <element signature="method#Gasolina#2;class#Gasolina#0" />
+            <element signature="method#Eletrico#1;class#Eletrico#0" />
+            <element signature="method#Eletrico#2;class#Eletrico#0" />
+            <element signature="method#Hibrido#0;class#Hibrido#0" />
+            <element signature="method#Hibrido#2;class#Hibrido#0" />
+>>>>>>> Stashed changes
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
+=======
+    <entry file="file://$PROJECT_DIR$/src/master/Menu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="35" column="45" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/master/Estado.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="718">
+          <caret line="476" column="19" lean-forward="true" selection-start-line="476" selection-start-column="19" selection-end-line="476" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Estado#0;class#Estado#0" />
+            <element signature="method#Estado#1;class#Estado#0" />
+            <element signature="method#login#0;class#Estado#0" />
+            <element signature="e#6292#6293#0" expanded="true" />
+            <element signature="e#6347#6348#0" expanded="true" />
+            <element signature="e#6586#6587#0" expanded="true" />
+            <element signature="e#6646#6647#0" expanded="true" />
+            <element signature="method#registo#0;class#Estado#0" />
+            <element signature="method#escreverFile#0;class#Estado#0" />
+            <element signature="method#lerString#0;class#Estado#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+>>>>>>> Stashed changes
   </component>
   <component name="masterDetails">
     <states>
