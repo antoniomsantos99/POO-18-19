@@ -111,7 +111,7 @@ public class Estado implements Serializable{
                     cliente.setLocalizacao(localizacao);
                     /* vai buscar o carro mais proximo das suas cordenadas com autonomia > distancia*5*/
                     carro = listaCarros.values().stream()
-                            .filter(ca -> ca.getAutonomia()>ca.getLocalizacao().distancia((cliente.getLocalizacao()))*5)
+                            .filter(ca -> ca.getAutonomia()>ca.getLocalizacao().distancia((cliente.getLocalizacao()))*5&&ca.dispAlugar)
                             .min(Comparator.comparing(x -> x.getLocalizacao().distancia(cliente.getLocalizacao())))
                             .get();
                     distancia = carro.getLocalizacao().distancia(cliente.getLocalizacao());
@@ -148,7 +148,7 @@ public class Estado implements Serializable{
                     cliente.setLocalizacao(localizacao);
                     /* vai buscar o carro mais barato */
                     carro = listaCarros.values().stream()
-                            .filter(ca -> ca.getAutonomia()>ca.getLocalizacao().distancia((cliente.getLocalizacao()))*5)
+                            .filter(ca -> ca.getAutonomia()>ca.getLocalizacao().distancia((cliente.getLocalizacao()))*5&&ca.dispAlugar)
                             .min(Comparator.comparing(Carro::getPrecoBase))
                             .get();
                     distancia = carro.getLocalizacao().distancia(cliente.getLocalizacao());
@@ -186,7 +186,7 @@ public class Estado implements Serializable{
                     cliente.setLocalizacao(localizacao);
                     /* vai buscar o carro mais barato */
                     carro = listaCarros.values().stream()
-                            .filter(ca -> ca.getAutonomia()>ca.getLocalizacao().distancia((cliente.getLocalizacao()))*5 && distanciaPercorrer>ca.getLocalizacao().distancia(cliente.getLocalizacao()))
+                            .filter(ca -> ca.getAutonomia()>ca.getLocalizacao().distancia((cliente.getLocalizacao()))*5 && distanciaPercorrer>ca.getLocalizacao().distancia(cliente.getLocalizacao())&&ca.dispAlugar)
                             .min(Comparator.comparing(Carro::getPrecoBase))
                             .get();//TODO, FIX CASO DE NÃO EXISTIR
                     distancia = carro.getLocalizacao().distancia(cliente.getLocalizacao());
@@ -272,7 +272,7 @@ public class Estado implements Serializable{
                     cliente.setLocalizacao(localizacao);
                     /* vai buscar o carro mais proximo das suas cordenadas com autonomia > distancia*5*/
                     carro = listaCarros.values().stream()
-                            .filter(car->car.getAutonomia()>autonomiaFinal)
+                            .filter(car->car.getAutonomia()>autonomiaFinal&&car.dispAlugar)
                             .min(Comparator.comparing(Carro::getPrecoBase))
                             .get();//TODO, FIX CASO DE NÃO EXISTIR
                     distancia = carro.getLocalizacao().distancia(cliente.getLocalizacao());
