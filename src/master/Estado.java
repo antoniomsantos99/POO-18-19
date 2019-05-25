@@ -554,7 +554,7 @@ public class Estado implements Serializable{
                     morada = lerString("Introduza a sua morada:");
                     dataNascimento = lerString("Introduza a sua data de nascimento (DD/MM/YYYY):");
                     nif = lerString("Introduza o seu NIF:");
-                    Proprietario p = new Proprietario(nome,nif,email,password,morada,dataNascimento,new HashSet<Carro>(),new ArrayList<Integer>(),new ArrayList<Aluguer>(),new ArrayList<Aluguer>()); //TODO alterar hashset
+                    Proprietario p = new Proprietario(nome,nif,email,password,morada,dataNascimento,new TreeSet<Carro>(new ComparaMatriculas()),new ArrayList<Integer>(),new ArrayList<Aluguer>(),new ArrayList<Aluguer>()); //TODO alterar hashset
                     listaProprietarios.put(email,p);
                     System.out.println("Proprietario " + nome + " resgistado com sucesso!");
                     break;
@@ -770,7 +770,7 @@ public class Estado implements Serializable{
                 parsed[1],
                 parsed[3],
                 "1/1/1970",
-                new HashSet<Carro>(),
+                new TreeSet<Carro>(new ComparaMatriculas()),
                 new ArrayList<Integer>(),
                 new ArrayList<Aluguer>(),
                 new ArrayList<Aluguer>());

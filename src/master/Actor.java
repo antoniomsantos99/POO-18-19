@@ -151,7 +151,7 @@ class Proprietario extends Actor{
 
     public Proprietario(){
         super();
-        this.listaCarros = new HashSet<Carro>();//TODO comparador
+        this.listaCarros = new TreeSet<Carro>(new ComparaMatriculas());//TODO comparador
         this.pending = new ArrayList<Aluguer>();
     }
     public Proprietario(String nome, String nif, String email, String password, String morada, String dataDeNascimento, Set<Carro> listaCarros, List<Integer> classificacao, ArrayList<Aluguer> historial, ArrayList<Aluguer> pending){

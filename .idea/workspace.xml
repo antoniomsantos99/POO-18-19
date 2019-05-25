@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6eae3ca2-9c8d-45e8-a2c3-a1d041439045" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/master/ComparaMatriculas.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/saves/estado.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/master/Actor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/master/Actor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/master/Estado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/master/Estado.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -27,25 +29,33 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/master/Estado.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4277">
-              <caret line="635" column="54" selection-start-line="635" selection-start-column="54" selection-end-line="635" selection-end-column="54" />
+            <state relative-caret-position="321">
+              <caret line="774" column="41" lean-forward="true" selection-start-line="774" selection-start-column="41" selection-end-line="774" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#Estado#0;class#Estado#0" />
                 <element signature="method#Estado#1;class#Estado#0" />
-                <element signature="method#hubProprietario#0;class#Estado#0" />
                 <element signature="method#login#0;class#Estado#0" />
-                <element signature="e#22796#22797#0" expanded="true" />
-                <element signature="e#22851#22852#0" expanded="true" />
-                <element signature="e#23090#23091#0" expanded="true" />
-                <element signature="e#23150#23151#0" expanded="true" />
                 <element signature="method#carregarEstadoTXT#0;class#Estado#0" />
                 <element signature="method#gravarEstadoTXT#0;class#Estado#0" />
                 <element signature="method#escreverFile#0;class#Estado#0" />
                 <element signature="method#lerString#0;class#Estado#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/master/ComparaMatriculas.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+              <folding>
+                <element signature="e#112#113#0" expanded="true" />
+                <element signature="e#141#142#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -86,17 +96,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/saves/dados.bak">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-28163">
+            <state relative-caret-position="11760">
               <caret line="588" column="35" selection-start-line="588" selection-start-column="35" selection-end-line="588" selection-end-column="44" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/master/Actor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1540">
-              <caret line="143" column="34" selection-start-line="143" selection-start-column="34" selection-end-line="143" selection-end-column="34" />
+            <state relative-caret-position="431">
+              <caret line="164" column="38" lean-forward="true" selection-start-line="164" selection-start-column="38" selection-end-line="164" selection-end-column="38" />
               <folding>
                 <element signature="method#getHistorial#0;class#Actor#0" />
                 <element signature="method#getClassificacao#0;class#Actor#0" />
@@ -104,13 +114,19 @@
                 <element signature="method#setClassificacao#0;class#Actor#0" />
                 <element signature="method#equals#0;class#Actor#0" />
                 <element signature="method#toString#0;class#Actor#0" />
-                <element signature="class#Proprietario#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -120,8 +136,9 @@
       <list>
         <option value="$PROJECT_DIR$/src/master/Aluguer.java" />
         <option value="$PROJECT_DIR$/src/master/Carro.java" />
-        <option value="$PROJECT_DIR$/src/master/Actor.java" />
+        <option value="$PROJECT_DIR$/src/master/ComparaMatriculas.java" />
         <option value="$PROJECT_DIR$/src/master/Estado.java" />
+        <option value="$PROJECT_DIR$/src/master/Actor.java" />
       </list>
     </option>
   </component>
@@ -138,6 +155,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
@@ -180,7 +198,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -231,8 +248,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11940298" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.120469086" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -299,9 +317,7 @@
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/saves/estado.obj">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/saves/estado.obj" />
     <entry file="file://$PROJECT_DIR$/src/master/classeTestes.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
@@ -351,10 +367,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/saves/dados.bak">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11760">
+          <caret line="588" column="35" selection-start-line="588" selection-start-column="35" selection-end-line="588" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/master/ComparaMatriculas.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#112#113#0" expanded="true" />
+            <element signature="e#141#142#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/master/Estado.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="774" column="41" lean-forward="true" selection-start-line="774" selection-start-column="41" selection-end-line="774" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Estado#0;class#Estado#0" />
+            <element signature="method#Estado#1;class#Estado#0" />
+            <element signature="method#login#0;class#Estado#0" />
+            <element signature="method#carregarEstadoTXT#0;class#Estado#0" />
+            <element signature="method#gravarEstadoTXT#0;class#Estado#0" />
+            <element signature="method#escreverFile#0;class#Estado#0" />
+            <element signature="method#lerString#0;class#Estado#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/master/Actor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1540">
-          <caret line="143" column="34" selection-start-line="143" selection-start-column="34" selection-end-line="143" selection-end-column="34" />
+        <state relative-caret-position="431">
+          <caret line="164" column="38" lean-forward="true" selection-start-line="164" selection-start-column="38" selection-end-line="164" selection-end-column="38" />
           <folding>
             <element signature="method#getHistorial#0;class#Actor#0" />
             <element signature="method#getClassificacao#0;class#Actor#0" />
@@ -362,36 +413,6 @@
             <element signature="method#setClassificacao#0;class#Actor#0" />
             <element signature="method#equals#0;class#Actor#0" />
             <element signature="method#toString#0;class#Actor#0" />
-            <element signature="class#Proprietario#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/saves/dados.bak">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-28163">
-          <caret line="588" column="35" selection-start-line="588" selection-start-column="35" selection-end-line="588" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/master/Estado.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4277">
-          <caret line="635" column="54" selection-start-line="635" selection-start-column="54" selection-end-line="635" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#Estado#0;class#Estado#0" />
-            <element signature="method#Estado#1;class#Estado#0" />
-            <element signature="method#hubProprietario#0;class#Estado#0" />
-            <element signature="method#login#0;class#Estado#0" />
-            <element signature="e#22796#22797#0" expanded="true" />
-            <element signature="e#22851#22852#0" expanded="true" />
-            <element signature="e#23090#23091#0" expanded="true" />
-            <element signature="e#23150#23151#0" expanded="true" />
-            <element signature="method#carregarEstadoTXT#0;class#Estado#0" />
-            <element signature="method#gravarEstadoTXT#0;class#Estado#0" />
-            <element signature="method#escreverFile#0;class#Estado#0" />
-            <element signature="method#lerString#0;class#Estado#0" />
           </folding>
         </state>
       </provider>
