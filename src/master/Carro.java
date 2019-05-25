@@ -158,6 +158,7 @@ public abstract class Carro implements Serializable {
     public abstract Carro clone();
 
     public void abastecer(double quantidade){this.autonomia+=quantidade;}
+    public abstract void updateAluguer(Aluguer a);
 }
 
 class Gasolina extends Carro {
@@ -203,6 +204,11 @@ class Gasolina extends Carro {
         return super.equals(o) &&
                 aux.getConsumoGas() == this.consumoGas;
     }
+
+    public void updateAluguer(Aluguer a){
+        this.autonomia -= a.getDistancia()*this.consumoGas;
+    }
+
 }
 
 class Eletrico extends Carro {
@@ -247,6 +253,9 @@ class Eletrico extends Carro {
         Eletrico aux = (Eletrico) o;
         return super.equals(o) &&
                 aux.getConsumoBat()==this.consumoBat;
+    }
+    public void updateAluguer(Aluguer a){
+        this.autonomia -= a.getDistancia()*this.consumoBat;
     }
 }
 
@@ -304,5 +313,12 @@ class Hibrido extends Carro {
         return super.equals(o) &&
                 aux.getConsumoGas()==this.consumoGas &&
                 aux.getConsumoBat()==this.consumoBat;
+    }
+    public void updateAluguer(Aluguer a){
+        if(a.getCombustivel().equals("Eletrico")){
+            this.autonomia -= a.getDistancia()*this.consumoBat;
+        }else{
+            this.autonomia -= a.getDistancia()*this.consumoGas;
+        }
     }
 }

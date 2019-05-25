@@ -159,7 +159,7 @@ public class Aluguer implements Serializable {
         sb.append("Aluguer: ");
         sb.append("{NifProp: ").append(this.nifProp);
         sb.append(", NifCliente: ").append(this.nifCliente);
-        sb.append(", Matricula").append(this.matricula);
+        sb.append(", Matricula: ").append(this.matricula);
         sb.append(", LocalInicial: ").append(this.localInicial.toString());
         sb.append(", LocalFinal: ").append(this.localFinal.toString());
         sb.append(", Preco: ").append(this.preco);

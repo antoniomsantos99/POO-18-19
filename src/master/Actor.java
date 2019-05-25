@@ -139,6 +139,10 @@ public abstract class Actor implements Serializable {
     public void confirmAluguer(Aluguer a){
         historial.add(a.clone());
     }
+    public int classificacao(){if(classificacao.isEmpty()) return -1; else return classificacao.stream().mapToInt(Integer::intValue).sum()/classificacao.size();}
+    public void classificar(int i){
+        this.classificacao.add(i);
+    }
 }
 
 class Proprietario extends Actor{
@@ -183,6 +187,9 @@ class Proprietario extends Actor{
     }
     public boolean verificaCarro(String s){
         return this.listaCarros.stream().anyMatch(c->c.getMatricula().equals(s));
+    }
+    public void addPending(Aluguer a){
+        this.pending.add(a.clone());
     }
     public void removerPending(int index){
         this.pending.remove(index);
