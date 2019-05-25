@@ -540,18 +540,70 @@ public class Estado implements Serializable{
         //NovoCarro:Gasolina,Tata,CB-68-97,240536003,62,1.3717524,2.1782432,457,-95.34003,65.17136
         Carro c;
         String[] parsed = linha.split(","); //[Tipo,Marca,Matricula,Nif,VelMedia,PrecoProKm,ConsumoporKm,Autonomia,X,Y]
+        String email = parsed[3] + "@gmail.com";
 
-        c = new Gasolina(parsed[1],
-                  parsed[2],
-                  parsed[3],
-                  Double.parseDouble(parsed[4]),
-                 100, //TODO Descobrir o preco base
-                  new Ponto(Double.parseDouble(parsed[8]),Double.parseDouble(parsed[9])),
-                  new ArrayList<Aluguer>(),
-                  new ArrayList<Integer>(),
-                  Double.parseDouble(parsed[6]),
-                  Double.parseDouble(parsed[7]),
-                 true);
+        if(parsed[0].equals("Gasolina")) {
+            c = new Gasolina(parsed[1],
+                    parsed[2],
+                    parsed[3],
+                    Double.parseDouble(parsed[4]),
+                    100, //TODO Descobrir o preco base
+                    new Ponto(Double.parseDouble(parsed[8]), Double.parseDouble(parsed[9])),
+                    new ArrayList<Aluguer>(),
+                    new ArrayList<Integer>(),
+                    Double.parseDouble(parsed[6]),
+                    Double.parseDouble(parsed[7]),
+                    true);
+            listaCarros.put(c.getMatricula(),c);
+
+            Set<Carro> newSet = listaProprietarios.get(email).getSetCarros();
+            newSet.add(c);
+            listaProprietarios.get(email).setSetCarros(newSet);
+        }
+
+        if(parsed[0].equals("Electrico")){
+            c = new Eletrico(parsed[1],
+                    parsed[2],
+                    parsed[3],
+                    Double.parseDouble(parsed[4]),
+                    100, //TODO Descobrir o preco base
+                    new Ponto(Double.parseDouble(parsed[8]), Double.parseDouble(parsed[9])),
+                    new ArrayList<Aluguer>(),
+                    new ArrayList<Integer>(),
+                    Double.parseDouble(parsed[6]),
+                    Double.parseDouble(parsed[7]),
+                    true);
+            listaCarros.put(c.getMatricula(),c);
+
+            Set<Carro> newSet = listaProprietarios.get(email).getSetCarros();
+            newSet.add(c);
+            listaProprietarios.get(email).setSetCarros(newSet);
+        }
+
+        if(parsed[0].equals("Hibrido")){
+            c = new Hibrido(parsed[1],
+                    parsed[2],
+                    parsed[3],
+                    Double.parseDouble(parsed[4]),
+                    100,
+                    new Ponto(Double.parseDouble(parsed[8]),
+                    Double.parseDouble(parsed[9])),
+                    new ArrayList<Aluguer>(),
+                    new ArrayList<Integer>(),
+                    Double.parseDouble(parsed[6]),
+                    Double.parseDouble(parsed[6]),
+                    Double.parseDouble(parsed[7]),
+                    true);
+            listaCarros.put(c.getMatricula(),c);
+
+            Set<Carro> newSet = listaProprietarios.get(email).getSetCarros();
+            newSet.add(c);
+            listaProprietarios.get(email).setSetCarros(newSet);
+
+
+        }
+
+
 
     }
     /**
