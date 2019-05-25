@@ -1,7 +1,6 @@
 package master;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -48,9 +47,9 @@ public class Estado implements Serializable{
         this.menuLogin = new Menu(opcoesLogin);
         this.menuRegisto = new Menu(opcoesRegisto);
 
-        this.listaClientes = listaClientes.entrySet().stream().collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue().clone()));
-        this.listaProprietarios = listaProprietarios.entrySet().stream().collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue().clone()));
-        this.listaCarros = listaCarros.entrySet().stream().collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue().clone()));
+        this.listaClientes = listaClientes.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().clone()));
+        this.listaProprietarios = listaProprietarios.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().clone()));
+        this.listaCarros = listaCarros.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().clone()));
     }
 
     /**
@@ -81,20 +80,19 @@ public class Estado implements Serializable{
 
     private void hubCliente(String email){
         String[] options = {"solicitar o aluguer do carro mais próximo das suas coordenadas",
-                            "solicitar o aluguer do carro mais barato",
-                            "solicitar o aluguer do carro mais barato dentro de uma distância que esteja disposto a percorrer a pé",
-                            "solicitar o aluguer de um carro específco",
-                            "solicitar o aluguer de um carro com uma autonomia desejada"};
+                "solicitar o aluguer do carro mais barato",
+                "solicitar o aluguer do carro mais barato dentro de uma distância que esteja disposto a percorrer a pé",
+                "solicitar o aluguer de um carro específco",
+                "solicitar o aluguer de um carro com uma autonomia desejada"};
         Menu menuHubCliente = new Menu(options);
         do{
-            Proprietario p;
-            Carro carro;
+            Proprietario p;Optional<Proprietario> propAux;
+            Carro carro;Optional<Carro> carroAux;
             Cliente cliente;
             double locX,locY;
             double distancia;
             boolean disponivel;
-            Ponto localizacao;
-            Ponto localizacao2;
+            Ponto localizacao,localizacao2;
             Aluguer a;
             String tipo;
             menuHubCliente.executa();
@@ -110,26 +108,29 @@ public class Estado implements Serializable{
                     cliente = listaClientes.get(email);
                     cliente.setLocalizacao(localizacao);
                     /* vai buscar o carro mais proximo das suas cordenadas com autonomia > distancia*5*/
-                    carro = listaCarros.values().stream()
-                            .filter(ca -> ca.getAutonomia()>ca.getLocalizacao().distancia((cliente.getLocalizacao()))*5)
-                            .min(Comparator.comparing(x -> x.getLocalizacao().distancia(cliente.getLocalizacao())))
-                            .get();
-                    distancia = carro.getLocalizacao().distancia(cliente.getLocalizacao());
+                    carroAux = listaCarros.values().stream()
+                            .filter(ca -> ca.getAutonomia()>ca.getLocalizacao().distancia((localizacao2))*5)
+                            .min(Comparator.comparing(x -> x.getLocalizacao().distancia(cliente.getLocalizacao())));
+                    if(carroAux.isPresent())carro=carroAux.get();else {System.out.println("Erro: Não existe carro com as suas especificações.");break;}
+                    distancia = carro.getLocalizacao().distancia(localizacao2);
                     if(carro instanceof Eletrico) tipo = "Eletrico";
                     else if(carro instanceof Hibrido) tipo = "Hibrido";
                     else tipo = "Gasolina";
                     a = new Aluguer(carro.getNif(),
                             cliente.getNif(),
                             carro.getMatricula(),
-                            localizacao,
+                            carro.getLocalizacao(),
                             localizacao2,
-                            carro.getPrecoBase()*localizacao.distancia(localizacao2), //preço base * distancia
-                            localizacao.distancia(localizacao2),//distancia
+                            carro.calcularPreco(carro.getLocalizacao().distancia(localizacao2)), //preço base * distancia
+                            carro.getLocalizacao().distancia(localizacao2),//distancia
                             LocalDateTime.now(),
                             LocalDateTime.now().plusMinutes(5*(int) distancia),//fim, tempo estimado
                             tipo,
                             "MaisPerto");
-                    p = listaProprietarios.values().stream().filter(pr -> pr.getNif().equals(carro.getNif())).findFirst().get();
+                    propAux = listaProprietarios.values().stream()
+                            .filter(pr -> pr.getNif().equals(carro.getNif()))
+                            .findFirst();
+                    if(propAux.isPresent())p=propAux.get();else {System.out.println("Erro: Não existe proprietario com esse carro associado.");break;}
                     System.out.println("Proprietario:"+p.getNif()+" Classificação:"+p.classificacao()+'\n'+a.toString()+"É este aluguer que pretende?");
                     disponivel = lerBool("1- Sim.\n0- Não.");
                     if(!disponivel) break;
@@ -147,26 +148,27 @@ public class Estado implements Serializable{
                     cliente = listaClientes.get(email);
                     cliente.setLocalizacao(localizacao);
                     /* vai buscar o carro mais barato */
-                    carro = listaCarros.values().stream()
-                            .filter(ca -> ca.getAutonomia()>ca.getLocalizacao().distancia((cliente.getLocalizacao()))*5)
-                            .min(Comparator.comparing(Carro::getPrecoBase))
-                            .get();
-                    distancia = carro.getLocalizacao().distancia(cliente.getLocalizacao());
+                    carroAux = listaCarros.values().stream()
+                            .filter(ca -> ca.getAutonomia()>ca.getLocalizacao().distancia((localizacao2))*5)
+                            .min(Comparator.comparing(Carro::getPrecoKm));
+                    if(carroAux.isPresent())carro=carroAux.get();else {System.out.println("Erro: Não existe carro com as suas especificações.");break;}
+                    distancia = carro.getLocalizacao().distancia(localizacao2);
                     if(carro instanceof Eletrico) tipo = "Eletrico";
                     else if(carro instanceof Hibrido) tipo = "Hibrido";
                     else tipo = "Gasolina";
                     a = new Aluguer(carro.getNif(),
                             cliente.getNif(),
                             carro.getMatricula(),
-                            localizacao,
+                            carro.getLocalizacao(),
                             localizacao2,
-                            carro.getPrecoBase()*localizacao.distancia(localizacao2), //preço base * distancia
-                            localizacao.distancia(localizacao2),//distancia
+                            carro.calcularPreco(carro.getLocalizacao().distancia(localizacao2)), //preço base * distancia
+                            carro.getLocalizacao().distancia(localizacao2),//distancia
                             LocalDateTime.now(),
                             LocalDateTime.now().plusMinutes(5*(int) distancia),//fim, tempo estimado
                             tipo,
                             "MaisBarato");
-                    p = listaProprietarios.values().stream().filter(pr -> pr.getNif().equals(carro.getNif())).findFirst().get();
+                    propAux = listaProprietarios.values().stream().filter(pr -> pr.getNif().equals(carro.getNif())).findFirst();
+                    if(propAux.isPresent())p=propAux.get();else {System.out.println("Erro: Não existe proprietario com esse carro associado.");break;}
                     System.out.println("Proprietario:"+p.getNif()+" Classificação:"+p.classificacao()+'\n'+a.toString()+"É este aluguer que pretende?");
                     disponivel = lerBool("1- Sim.\n0- Não.");
                     if(!disponivel) break;
@@ -185,26 +187,27 @@ public class Estado implements Serializable{
                     cliente = listaClientes.get(email);
                     cliente.setLocalizacao(localizacao);
                     /* vai buscar o carro mais barato */
-                    carro = listaCarros.values().stream()
+                    carroAux = listaCarros.values().stream()
                             .filter(ca -> ca.getAutonomia()>ca.getLocalizacao().distancia((cliente.getLocalizacao()))*5 && distanciaPercorrer>ca.getLocalizacao().distancia(cliente.getLocalizacao()))
-                            .min(Comparator.comparing(Carro::getPrecoBase))
-                            .get();//TODO, FIX CASO DE NÃO EXISTIR
-                    distancia = carro.getLocalizacao().distancia(cliente.getLocalizacao());
+                            .min(Comparator.comparing(Carro::getPrecoKm));
+                    if(carroAux.isPresent())carro=carroAux.get();else {System.out.println("Erro: Não existe carro com as suas especificações.");break;}
+                    distancia = carro.getLocalizacao().distancia(localizacao2);
                     if(carro instanceof Eletrico) tipo = "Eletrico";
                     else if(carro instanceof Hibrido) tipo = "Hibrido";
                     else tipo = "Gasolina";
                     a = new Aluguer(carro.getNif(),
                             cliente.getNif(),
                             carro.getMatricula(),
-                            localizacao,
+                            carro.getLocalizacao(),
                             localizacao2,
-                            carro.getPrecoBase()*localizacao.distancia(localizacao2), //preço base * distancia
-                            localizacao.distancia(localizacao2),//distancia
+                            carro.calcularPreco(carro.getLocalizacao().distancia(localizacao2)), //preço base * distancia
+                            carro.getLocalizacao().distancia(localizacao2),//distancia
                             LocalDateTime.now(),
                             LocalDateTime.now().plusMinutes(5*(int) distancia),//fim, tempo estimado
                             tipo,
                             "MaisBarato");
-                    p = listaProprietarios.values().stream().filter(pr -> pr.getNif().equals(carro.getNif())).findFirst().get();
+                    propAux = listaProprietarios.values().stream().filter(pr -> pr.getNif().equals(carro.getNif())).findFirst();
+                    if(propAux.isPresent())p=propAux.get();else {System.out.println("Erro: Não existe proprietario com esse carro associado.");break;}
                     System.out.println("Proprietario:"+p.getNif()+" Classificação:"+p.classificacao()+'\n'+a.toString()+"É este aluguer que pretende?");
                     disponivel = lerBool("1- Sim.\n0- Não.");
                     if(!disponivel) break;
@@ -230,22 +233,23 @@ public class Estado implements Serializable{
                     cliente.setLocalizacao(localizacao);
                     /* vai buscar o carro mais proximo das suas cordenadas com autonomia > distancia*5*/
                     carro = listaCarros.get(matricula);
-                    distancia = carro.getLocalizacao().distancia(cliente.getLocalizacao());
+                    distancia = carro.getLocalizacao().distancia(localizacao2);
                     if(carro instanceof Eletrico) tipo = "Eletrico";
                     else if(carro instanceof Hibrido) tipo = "Hibrido";
                     else tipo = "Gasolina";
                     a = new Aluguer(carro.getNif(),
                             cliente.getNif(),
                             carro.getMatricula(),
-                            localizacao,
+                            carro.getLocalizacao(),
                             localizacao2,
-                            carro.getPrecoBase()*localizacao.distancia(localizacao2), //preço base * distancia
-                            localizacao.distancia(localizacao2),//distancia
+                            carro.calcularPreco(carro.getLocalizacao().distancia(localizacao2)), //preço base * distancia
+                            carro.getLocalizacao().distancia(localizacao2),//distancia
                             LocalDateTime.now(),
                             LocalDateTime.now().plusMinutes(5*(int) distancia),//fim, tempo estimado
                             tipo,
                             "MaisPerto");
-                    p = listaProprietarios.values().stream().filter(pr -> pr.getNif().equals(carro.getNif())).findFirst().get();
+                    propAux = listaProprietarios.values().stream().filter(pr -> pr.getNif().equals(carro.getNif())).findFirst();
+                    if(propAux.isPresent())p=propAux.get();else {System.out.println("Erro: Não existe proprietario com esse carro associado.");break;}
                     System.out.println("Proprietario:"+p.getNif()+" Classificação:"+p.classificacao()+'\n'+a.toString()+"É este aluguer que pretende?");
                     disponivel = lerBool("1- Sim.\n0- Não.");
                     if(!disponivel) break;
@@ -271,26 +275,27 @@ public class Estado implements Serializable{
                     cliente = listaClientes.get(email);
                     cliente.setLocalizacao(localizacao);
                     /* vai buscar o carro mais proximo das suas cordenadas com autonomia > distancia*5*/
-                    carro = listaCarros.values().stream()
+                    carroAux = listaCarros.values().stream()
                             .filter(car->car.getAutonomia()>autonomiaFinal)
-                            .min(Comparator.comparing(Carro::getPrecoBase))
-                            .get();//TODO, FIX CASO DE NÃO EXISTIR
-                    distancia = carro.getLocalizacao().distancia(cliente.getLocalizacao());
+                            .min(Comparator.comparing(Carro::getPrecoKm));
+                    if(carroAux.isPresent())carro=carroAux.get();else {System.out.println("Erro: Não existe carro com as suas especificações.");break;}
+                    distancia = carro.getLocalizacao().distancia(localizacao2);
                     if(carro instanceof Eletrico) tipo = "Eletrico";
                     else if(carro instanceof Hibrido) tipo = "Hibrido";
                     else tipo = "Gasolina";
                     a = new Aluguer(carro.getNif(),
                             cliente.getNif(),
                             carro.getMatricula(),
-                            localizacao,
+                            carro.getLocalizacao(),
                             localizacao2,
-                            carro.getPrecoBase()*localizacao.distancia(localizacao2), //preço base * distancia
-                            localizacao.distancia(localizacao2),//distancia
+                            carro.calcularPreco(carro.getLocalizacao().distancia(localizacao2)), //preço base * distancia
+                            carro.getLocalizacao().distancia(localizacao2),//distancia
                             LocalDateTime.now(),
                             LocalDateTime.now().plusMinutes(5*(int) distancia),//fim, tempo estimado
                             tipo,
                             "MaisBarato");
-                    p = listaProprietarios.values().stream().filter(pr -> pr.getNif().equals(carro.getNif())).findFirst().get();
+                    propAux = listaProprietarios.values().stream().filter(pr -> pr.getNif().equals(carro.getNif())).findFirst();
+                    if(propAux.isPresent())p=propAux.get();else {System.out.println("Erro: Não existe proprietario com esse carro associado.");break;}
                     System.out.println("Proprietario:"+p.getNif()+" Classificação:"+p.classificacao()+'\n'+a.toString()+"É este aluguer que pretende?");
                     disponivel = lerBool("1- Sim.\n0- Não.");
                     if(!disponivel) break;
@@ -302,11 +307,11 @@ public class Estado implements Serializable{
     }
     private void hubProprietario(String email){
         String[] options = {"Registar novo Carro",
-                            "Sinalizar que um dos seus carros está disponível ou não para alugar",
-                            "Abastecer um veiculo",
-                            "Alterar o preço por km de um veiculo",
-                            "Aceitar/rejeitar o aluguer de um determinado cliente",
-                            "Registar quanto custou a viagem"};
+                "Sinalizar que um dos seus carros está disponível ou não para alugar",
+                "Abastecer um veiculo",
+                "Alterar o preço por km de um veiculo",
+                "Aceitar/rejeitar o aluguer de um determinado cliente",
+                "Registar quanto custou a viagem"};
         Menu menuHubProprietario = new Menu(options);
         do{
             Proprietario p;
@@ -376,7 +381,7 @@ public class Estado implements Serializable{
                     lsC = p.getSetCarros();
                     if(lsC.isEmpty()){System.out.println("Erro: Parece que ainda não tem nenhum carro.");break;}
                     for(Carro carro:lsC){
-                        System.out.println("Matricula: " + carro.getMatricula() + " - Preço/km: " + carro.getPrecoBase());
+                        System.out.println("Matricula: " + carro.getMatricula() + " - Preço/km: " + carro.getPrecoKm());
                     }
                     matricula = lerString("Introduza a matricula do carro que pretende alterar o preço/km: (-1 para cancelar)");
                     if(matricula.equals("-1")) break;
@@ -388,7 +393,7 @@ public class Estado implements Serializable{
                     p = listaProprietarios.get(email);
                     c = listaCarros.get(matricula);
                     double precoKm = lerDouble("Introduza o novo preço/km:");
-                    c.setPrecoBase(precoKm);
+                    c.setPrecoKm(precoKm);
                     p.trocarCarro(c.clone());
                     listaCarros.put(c.getMatricula(),c.clone());
                     listaProprietarios.put(p.getEmail(),p.clone());
@@ -399,7 +404,9 @@ public class Estado implements Serializable{
                     if(pending.isEmpty()){System.out.println("Erro: Parece que não tem alugueres pendentes.");break;}
                     for(int i=0;i<pending.size();i++){
                         Aluguer temp = pending.get(i);
-                        int classif = listaClientes.values().stream().filter(abc -> abc.getNif().equals(temp.getNifCliente())).findFirst().get().classificacao();
+                        Optional<Cliente> clienteAux2 = listaClientes.values().stream().filter(abc -> abc.getNif().equals(temp.getNifCliente())).findFirst();
+                        if(clienteAux2.isPresent())cliente=clienteAux2.get();else {System.out.println("Erro: O cliente não existe.");break;}
+                        int classif = cliente.classificacao();
                         System.out.println((i+1)+" - "+pending.get(i).toString() + "Classificação cliente: "+ classif);
                     }
                     escolha = lerInt("Introduza o aluguer que pretende aceitar ou rejeitar: (-1 para cancelar)");
@@ -414,11 +421,12 @@ public class Estado implements Serializable{
                     boolean aceite = lerBool("1- Aceitar pedido.\n0- Rejeitar pedido.");
                     if(aceite){
                         p.confirmAluguer(a);//adicionar o aluguer a lista de alugueres
-                        cliente = this.listaClientes.values().stream().filter(cl -> cl.getNif().equals(a.getNifCliente())).findFirst().get();
+                        Optional<Cliente> clienteAux = this.listaClientes.values().stream().filter(cl -> cl.getNif().equals(a.getNifCliente())).findFirst();
+                        if(clienteAux.isPresent())cliente=clienteAux.get();else {System.out.println("Erro: O cliente não existe.");break;}
                         cliente.confirmAluguer(a);//adicionar o aluguer a lista de alugueres
                         p.removerPending(escolha-1);//escolha -1 pcausa d arrays começarem em 0
                         c = this.listaCarros.get(a.getMatricula());
-                        c.updateAluguer(a);
+                        c.updateCarro(a);
 
                         boolean classifica = lerBool("1- Classificar cliente.\n0- Não classificar cliente.");
                         if(classifica){
@@ -537,7 +545,7 @@ public class Estado implements Serializable{
                     locY = lerDouble("Introduza a sua localização (y)");
                     localizacao = new Ponto(locX,locY);
                     Cliente c = new Cliente(nome,nif,email,password,morada,dataNascimento,localizacao,new ArrayList<Integer>(),new ArrayList<Aluguer>());
-                    listaClientes.put(email,c);
+                    listaClientes.put(email,c.clone());
                     System.out.println("Cliente " + nome + " resgistado com sucesso!");
                     break;
                 case 2:
@@ -554,19 +562,17 @@ public class Estado implements Serializable{
                     morada = lerString("Introduza a sua morada:");
                     dataNascimento = lerString("Introduza a sua data de nascimento (DD/MM/YYYY):");
                     nif = lerString("Introduza o seu NIF:");
-                    Proprietario p = new Proprietario(nome,nif,email,password,morada,dataNascimento,new TreeSet<Carro>(new ComparaMatriculas()),new ArrayList<Integer>(),new ArrayList<Aluguer>(),new ArrayList<Aluguer>()); //TODO alterar hashset
-                    listaProprietarios.put(email,p);
+                    Proprietario p = new Proprietario(nome,nif,email,password,morada,dataNascimento,new TreeSet<Carro>(new ComparaMatriculas()),new ArrayList<Integer>(),new ArrayList<Aluguer>(),new ArrayList<Aluguer>());
+                    listaProprietarios.put(email,p.clone());
                     System.out.println("Proprietario " + nome + " resgistado com sucesso!");
                     break;
             }
         }while(menuRegisto.getOpcao()<0);
     }
 
-
     private boolean verificaCarro(String matricula){
         return listaCarros.containsKey(matricula);
     }
-
 
     private Carro registoCarro(String email){
         String[] options = {"Registar Eletrico","Registar Hibrido","Registar Gasolina"};
@@ -601,7 +607,7 @@ public class Estado implements Serializable{
                     consumoBateria = lerDouble("Introduza o consumo da bateria por km");
                     autonomia = lerDouble("Bateria atual (em %)?");
                     dispAlugar = lerBool("Inicialmente disponivel para alugar? (1- sim, 0- não)");
-                    c = new Eletrico(marca,matricula,proprietario.getNif(),velMed,precoBase,localizacao,new ArrayList<Aluguer>(),new ArrayList<Integer>(),consumoBateria,autonomia,dispAlugar);
+                    c = new Eletrico(marca,matricula,proprietario.getNif(),velMed,precoBase,localizacao,new ArrayList<Integer>(),consumoBateria,autonomia,dispAlugar);
                     return c;
                 case 2:
                     System.out.println("Introduza as informações seguintes para resgistar um Carro Hibrido:");
@@ -622,7 +628,7 @@ public class Estado implements Serializable{
                     consumoGas = lerDouble("Introduza o consumo de gas por km");
                     autonomia = lerDouble("Autonomia atual?");
                     dispAlugar = lerBool("Inicialmente disponivel para alugar? (1- sim, 0- não)");
-                    c = new Hibrido(marca,matricula,proprietario.getNif(),velMed,precoBase,localizacao,new ArrayList<Aluguer>(),new ArrayList<Integer>(),consumoGas,consumoBateria,autonomia,dispAlugar);
+                    c = new Hibrido(marca,matricula,proprietario.getNif(),velMed,precoBase,localizacao,new ArrayList<Integer>(),consumoGas,consumoBateria,autonomia,dispAlugar);
                     return c;
                 case 3:
                     System.out.println("Introduza as informações seguintes para resgistar um Carro a Gasolina:");
@@ -642,44 +648,11 @@ public class Estado implements Serializable{
                     consumoGas = lerDouble("Introduza o consumo de gas por km");
                     autonomia = lerDouble("Autonomia atual?");
                     dispAlugar = lerBool("Inicialmente disponivel para alugar? (1- sim, 0- não)");
-                    c = new Gasolina(marca,matricula,proprietario.getNif(),velMed,precoBase,localizacao,new ArrayList<Aluguer>(),new ArrayList<Integer>(),consumoGas,autonomia,dispAlugar);
+                    c = new Gasolina(marca,matricula,proprietario.getNif(),velMed,precoBase,localizacao,new ArrayList<Integer>(),consumoGas,autonomia,dispAlugar);
                     return c;
             }
         }while(menuCarro.getOpcao()!=0);
         return null;
-    }
-
-    //TODO
-    public void carregarEstadoTXT() {
-        String[] opcoes = {"Carregar Rápido", "Carregar com Nome do ficheiro"};
-        Menu m = new Menu(opcoes);
-        do {
-            m.executa();
-            switch (m.getOpcao()) {
-                case 1:
-                    try {
-                        lerFile(path + "state.txt");
-                    } catch (FileNotFoundException e) {
-                        System.out.println("Erro: Não foi possivel ler o ficheiro.");
-                    } catch (IOException io) {
-                        System.out.println("Erro: Problema ao tentar ler");
-                    }
-                    break;
-                case 2:
-                    Scanner is = new Scanner(System.in);
-                    System.out.print("Nome do Ficheiro que pretende carregar (.txt): ");
-                    String nomeFile = is.nextLine();
-                    try {
-                        lerFile(path + nomeFile);
-                    } catch (FileNotFoundException e) {
-                        System.out.println("Erro: Não foi possivel ler o ficheiro.");
-                    } catch (IOException io) {
-                        System.out.println("Erro: Problema ao tentar ler");
-                    }
-                    break;
-            }
-        } while (m.getOpcao() < 0);
-
     }
 
     //TODO
@@ -698,7 +671,7 @@ public class Estado implements Serializable{
                     break;
                 case 2:
                     Scanner is = new Scanner(System.in);
-                    System.out.print("Nome do Ficheiro que pretende gravar (.txt): ");
+                    System.out.print("Nome do Ficheiro que pretende gravar: ");
                     String nomeFile = is.nextLine();
                     try {
                         escreverFile(path + nomeFile);
@@ -725,7 +698,38 @@ public class Estado implements Serializable{
         fich.close();
     }
 
-    //TODO
+    public void carregarEstadoTXT() {
+        String[] opcoes = {"Carregar Rápido", "Carregar com Nome do ficheiro"};
+        Menu m = new Menu(opcoes);
+        do {
+            m.executa();
+            switch (m.getOpcao()) {
+                case 1:
+                    try {
+                        lerFile(path + "state.txt");
+                    } catch (FileNotFoundException e) {
+                        System.out.println("Erro: Ficheiro não existe.");
+                    } catch (IOException io) {
+                        System.out.println("Erro: Problema ao tentar ler");
+                    }
+                    break;
+                case 2:
+                    Scanner is = new Scanner(System.in);
+                    System.out.print("Nome do Ficheiro que pretende carregar: ");
+                    String nomeFile = is.nextLine();
+                    try {
+                        lerFile(path + nomeFile);
+                    } catch (FileNotFoundException e) {
+                        System.out.println("Erro: Ficheiro não existe.");
+                    } catch (IOException io) {
+                        System.out.println("Erro: Problema ao tentar ler");
+                    }
+                    break;
+            }
+        } while (m.getOpcao() < 0);
+
+    }
+
     private void lerFile(String file) throws FileNotFoundException, IOException {
         List<String> linhas = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(file));
@@ -746,24 +750,19 @@ public class Estado implements Serializable{
         });
     }
 
-    //TODO
     private void CVC2Cliente(String linha) {
         String[] parsed = linha.split(","); //[Nome,Nif,Email,Morada,X,Y]
         Cliente c = new Cliente(parsed[0],
-                    parsed[1],
-                    parsed[2],
-                    parsed[1],
-                    parsed[3],
-                    "1/1/1970",
-                    new Ponto(Double.parseDouble(parsed[4]),Double.parseDouble(parsed[5])),
-                    new ArrayList<Integer>(),
-                    new ArrayList<Aluguer>());
+                parsed[1],
+                parsed[2],
+                parsed[1],
+                parsed[3],
+                "1/1/1970",
+                new Ponto(Double.parseDouble(parsed[4]),Double.parseDouble(parsed[5])),
+                new ArrayList<Integer>(),
+                new ArrayList<Aluguer>());
         listaClientes.put(c.getEmail(),c.clone());
-
-
     }
-
-    //TODO
     private void CVC2Proprietario(String linha) {
         String[] parsed = linha.split(","); //[Nome,Nif,Email,Morada]
         Proprietario p = new Proprietario(parsed[0],
@@ -777,8 +776,6 @@ public class Estado implements Serializable{
                 new ArrayList<Aluguer>(),
                 new ArrayList<Aluguer>());
         listaProprietarios.put(p.getEmail(), p.clone());
-
-
     }
     private void CVC2Carro(String linha) {
         //NovoCarro:Gasolina,Tata,CB-68-97,240536003,62,1.3717524,2.1782432,457,-95.34003,65.17136
@@ -791,37 +788,28 @@ public class Estado implements Serializable{
                     parsed[2],
                     parsed[3],
                     Double.parseDouble(parsed[4]),
-                    100, //TODO Descobrir o preco base
+                    5,
                     new Ponto(Double.parseDouble(parsed[8]), Double.parseDouble(parsed[9])),
-                    new ArrayList<Aluguer>(),
                     new ArrayList<Integer>(),
                     Double.parseDouble(parsed[6]),
                     Double.parseDouble(parsed[7]),
                     true);
-            listaCarros.put(c.getMatricula(), c);
-
-            Set<Carro> newSet = listaProprietarios.get(email).getSetCarros();
-            newSet.add(c);
-            listaProprietarios.get(email).setSetCarros(newSet);
+            listaProprietarios.get(email).trocarCarro(c);
+            listaCarros.put(c.getMatricula(), c.clone());
         }
-
         if (parsed[0].equals("Electrico")) {
             c = new Eletrico(parsed[1],
                     parsed[2],
                     parsed[3],
                     Double.parseDouble(parsed[4]),
-                    100, //TODO Descobrir o preco base
+                    5, //TODO Descobrir o preco base
                     new Ponto(Double.parseDouble(parsed[8]), Double.parseDouble(parsed[9])),
-                    new ArrayList<Aluguer>(),
                     new ArrayList<Integer>(),
                     Double.parseDouble(parsed[6]),
                     Double.parseDouble(parsed[7]),
                     true);
+            listaProprietarios.get(email).trocarCarro(c);
             listaCarros.put(c.getMatricula(), c);
-
-            Set<Carro> newSet = listaProprietarios.get(email).getSetCarros();
-            newSet.add(c);
-            listaProprietarios.get(email).setSetCarros(newSet);
         }
 
         if (parsed[0].equals("Hibrido")) {
@@ -829,172 +817,166 @@ public class Estado implements Serializable{
                     parsed[2],
                     parsed[3],
                     Double.parseDouble(parsed[4]),
-                    100,
+                    5,
                     new Ponto(Double.parseDouble(parsed[8]),
                             Double.parseDouble(parsed[9])),
-                    new ArrayList<Aluguer>(),
                     new ArrayList<Integer>(),
                     Double.parseDouble(parsed[6]),
                     Double.parseDouble(parsed[6]),
                     Double.parseDouble(parsed[7]),
                     true);
+            listaProprietarios.get(email).trocarCarro(c);
             listaCarros.put(c.getMatricula(), c);
-
-            Set<Carro> newSet = listaProprietarios.get(email).getSetCarros();
-            newSet.add(c);
-            listaProprietarios.get(email).setSetCarros(newSet);
 
 
         }
     }
-        private void CVC2Aluguer(String linha){
-            String[] parsed = linha.split(","); //[nif cliente, X destino, Y destino, tipoCombustivel , preferencia]
-            String email = parsed[0]+"@gmail.com";
-            Cliente cliente = listaClientes.get(email);
+    private void CVC2Aluguer(String linha){
+        String[] parsed = linha.split(","); //[nif cliente, X destino, Y destino, tipoCombustivel , preferencia]
+        String email = parsed[0]+"@gmail.com";
+        Cliente cliente = listaClientes.get(email);
 
-            if(parsed[3].equals("Gasolina")) {
-                Gasolina carro;
-
-                if(parsed[4].equals("MaisPerto")){
+        if(parsed[3].equals("Gasolina")) {
+            Optional<Gasolina> carro;
+            if(parsed[4].equals("MaisPerto")){
                 /* vai buscar o carro mais proximo das suas cordenadas com autonomia > distancia*5*/
-                carro = (Gasolina) listaCarros.values().stream()
+                carro = listaCarros.values().stream()
                         .filter(ca -> ca.getAutonomia() > ca.getLocalizacao().distancia((cliente.getLocalizacao())) * 5 && ca.getDispAlugar() && ca instanceof Gasolina)
-                        .min(Comparator.comparing(x -> x.getLocalizacao().distancia(cliente.getLocalizacao())))
-                        .get();}
-                else{
+                        .map(c -> (Gasolina) c)
+                        .min(Comparator.comparing(x -> x.getLocalizacao().distancia(cliente.getLocalizacao())));
+            }else{
                 /* vai buscar o carro mais barato das suas cordenadas com autonomia > distancia*5*/
-                carro = (Gasolina) listaCarros.values().stream().filter(ca -> ca.getAutonomia() > ca.getLocalizacao().distancia((cliente.getLocalizacao())) * 5 && ca.getDispAlugar() && ca instanceof Gasolina).map(ca -> (Gasolina) ca)
-                        .min(Comparator.comparing(x -> x.getPrecoBase() + x.getConsumoGas() * x.localizacao.distancia(new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2]))))).get();}
-
-
-                Aluguer a = new Aluguer(carro.getNif(),
-                        parsed[0], carro.getMatricula(),
-                        carro.getLocalizacao(),
-                        new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2])),
-                        carro.getPrecoBase() + carro.getConsumoGas() * carro.getLocalizacao().distancia(new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2]))),
-                        carro.getLocalizacao().distancia(new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2]))),
-                        LocalDateTime.now(),
-                        LocalDateTime.now(),
-                        parsed[3],
-                        parsed[4]);
-
-
-                List<Aluguer> newProp = listaProprietarios.get(carro.getNif() + "@gmail.com").getHistorial();
-                newProp.add(a);
-                listaProprietarios.get(carro.getNif() + "@gmail.com").setHistorial(newProp);
-
-                List<Aluguer> newClie = listaClientes.get(parsed[0]+"@gmail.com").getHistorial();
-                newClie.add(a);
-                listaClientes.get(parsed[0] + "@gmail.com").setHistorial(newClie);
-
-                List<Aluguer> newCar = listaCarros.get(carro.getMatricula()).getHistorico();
-                newCar.add(a);
-                listaCarros.get(carro.getMatricula()).setHistorico(newCar);
+                carro = listaCarros.values().stream()
+                        .filter(ca -> ca.getAutonomia() > ca.getLocalizacao().distancia((cliente.getLocalizacao())) * 5 && ca.getDispAlugar() && ca instanceof Gasolina)
+                        .map(ca -> (Gasolina) ca)
+                        .min(Comparator.comparing(x -> x.getPrecoKm() + x.getConsumoGas() * x.localizacao.distancia(new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2])))));
             }
+            //se carro existir cria o aluguer, se não sai
+            Gasolina carroGasolina;
+            if(carro.isPresent())carroGasolina=carro.get();else return;
 
-            if(parsed[3].equals("Electrico")) {
-                /* vai buscar o carro mais proximo das suas cordenadas com autonomia > distancia*5*/
-                Eletrico carro;
+            Aluguer a = new Aluguer(carroGasolina.getNif(),
+                    parsed[0], carroGasolina.getMatricula(),
+                    carroGasolina.getLocalizacao(),
+                    new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2])),
+                    carroGasolina.getPrecoKm() + carroGasolina.getConsumoGas() * carroGasolina.getLocalizacao().distancia(new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2]))),
+                    carroGasolina.getLocalizacao().distancia(new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2]))),
+                    LocalDateTime.now(),
+                    LocalDateTime.now(),
+                    parsed[3],
+                    parsed[4]);
 
-                if(parsed[4].equals("MaisPerto")){
-                    /* vai buscar o carro mais proximo das suas cordenadas com autonomia > distancia*5*/
-                    carro = (Eletrico) listaCarros.values().stream()
-                            .filter(ca -> ca.getAutonomia() > ca.getLocalizacao().distancia((cliente.getLocalizacao())) * 5 && ca.getDispAlugar() && ca instanceof Eletrico)
-                            .min(Comparator.comparing(x -> x.getLocalizacao().distancia(cliente.getLocalizacao())))
-                            .get();}
-                else{
-                    /* vai buscar o carro mais barato das suas cordenadas com autonomia > distancia*5*/
-                    carro = (Eletrico) listaCarros.values().stream().filter(ca -> ca.getAutonomia() > ca.getLocalizacao().distancia((cliente.getLocalizacao())) * 5 && ca.getDispAlugar() && ca instanceof Eletrico).map(ca -> (Eletrico) ca)
-                            .min(Comparator.comparing(x -> x.getPrecoBase() + x.getConsumoBat() * x.localizacao.distancia(new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2]))))).get();}
-
-
-                Aluguer a = new Aluguer(carro.getNif(),
-                        parsed[0], carro.getMatricula(),
-                        carro.getLocalizacao(),
-                        new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2])),
-                        carro.getPrecoBase() + carro.getConsumoBat() * carro.getLocalizacao().distancia(new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2]))),
-                        carro.getLocalizacao().distancia(new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2]))),
-                        LocalDateTime.now(),
-                        LocalDateTime.now(),
-                        parsed[3],
-                        parsed[4]);
+            Optional<Proprietario> prop = listaProprietarios.values().stream().filter(p->p.getNif().equals(carroGasolina.getNif())).findAny();
+            List<Aluguer> newProp;
+            if(prop.isPresent()) newProp = prop.get().getHistorial();else return;
+            newProp.add(a);
+            prop.get().setHistorial(newProp);
 
 
-                List<Aluguer> newProp = listaProprietarios.get(carro.getNif() + "@gmail.com").getHistorial();
-                newProp.add(a);
-                listaProprietarios.get(carro.getNif() + "@gmail.com").setHistorial(newProp);
-
-                List<Aluguer> newClie = listaClientes.get(parsed[0]+"@gmail.com").getHistorial();
-                newClie.add(a);
-                listaClientes.get(parsed[0] + "@gmail.com").setHistorial(newClie);
-
-                List<Aluguer> newCar = listaCarros.get(carro.getMatricula()).getHistorico();
-                newCar.add(a);
-                listaCarros.get(carro.getMatricula()).setHistorico(newCar);
-
-
-            }
-
-            if(parsed[3].equals("Hibrido")) {
-                Hibrido carro;
-                /* vai buscar o carro mais proximo das suas cordenadas com autonomia > distancia*5*/
-                if (parsed[4].equals("MaisPerto")) {
-                    /* vai buscar o carro mais proximo das suas cordenadas com autonomia > distancia*5*/
-                    carro = (Hibrido) listaCarros.values().stream()
-                            .filter(ca -> ca.getAutonomia() > ca.getLocalizacao().distancia((cliente.getLocalizacao())) * 5 && ca.getDispAlugar() && ca instanceof Hibrido)
-                            .min(Comparator.comparing(x -> x.getLocalizacao().distancia(cliente.getLocalizacao())))
-                            .get();
-                } else {
-                    /* vai buscar o carro mais barato das suas cordenadas com autonomia > distancia*5*/
-                    carro = (Hibrido) listaCarros.values().stream().filter(ca -> ca.getAutonomia() > ca.getLocalizacao().distancia((cliente.getLocalizacao())) * 5 && ca.getDispAlugar() && ca instanceof Hibrido).map(ca -> (Hibrido) ca)
-                            .min(Comparator.comparing(x -> x.getPrecoBase() + ((x.getConsumoGas() + x.getConsumoBat())/2) * x.localizacao.distancia(new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2]))))).get();
-                }
-
-
-
-                Aluguer a = new Aluguer(carro.getNif(),
-                        parsed[0], carro.getMatricula(),
-                        carro.getLocalizacao(),
-                        new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2])),
-                        carro.getPrecoBase() + carro.getConsumoBat() * carro.getLocalizacao().distancia(new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2]))),
-                        carro.getLocalizacao().distancia(new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2]))),
-                        LocalDateTime.now(),
-                        LocalDateTime.now(),
-                        parsed[3],
-                        parsed[4]);
-
-
-                List<Aluguer> newProp = listaProprietarios.get(carro.getNif() + "@gmail.com").getHistorial();
-                newProp.add(a);
-                listaProprietarios.get(carro.getNif() + "@gmail.com").setHistorial(newProp);
-
-                List<Aluguer> newClie = listaClientes.get(parsed[0]+"@gmail.com").getHistorial();
-                newClie.add(a);
-                listaClientes.get(parsed[0] + "@gmail.com").setHistorial(newClie);
-
-                List<Aluguer> newCar = listaCarros.get(carro.getMatricula()).getHistorico();
-                newCar.add(a);
-                listaCarros.get(carro.getMatricula()).setHistorico(newCar);
-
-
-            }
-
-
+            Optional<Cliente> clie = listaClientes.values().stream().filter(c->c.getNif().equals(carroGasolina.getNif())).findAny();
+            List<Aluguer> newClie;
+            if(clie.isPresent()) newClie = clie.get().getHistorial();else return;
+            newClie.add(a);
+            clie.get().setHistorial(newClie);
         }
 
+        if(parsed[3].equals("Electrico")) {
+            /* vai buscar o carro mais proximo das suas cordenadas com autonomia > distancia*5*/
+            Optional<Eletrico> carro;
+            if(parsed[4].equals("MaisPerto")){
+                /* vai buscar o carro mais proximo das suas cordenadas com autonomia > distancia*5*/
+                carro = listaCarros.values().stream()
+                        .filter(ca -> ca.getAutonomia() > ca.getLocalizacao().distancia((cliente.getLocalizacao())) * 5 && ca.getDispAlugar() && ca instanceof Eletrico)
+                        .map(c -> (Eletrico) c)
+                        .min(Comparator.comparing(x -> x.getLocalizacao().distancia(cliente.getLocalizacao())));
+            }else{
+                /* vai buscar o carro mais barato das suas cordenadas com autonomia > distancia*5*/
+                carro = listaCarros.values().stream()
+                        .filter(ca -> ca.getAutonomia() > ca.getLocalizacao().distancia((cliente.getLocalizacao())) * 5 && ca.getDispAlugar() && ca instanceof Eletrico)
+                        .map(ca -> (Eletrico) ca)
+                        .min(Comparator.comparing(x -> x.getPrecoKm() + x.getConsumoBat() * x.localizacao.distancia(new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2])))));
+            }
+            //se carro existir cria o aluguer, se não sai
+            Eletrico carroEletrico;
+            if(carro.isPresent())carroEletrico=carro.get();else return;
+
+            Aluguer a = new Aluguer(carroEletrico.getNif(),
+                    parsed[0], carroEletrico.getMatricula(),
+                    carroEletrico.getLocalizacao(),
+                    new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2])),
+                    carroEletrico.getPrecoKm() + carroEletrico.getConsumoBat() * carroEletrico.getLocalizacao().distancia(new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2]))),
+                    carroEletrico.getLocalizacao().distancia(new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2]))),
+                    LocalDateTime.now(),
+                    LocalDateTime.now(),
+                    parsed[3],
+                    parsed[4]);
+
+            Optional<Proprietario> prop = listaProprietarios.values().stream().filter(p->p.getNif().equals(carroEletrico.getNif())).findAny();
+            List<Aluguer> newProp;
+            if(prop.isPresent()) newProp = prop.get().getHistorial();else return;
+            newProp.add(a);
+            prop.get().setHistorial(newProp);
+
+            Optional<Cliente> clie = listaClientes.values().stream().filter(c->c.getNif().equals(carroEletrico.getNif())).findAny();
+            List<Aluguer> newClie;
+            if(clie.isPresent()) newClie = clie.get().getHistorial();else return;
+            newClie.add(a);
+            clie.get().setHistorial(newClie);
+        }
+
+        if(parsed[3].equals("Hibrido")) {
+            Optional<Hibrido> carro;
+            if(parsed[4].equals("MaisPerto")){
+                /* vai buscar o carro mais proximo das suas cordenadas com autonomia > distancia*5*/
+                carro = listaCarros.values().stream()
+                        .filter(ca -> ca.getAutonomia() > ca.getLocalizacao().distancia((cliente.getLocalizacao())) * 5 && ca.getDispAlugar() && ca instanceof Hibrido)
+                        .map(c -> (Hibrido) c)
+                        .min(Comparator.comparing(x -> x.getLocalizacao().distancia(cliente.getLocalizacao())));
+            }else{
+                /* vai buscar o carro mais barato das suas cordenadas com autonomia > distancia*5*/
+                carro = listaCarros.values().stream()
+                        .filter(ca -> ca.getAutonomia() > ca.getLocalizacao().distancia((cliente.getLocalizacao())) * 5 && ca.getDispAlugar() && ca instanceof Hibrido)
+                        .map(ca -> (Hibrido) ca)
+                        .min(Comparator.comparing(x -> x.getPrecoKm() + x.getConsumoBat() + x.getConsumoGas() * x.localizacao.distancia(new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2])))));
+            }
+            //se carro existir cria o aluguer, se não sai
+            Hibrido carroHibrido;
+            if(carro.isPresent())carroHibrido=carro.get();else return;
+
+            Aluguer a = new Aluguer(carroHibrido.getNif(),
+                    parsed[0], carroHibrido.getMatricula(),
+                    carroHibrido.getLocalizacao(),
+                    new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2])),
+                    carroHibrido.getPrecoKm() + carroHibrido.getConsumoBat()+carroHibrido.getConsumoGas() * carroHibrido.getLocalizacao().distancia(new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2]))),
+                    carroHibrido.getLocalizacao().distancia(new Ponto(Double.parseDouble(parsed[1]), Double.parseDouble(parsed[2]))),
+                    LocalDateTime.now(),
+                    LocalDateTime.now(),
+                    parsed[3],
+                    parsed[4]);
+
+            Optional<Proprietario> prop = listaProprietarios.values().stream().filter(p->p.getNif().equals(carroHibrido.getNif())).findAny();
+            List<Aluguer> newProp;
+            if(prop.isPresent()) newProp = prop.get().getHistorial();else return;
+            newProp.add(a);
+            prop.get().setHistorial(newProp);
+
+            Optional<Cliente> clie = listaClientes.values().stream().filter(c->c.getNif().equals(carroHibrido.getNif())).findAny();
+            List<Aluguer> newClie;
+            if(clie.isPresent()) newClie = clie.get().getHistorial();else return;
+            newClie.add(a);
+            clie.get().setHistorial(newClie);
+        }
+    }
     private void CVC2Classificacao(String linha) {
         String[] parsed = linha.split(","); //[matricula ou nif (cliente ou prop) , nota (0-100)]
         if (parsed[0].length() == 8) {
-            List<Integer> newCar = listaCarros.get(parsed[0]).getClassificacao();
-            newCar.add(Integer.parseInt(parsed[1]));
-            listaCarros.get(parsed[0]).setClassificacao(newCar);
+            Optional<Carro> carro = listaCarros.values().stream().filter(c -> c.getMatricula().equals(parsed[0])).findAny();
+            carro.ifPresent(value->value.classficarCarro(Integer.parseInt(parsed[1])));
         } else {
-            try {
-                List<Integer> newClien = listaClientes.get(parsed[0] + "@gmail.com").getClassificacao();
-                newClien.add(Integer.parseInt(parsed[1]));
-                listaClientes.get(parsed[0] + "@gmail.com").setClassificacao(newClien);
-            } catch (Exception e) {
-            }
+            Optional<Cliente> cliente = listaClientes.values().stream().filter(c -> c.getNif().equals(parsed[0])).findAny();
+            cliente.ifPresent(value -> value.classificar(Integer.parseInt(parsed[1])));
+            Optional<Proprietario> prop = listaProprietarios.values().stream().filter(p->p.getNif().equals(parsed[0])).findAny();
+            prop.ifPresent(value -> value.classificar(Integer.parseInt(parsed[1])));
         }
     }
 
@@ -1083,9 +1065,14 @@ public class Estado implements Serializable{
         return d;
     }
 
+    /**
+     * le um int
+     * @param s dá print do parametro que recebe
+     * @return devolve o int incializado
+     */
     public int lerInt(String s){
         System.out.println(s);
-        Integer output = Integer.MIN_VALUE;
+        int output = Integer.MIN_VALUE;
         while(output==Integer.MIN_VALUE){
             output = lerIntAux();
         }
@@ -1104,6 +1091,11 @@ public class Estado implements Serializable{
         return d;
     }
 
+    /**
+     * le um bool
+     * @param s dá print do parametro que recebe
+     * @return devolve o bool incializado
+     */
     private boolean lerBool(String s){
         System.out.println(s);
         boolean lido = false;
@@ -1114,7 +1106,6 @@ public class Estado implements Serializable{
         }
         return output;
     }
-
     private int lerBoolAux(){
         Scanner sc = new Scanner(System.in);
         int i;
