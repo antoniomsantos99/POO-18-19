@@ -4,10 +4,6 @@
     <list default="true" id="6eae3ca2-9c8d-45e8-a2c3-a1d041439045" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/saves/estado.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/saves/logsPOO_carregamentoInicial.bak" beforeDir="false" afterPath="$PROJECT_DIR$/saves/dados.bak" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/master/Actor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/master/Actor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/master/Aluguer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/master/Aluguer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/master/Carro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/master/Carro.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/master/Estado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/master/Estado.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -25,7 +21,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/master/UMCarroJa.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
+            <state relative-caret-position="540">
               <caret line="27" column="48" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
             </state>
           </provider>
@@ -34,18 +30,18 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/master/Estado.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="515">
-              <caret line="190" column="66" selection-start-line="190" selection-start-column="66" selection-end-line="190" selection-end-column="66" />
+            <state relative-caret-position="4277">
+              <caret line="635" column="54" selection-start-line="635" selection-start-column="54" selection-end-line="635" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#Estado#0;class#Estado#0" />
                 <element signature="method#Estado#1;class#Estado#0" />
+                <element signature="method#hubProprietario#0;class#Estado#0" />
                 <element signature="method#login#0;class#Estado#0" />
+                <element signature="e#22796#22797#0" expanded="true" />
                 <element signature="e#22851#22852#0" expanded="true" />
+                <element signature="e#23090#23091#0" expanded="true" />
                 <element signature="e#23150#23151#0" expanded="true" />
-                <element signature="e#17791#17792#0" expanded="true" />
-                <element signature="e#17848#17849#0" expanded="true" />
-                <element signature="method#registoCarro#0;class#Estado#0" />
                 <element signature="method#carregarEstadoTXT#0;class#Estado#0" />
                 <element signature="method#gravarEstadoTXT#0;class#Estado#0" />
                 <element signature="method#escreverFile#0;class#Estado#0" />
@@ -58,7 +54,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/master/Aluguer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2195">
+            <state relative-caret-position="2300">
               <caret line="161" column="32" selection-start-line="161" selection-start-column="32" selection-end-line="161" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -70,8 +66,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/master/Carro.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4520">
-              <caret line="323" column="1" lean-forward="true" selection-start-line="323" selection-start-column="1" selection-end-line="323" selection-end-column="1" />
+            <state relative-caret-position="4400">
+              <caret line="323" column="1" selection-start-line="323" selection-start-column="1" selection-end-line="323" selection-end-column="1" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#getHistorico#0;class#Carro#0" />
@@ -81,13 +77,7 @@
                 <element signature="method#toString#0;class#Carro#0" />
                 <element signature="method#equals#0;class#Carro#0" />
                 <element signature="method#Gasolina#1;class#Gasolina#0" />
-                <element signature="e#6543#6544#0" expanded="true" />
-                <element signature="e#6587#6588#0" expanded="true" />
-                <element signature="e#7288#7289#0" expanded="true" />
-                <element signature="e#7336#7337#0" expanded="true" />
                 <element signature="method#Eletrico#1;class#Eletrico#0" />
-                <element signature="e#8827#8828#0" expanded="true" />
-                <element signature="e#8893#8894#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -96,8 +86,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/saves/dados.bak">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-47378">
-              <caret line="567" column="82" lean-forward="true" selection-start-line="567" selection-start-column="82" selection-end-line="567" selection-end-column="82" />
+            <state relative-caret-position="-28163">
+              <caret line="588" column="35" selection-start-line="588" selection-start-column="35" selection-end-line="588" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -105,7 +95,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/master/Actor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1445">
+            <state relative-caret-position="1540">
               <caret line="143" column="34" selection-start-line="143" selection-start-column="34" selection-end-line="143" selection-end-column="34" />
               <folding>
                 <element signature="method#getHistorial#0;class#Actor#0" />
@@ -148,6 +138,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -189,7 +180,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -230,11 +220,19 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.118336886" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11940298" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -247,7 +245,7 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.3298731" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.33586133" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5010661" side_tool="true" weight="0.24377032" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32936078" />
@@ -320,14 +318,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/master/UMCarroJa.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
+        <state relative-caret-position="540">
           <caret line="27" column="48" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/master/Aluguer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2300">
+          <caret line="161" column="32" selection-start-line="161" selection-start-column="32" selection-end-line="161" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/master/Carro.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4400">
+          <caret line="323" column="1" selection-start-line="323" selection-start-column="1" selection-end-line="323" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getHistorico#0;class#Carro#0" />
+            <element signature="method#getClassificacao#0;class#Carro#0" />
+            <element signature="method#setHistorico#0;class#Carro#0" />
+            <element signature="method#setClassificacao#0;class#Carro#0" />
+            <element signature="method#toString#0;class#Carro#0" />
+            <element signature="method#equals#0;class#Carro#0" />
+            <element signature="method#Gasolina#1;class#Gasolina#0" />
+            <element signature="method#Eletrico#1;class#Eletrico#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/master/Actor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1445">
+        <state relative-caret-position="1540">
           <caret line="143" column="34" selection-start-line="143" selection-start-column="34" selection-end-line="143" selection-end-column="34" />
           <folding>
             <element signature="method#getHistorial#0;class#Actor#0" />
@@ -341,61 +367,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/master/Carro.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4520">
-          <caret line="323" column="1" lean-forward="true" selection-start-line="323" selection-start-column="1" selection-end-line="323" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#getHistorico#0;class#Carro#0" />
-            <element signature="method#getClassificacao#0;class#Carro#0" />
-            <element signature="method#setHistorico#0;class#Carro#0" />
-            <element signature="method#setClassificacao#0;class#Carro#0" />
-            <element signature="method#toString#0;class#Carro#0" />
-            <element signature="method#equals#0;class#Carro#0" />
-            <element signature="method#Gasolina#1;class#Gasolina#0" />
-            <element signature="e#6543#6544#0" expanded="true" />
-            <element signature="e#6587#6588#0" expanded="true" />
-            <element signature="e#7288#7289#0" expanded="true" />
-            <element signature="e#7336#7337#0" expanded="true" />
-            <element signature="method#Eletrico#1;class#Eletrico#0" />
-            <element signature="e#8827#8828#0" expanded="true" />
-            <element signature="e#8893#8894#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/master/Aluguer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2195">
-          <caret line="161" column="32" selection-start-line="161" selection-start-column="32" selection-end-line="161" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/saves/dados.bak">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-47378">
-          <caret line="567" column="82" lean-forward="true" selection-start-line="567" selection-start-column="82" selection-end-line="567" selection-end-column="82" />
+        <state relative-caret-position="-28163">
+          <caret line="588" column="35" selection-start-line="588" selection-start-column="35" selection-end-line="588" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/master/Estado.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="515">
-          <caret line="190" column="66" selection-start-line="190" selection-start-column="66" selection-end-line="190" selection-end-column="66" />
+        <state relative-caret-position="4277">
+          <caret line="635" column="54" selection-start-line="635" selection-start-column="54" selection-end-line="635" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#Estado#0;class#Estado#0" />
             <element signature="method#Estado#1;class#Estado#0" />
+            <element signature="method#hubProprietario#0;class#Estado#0" />
             <element signature="method#login#0;class#Estado#0" />
+            <element signature="e#22796#22797#0" expanded="true" />
             <element signature="e#22851#22852#0" expanded="true" />
+            <element signature="e#23090#23091#0" expanded="true" />
             <element signature="e#23150#23151#0" expanded="true" />
-            <element signature="e#17791#17792#0" expanded="true" />
-            <element signature="e#17848#17849#0" expanded="true" />
-            <element signature="method#registoCarro#0;class#Estado#0" />
             <element signature="method#carregarEstadoTXT#0;class#Estado#0" />
             <element signature="method#gravarEstadoTXT#0;class#Estado#0" />
             <element signature="method#escreverFile#0;class#Estado#0" />

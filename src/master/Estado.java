@@ -212,6 +212,90 @@ public class Estado implements Serializable{
                     p.addPending(a);
                     break;
                 case 4:
+                    String matricula = lerString("Introduza a matricula do carro que pretende alugar: (-1 para cancelar)");
+                    if(matricula.equals("-1")) break;
+                    while(!verificaCarro(matricula)||!listaCarros.get(matricula).getDispAlugar()){
+                        matricula = lerString("Erro: Matricula não existe ou carro não está disponível.\nIntroduza outra matricula: (-1 para cancelar)");
+                        if(matricula.equals("-1")) break;
+                    }
+                    if(matricula.equals("-1")) break;
+                    locX = lerDouble("Introduza a sua localização (x)");
+                    locY = lerDouble("Introduza a sua localização (y)");
+                    localizacao = new Ponto(locX,locY);
+                    locX = lerDouble("Introduza localizacao para onde se pretende desclocar (x)");
+                    locY = lerDouble("Introduza localizacao para onde se pretende desclocar (y)");
+                    localizacao2 = new Ponto(locX,locY);
+                    /* vai buscar o cliente e altera a sua localizaçao atual*/
+                    cliente = listaClientes.get(email);
+                    cliente.setLocalizacao(localizacao);
+                    /* vai buscar o carro mais proximo das suas cordenadas com autonomia > distancia*5*/
+                    carro = listaCarros.get(matricula);
+                    distancia = carro.getLocalizacao().distancia(cliente.getLocalizacao());
+                    if(carro instanceof Eletrico) tipo = "Eletrico";
+                    else if(carro instanceof Hibrido) tipo = "Hibrido";
+                    else tipo = "Gasolina";
+                    a = new Aluguer(carro.getNif(),
+                            cliente.getNif(),
+                            carro.getMatricula(),
+                            localizacao,
+                            localizacao2,
+                            carro.getPrecoBase()*localizacao.distancia(localizacao2), //preço base * distancia
+                            localizacao.distancia(localizacao2),//distancia
+                            LocalDateTime.now(),
+                            LocalDateTime.now().plusMinutes(5*(int) distancia),//fim, tempo estimado
+                            tipo,
+                            "MaisPerto");
+                    p = listaProprietarios.values().stream().filter(pr -> pr.getNif().equals(carro.getNif())).findFirst().get();
+                    System.out.println("Proprietario:"+p.getNif()+" Classificação:"+p.classificacao()+'\n'+a.toString()+"É este aluguer que pretende?");
+                    disponivel = lerBool("1- Sim.\n0- Não.");
+                    if(!disponivel) break;
+                    System.out.println("Pedido enviado com sucesso!");
+                    p.addPending(a);
+                    break;
+                case 5:
+                    double autonomia = lerDouble("Introduza a autonomia minima do carro que pretende alugar: (-1 para cancelar)");
+                    if(autonomia == -1) break;
+                    while(autonomia<0){
+                        autonomia = lerDouble("Erro: introduza um valor valido: (-1 para cancelar)");
+                        if(autonomia == -1) break;
+                    }
+                    if(autonomia == -1) break;
+                    double autonomiaFinal = autonomia; // dar cast pcausa de ser "final"
+                    locX = lerDouble("Introduza a sua localização (x)");
+                    locY = lerDouble("Introduza a sua localização (y)");
+                    localizacao = new Ponto(locX,locY);
+                    locX = lerDouble("Introduza localizacao para onde se pretende desclocar (x)");
+                    locY = lerDouble("Introduza localizacao para onde se pretende desclocar (y)");
+                    localizacao2 = new Ponto(locX,locY);
+                    /* vai buscar o cliente e altera a sua localizaçao atual*/
+                    cliente = listaClientes.get(email);
+                    cliente.setLocalizacao(localizacao);
+                    /* vai buscar o carro mais proximo das suas cordenadas com autonomia > distancia*5*/
+                    carro = listaCarros.values().stream()
+                            .filter(car->car.getAutonomia()>autonomiaFinal)
+                            .min(Comparator.comparing(Carro::getPrecoBase))
+                            .get();//TODO, FIX CASO DE NÃO EXISTIR
+                    distancia = carro.getLocalizacao().distancia(cliente.getLocalizacao());
+                    if(carro instanceof Eletrico) tipo = "Eletrico";
+                    else if(carro instanceof Hibrido) tipo = "Hibrido";
+                    else tipo = "Gasolina";
+                    a = new Aluguer(carro.getNif(),
+                            cliente.getNif(),
+                            carro.getMatricula(),
+                            localizacao,
+                            localizacao2,
+                            carro.getPrecoBase()*localizacao.distancia(localizacao2), //preço base * distancia
+                            localizacao.distancia(localizacao2),//distancia
+                            LocalDateTime.now(),
+                            LocalDateTime.now().plusMinutes(5*(int) distancia),//fim, tempo estimado
+                            tipo,
+                            "MaisBarato");
+                    p = listaProprietarios.values().stream().filter(pr -> pr.getNif().equals(carro.getNif())).findFirst().get();
+                    System.out.println("Proprietario:"+p.getNif()+" Classificação:"+p.classificacao()+'\n'+a.toString()+"É este aluguer que pretende?");
+                    disponivel = lerBool("1- Sim.\n0- Não.");
+                    if(!disponivel) break;
+                    System.out.println("Pedido enviado com sucesso!");
+                    p.addPending(a);
                     break;
             }
         }while(menuHubCliente.getOpcao()!=0);
@@ -437,7 +521,8 @@ public class Estado implements Serializable{
             switch(menuRegisto.getOpcao()){
                 case 1:
                     System.out.println("Introduza as informações seguites para se registar como Cliente:");
-                    email = lerString("Introduza o seu email:");
+                    email = lerString("Introduza o seu email: (-1 para cancelar)");
+                    if (email.equals("-1")) break;
                     while(verificaCliente(email)){
                         email = lerString("Erro: Email já existe, introduza um email válido: (-1 para cancelar)");
                         if (email.equals("-1")) break;
@@ -458,7 +543,8 @@ public class Estado implements Serializable{
                 case 2:
                     System.out.println("Introduza as informações seguites para se registar como Proprietario:");
                     nome = lerString("Introduza o seu nome:");
-                    email = lerString("Introduza o seu email:");
+                    email = lerString("Introduza o seu email: (-1 para cancelar)");
+                    if (email.equals("-1")) break;
                     while(verificaProprietario(email)){
                         email = lerString("Erro: Email já existe, introduza um email válido: (-1 para cancelar)");
                         if (email.equals("-1")) break;
@@ -500,10 +586,13 @@ public class Estado implements Serializable{
                 case 1:
                     System.out.println("Introduza as informações seguintes para resgistar um Carro Eletrico:");
                     marca = lerString("Introduza a marca do carro:");
-                    matricula = lerString("Introduza a matricula do carro:");
+                    matricula = lerString("Introduza a matricula do carro: (-1 para cancelar)");
+                    if (matricula.equals("-1")) break;
                     while(verificaCarro(matricula)){
-                        matricula = lerString("Erro: Matricula já existe, introduza uma matricula válida:");
+                        matricula = lerString("Erro: Matricula já existe, introduza uma matricula válida: (-1 para cancelar)");
+                        if (matricula.equals("-1")) break;
                     }
+                    if (matricula.equals("-1")) break;
                     velMed = lerDouble("Introduza a velocidade media:");
                     precoBase = lerDouble("Introduza o preco base");
                     locX = lerDouble("Introduza a sua localização (x)");
@@ -517,10 +606,13 @@ public class Estado implements Serializable{
                 case 2:
                     System.out.println("Introduza as informações seguintes para resgistar um Carro Hibrido:");
                     marca = lerString("Introduza a marca do carro:");
-                    matricula = lerString("Introduza a matricula do carro:");
+                    matricula = lerString("Introduza a matricula do carro: (-1 para cancelar)");
+                    if (matricula.equals("-1")) break;
                     while(verificaCarro(matricula)){
-                        matricula = lerString("Erro: Matricula já existe, introduza uma matricula válida:");
+                        matricula = lerString("Erro: Matricula já existe, introduza uma matricula válida: (-1 para cancelar)");
+                        if (matricula.equals("-1")) break;
                     }
+                    if (matricula.equals("-1")) break;
                     velMed = lerDouble("Introduza a velocidade media:");
                     precoBase = lerDouble("Introduza o preco base");
                     locX = lerDouble("Introduza a sua localização (x)");
@@ -535,10 +627,13 @@ public class Estado implements Serializable{
                 case 3:
                     System.out.println("Introduza as informações seguintes para resgistar um Carro a Gasolina:");
                     marca = lerString("Introduza a marca do carro:");
-                    matricula = lerString("Introduza a matricula do carro:");
+                    matricula = lerString("Introduza a matricula do carro: (-1 para cancelar)");
+                    if (matricula.equals("-1")) break;
                     while(verificaCarro(matricula)){
-                        matricula = lerString("Erro: Matricula já existe, introduza uma matricula válida:");
+                        matricula = lerString("Erro: Matricula já existe, introduza uma matricula válida: (-1 para cancelar)");
+                        if (matricula.equals("-1")) break;
                     }
+                    if (matricula.equals("-1")) break;
                     velMed = lerDouble("Introduza a velocidade media:");
                     precoBase = lerDouble("Introduza o preco base");
                     locX = lerDouble("Introduza a sua localização (x)");
