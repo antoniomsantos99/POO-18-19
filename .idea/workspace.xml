@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6eae3ca2-9c8d-45e8-a2c3-a1d041439045" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/saves/.keep" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/estado.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/state.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/master/Actor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/master/Actor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/master/Estado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/master/Estado.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -28,14 +32,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/master/Estado.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="831" column="48" selection-start-line="831" selection-start-column="48" selection-end-line="831" selection-end-column="48" />
+            <state relative-caret-position="728">
+              <caret line="481" column="26" lean-forward="true" selection-start-line="481" selection-start-column="26" selection-end-line="481" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#Estado#0;class#Estado#0" />
                 <element signature="method#login#0;class#Estado#0" />
-                <element signature="e#34397#34398#0" expanded="true" />
-                <element signature="e#34696#34697#0" expanded="true" />
+                <element signature="e#34405#34406#0" expanded="true" />
+                <element signature="e#34704#34705#0" expanded="true" />
                 <element signature="method#registo#0;class#Estado#0" />
                 <element signature="e#35884#35885#0" expanded="true" />
                 <element signature="e#35941#35942#0" expanded="true" />
@@ -101,8 +105,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/master/Actor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="461">
-              <caret line="259" column="5" lean-forward="true" selection-start-line="259" selection-start-column="5" selection-end-line="259" selection-end-column="5" />
+            <state relative-caret-position="221">
+              <caret line="244" lean-forward="true" selection-start-line="244" selection-end-line="244" />
               <folding>
                 <element signature="class#Actor#0" />
                 <element signature="method#getHistorial#0;class#Actor#0" />
@@ -111,8 +115,7 @@
                 <element signature="method#setClassificacao#0;class#Actor#0" />
                 <element signature="method#equals#0;class#Actor#0" />
                 <element signature="method#toString#0;class#Actor#0" />
-                <element signature="method#getConcluido#0;class#Cliente#0" />
-                <element signature="e#8873#8874#0" expanded="true" />
+                <element signature="e#8878#8879#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -155,6 +158,7 @@
         <option value="$PROJECT_DIR$/src/master/UMCarroJa.java" />
         <option value="$PROJECT_DIR$/src/master/nullAluguer.java" />
         <option value="$PROJECT_DIR$/src/master/nullAluguerException.java" />
+        <option value="$PROJECT_DIR$/saves/state.txt" />
         <option value="$PROJECT_DIR$/src/master/Actor.java" />
         <option value="$PROJECT_DIR$/src/master/Estado.java" />
       </list>
@@ -267,7 +271,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12260128" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12260128" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -276,7 +280,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4989339" visible="true" weight="0.2654388" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4989339" weight="0.2654388" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -371,10 +375,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/saves/dados.bak">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53080">
+          <caret line="2699" column="8" selection-start-line="2699" selection-start-column="8" selection-end-line="2699" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/saves/state.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/saves/.keep">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/master/Actor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="259" column="5" lean-forward="true" selection-start-line="259" selection-start-column="5" selection-end-line="259" selection-end-column="5" />
+        <state relative-caret-position="221">
+          <caret line="244" lean-forward="true" selection-start-line="244" selection-end-line="244" />
           <folding>
             <element signature="class#Actor#0" />
             <element signature="method#getHistorial#0;class#Actor#0" />
@@ -383,29 +400,21 @@
             <element signature="method#setClassificacao#0;class#Actor#0" />
             <element signature="method#equals#0;class#Actor#0" />
             <element signature="method#toString#0;class#Actor#0" />
-            <element signature="method#getConcluido#0;class#Cliente#0" />
-            <element signature="e#8873#8874#0" expanded="true" />
+            <element signature="e#8878#8879#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/saves/dados.bak">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="53080">
-          <caret line="2699" column="8" selection-start-line="2699" selection-start-column="8" selection-end-line="2699" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/master/Estado.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="831" column="48" selection-start-line="831" selection-start-column="48" selection-end-line="831" selection-end-column="48" />
+        <state relative-caret-position="728">
+          <caret line="481" column="26" lean-forward="true" selection-start-line="481" selection-start-column="26" selection-end-line="481" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#Estado#0;class#Estado#0" />
             <element signature="method#login#0;class#Estado#0" />
-            <element signature="e#34397#34398#0" expanded="true" />
-            <element signature="e#34696#34697#0" expanded="true" />
+            <element signature="e#34405#34406#0" expanded="true" />
+            <element signature="e#34704#34705#0" expanded="true" />
             <element signature="method#registo#0;class#Estado#0" />
             <element signature="e#35884#35885#0" expanded="true" />
             <element signature="e#35941#35942#0" expanded="true" />

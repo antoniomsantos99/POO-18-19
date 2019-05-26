@@ -475,7 +475,7 @@ public class Estado implements Serializable{
                         }
 
                         p.trocarCarro(c.clone());
-                        cliente.setConcluido(a);
+                        cliente.setConcluido(a.clone());
                         listaClientes.put(cliente.getEmail(),cliente.clone());
                         listaCarros.put(c.getMatricula(),c.clone());
                         listaProprietarios.put(p.getEmail(),p.clone());

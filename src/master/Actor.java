@@ -240,7 +240,7 @@ class Cliente extends Actor{
     }
     public Aluguer getConcluido()throws noAluguerException{
         if(this.concluido==null) throw new noAluguerException();
-        return this.concluido.clone();
+        else return this.concluido.clone();
     }
 
     public void setLocalizacao(Ponto localizacao) {
