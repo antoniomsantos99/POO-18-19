@@ -1,5 +1,7 @@
 package master;
 
+import com.sun.istack.internal.Nullable;
+
 import java.io.Serializable;
 import java.util.*;
 import java.util.List;
@@ -217,7 +219,7 @@ class Proprietario extends Actor{
 
 class Cliente extends Actor{
     private Ponto localizacao;
-
+    private Aluguer concluido;
     //DUVIDA CLIENTE CONSTRUTOR
 
     public Cliente(){
@@ -236,9 +238,25 @@ class Cliente extends Actor{
     public Ponto getLocalizacao() {
         return this.localizacao.clone();
     }
+    public Aluguer getConcluido()throws noAluguerException{
+        if(this.concluido==null) throw new noAluguerException();
+        return this.concluido.clone();
+    }
 
     public void setLocalizacao(Ponto localizacao) {
         this.localizacao = localizacao.clone();
+    }
+
+    /**
+     * coloca um aluguer para poder ser classificado
+     * @param concluido pode ser null
+     */
+    public void setConcluido(Aluguer concluido){
+        try{
+            this.concluido=concluido.clone();
+        }catch(NullPointerException e){
+            this.concluido = null;
+        }
     }
 
     public boolean equals(Object o) {

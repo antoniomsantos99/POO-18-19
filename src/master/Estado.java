@@ -79,11 +79,13 @@ public class Estado implements Serializable{
     }
 
     private void hubCliente(String email){
-        String[] options = {"solicitar o aluguer do carro mais próximo das suas coordenadas",
-                "solicitar o aluguer do carro mais barato",
-                "solicitar o aluguer do carro mais barato dentro de uma distância que esteja disposto a percorrer a pé",
-                "solicitar o aluguer de um carro específco",
-                "solicitar o aluguer de um carro com uma autonomia desejada"};
+        String[] options = {"Solicitar o aluguer do carro mais próximo das suas coordenadas.",
+                "Solicitar o aluguer do carro mais barato.",
+                "Solicitar o aluguer do carro mais barato dentro de uma distância que esteja disposto a percorrer a pé.",
+                "Solicitar o aluguer de um carro específco.",
+                "Solicitar o aluguer de um carro com uma autonomia desejada.",
+                "Verificar alugueres recentes.",
+                "Classificar aluguer recente."};
         Menu menuHubCliente = new Menu(options);
         do{
             Proprietario p;Optional<Proprietario> propAux;
@@ -302,6 +304,38 @@ public class Estado implements Serializable{
                     System.out.println("Pedido enviado com sucesso!");
                     p.addPending(a);
                     break;
+                case 6:
+                    cliente = listaClientes.get(email);
+                    List<Aluguer> historico = cliente.getHistorial();
+                    if(historico.isEmpty()){System.out.println("Sem alugueres realizados");break;}
+                    System.out.println("Alugueres mais recentes:");
+                    for(int i = historico.size()-5; i < historico.size();i++){
+                        if(i>=0) System.out.println(historico.get(i).toString());
+                    }
+                    break;
+                case 7:
+                    try{
+                        cliente = listaClientes.get(email);
+                        Aluguer alu = cliente.getConcluido();
+                        System.out.println("Pretende classificar o proprietario e o carro?");
+                        disponivel = lerBool("1- Sim.\n2- Não.");
+                        if(disponivel){
+                            int classifP = lerInt("Introduza o valor que pretende classificar o proprietario:");
+                            int classifC = lerInt("Introduza o valor que pretende classificar o carro:");
+                            propAux = listaProprietarios.values().stream().filter(prop -> prop.getNome().equals(alu.getNifProp())).findFirst();
+                            carroAux =listaCarros.values().stream().filter(car -> car.getMatricula().equals(alu.getMatricula())).findFirst();
+                            propAux.ifPresent(proprietario -> proprietario.classificar(classifP));
+                            carroAux.ifPresent(car -> car.classficarCarro(classifC));
+                            System.out.println("Classificados com sucesso!");
+                            cliente.setConcluido(null);
+                        }else{
+                            cliente.setConcluido(null);
+                        }
+                    }catch(noAluguerException e){
+                        System.out.println("Sem aluguer por classificar.");
+                        break;
+                    }
+                    break;
             }
         }while(menuHubCliente.getOpcao()!=0);
     }
@@ -311,7 +345,9 @@ public class Estado implements Serializable{
                 "Abastecer um veiculo",
                 "Alterar o preço por km de um veiculo",
                 "Aceitar/rejeitar o aluguer de um determinado cliente",
-                "Registar quanto custou a viagem"};
+                "Registar quanto custou a viagem",
+                "Verificar alugueres recentes",
+                "Total faturado por uma viatura"};
         Menu menuHubProprietario = new Menu(options);
         do{
             Proprietario p;
@@ -439,6 +475,7 @@ public class Estado implements Serializable{
                         }
 
                         p.trocarCarro(c.clone());
+                        cliente.setConcluido(a);
                         listaClientes.put(cliente.getEmail(),cliente.clone());
                         listaCarros.put(c.getMatricula(),c.clone());
                         listaProprietarios.put(p.getEmail(),p.clone());
@@ -463,6 +500,15 @@ public class Estado implements Serializable{
                     //p = listaProprietarios.get(email);
                     a = alugueres.get(escolha);
                     System.out.println(a.toString());//TODO faço a minima do que é resgistar o valor, mas já tenho o aluguer certo...
+                    break;
+                case 7:
+                    cliente = listaClientes.get(email);
+                    List<Aluguer> historico = cliente.getHistorial();
+                    if(historico.isEmpty()){System.out.println("Sem alugueres realizados");break;}
+                    System.out.println("Alugueres mais recentes:");
+                    for(int i = historico.size()-5; i < historico.size();i++){
+                        if(i>=0) System.out.println(historico.get(i).toString());
+                    }
                     break;
             }
         }while(menuHubProprietario.getOpcao()!=0);
@@ -1005,6 +1051,13 @@ public class Estado implements Serializable{
         Estado e = (Estado) ois.readObject();
         ois.close();
         return e;
+    }
+
+    public void listagemClientes(){//TODO fix para dar os maiores 10
+        List<Cliente> listagem = listaClientes.values().stream().limit(10).collect(Collectors.toList());
+        for(Cliente c:listagem){
+            System.out.println(c.toString());
+        }
     }
 
     //PARA DEBUG APENAS, DEPOIS REMOVER

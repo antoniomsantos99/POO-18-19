@@ -21,7 +21,7 @@ public class UMCarroJa{
 
     public UMCarroJa(){
         String[] opcoesMenuPrincipal = {"Continuar ->","Carregar Estado (.txt)","Gravar Estado (.txt)","Debug"};
-        String[] opcoesLogOuReg = {"Login","Registo"};
+        String[] opcoesLogOuReg = {"Login","Registo","10 Clientes que mais utilizam o sistema"};
         this.menuPrincipal = new Menu(opcoesMenuPrincipal);
         this.menuLogOuReg = new Menu(opcoesLogOuReg);
         try{
@@ -79,6 +79,9 @@ public class UMCarroJa{
                     break;
                 case 2:
                     this.estado.registo();
+                    break;
+                case 3:
+                    this.estado.listagemClientes();
                     break;
             }
         }while(menuLogOuReg.getOpcao()!=0);
