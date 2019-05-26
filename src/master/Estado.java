@@ -898,7 +898,7 @@ public class Estado implements Serializable{
                     parsed[2],
                     parsed[3],
                     Double.parseDouble(parsed[4]),
-                    5, //TODO Descobrir o preco base
+                    5,
                     new Ponto(Double.parseDouble(parsed[8]), Double.parseDouble(parsed[9])),
                     new ArrayList<Integer>(),
                     Double.parseDouble(parsed[6]),
