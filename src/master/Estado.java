@@ -1,5 +1,7 @@
 package master;
 
+import sun.rmi.runtime.Log;
+
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -16,6 +18,8 @@ public class Estado implements Serializable{
 
     /**Path onde vão ser guardadas as saves*/
     private static final String path = "saves/";
+    /**Path do ficheiro temporário*/
+    private static final String tempFileName = "saves/temp.txt";
 
     /** map de todos os clientes no sistema*/
     private Map<String, Cliente> listaClientes;
@@ -468,6 +472,7 @@ public class Estado implements Serializable{
                         p.removerPending(escolha-1);//escolha -1 pcausa d arrays começarem em 0
                         c = this.listaCarros.get(a.getMatricula());
                         c.updateCarro(a);
+                        try{LogWriter.logAluguer(a.clone(),tempFileName);}catch(IOException e){System.out.println("Erro: Não foi possivel criar logs com este Aluguer.");}
 
                         boolean classifica = lerBool("1- Classificar cliente.\n0- Não classificar cliente.");
                         if(classifica){
@@ -477,6 +482,7 @@ public class Estado implements Serializable{
                             }
                             cliente.classificar(classificacao);
                             System.out.println("Cliente classificado com sucesso!");
+                            try{LogWriter.logClassActor(cliente.clone(),classificacao,tempFileName);}catch(IOException e){System.out.println("Erro: Não foi possivel criar logs com esta Classificação.");}
                         }
 
                         p.trocarCarro(c.clone());
@@ -618,6 +624,7 @@ public class Estado implements Serializable{
                     Cliente c = new Cliente(nome,nif,email,password,morada,dataNascimento,localizacao,new ArrayList<Integer>(),new ArrayList<Aluguer>());
                     listaClientes.put(email,c.clone());
                     System.out.println("Cliente " + nome + " resgistado com sucesso!");
+                    try{LogWriter.logCliente(c.clone(),tempFileName);}catch(IOException e){System.out.println("Erro: Não foi possivel criar logs com este Cliente.");}
                     break;
                 case 2:
                     System.out.println("Introduza as informações seguites para se registar como Proprietario:");
@@ -636,6 +643,7 @@ public class Estado implements Serializable{
                     Proprietario p = new Proprietario(nome,nif,email,password,morada,dataNascimento,new TreeSet<Carro>(new ComparaMatriculas()),new ArrayList<Integer>(),new ArrayList<Aluguer>(),new ArrayList<Aluguer>());
                     listaProprietarios.put(email,p.clone());
                     System.out.println("Proprietario " + nome + " resgistado com sucesso!");
+                    try{LogWriter.logProp(p.clone(),tempFileName);}catch(IOException e){System.out.println("Erro: Não foi possivel criar logs com este Proprietário.");}
                     break;
             }
         }while(menuRegisto.getOpcao()<0);
@@ -686,9 +694,10 @@ public class Estado implements Serializable{
                     locY = lerDouble("Introduza a sua localização (y)");
                     localizacao = new Ponto(locX,locY);
                     consumoBateria = lerDouble("Introduza o consumo da bateria por km");
-                    autonomia = lerDouble("Bateria atual (em %)?");
+                    autonomia = lerDouble("Introduza a bateria atual:");
                     dispAlugar = lerBool("Inicialmente disponivel para alugar? (1- sim, 0- não)");
                     c = new Eletrico(marca,matricula,proprietario.getNif(),velMed,precoBase,localizacao,new ArrayList<Integer>(),consumoBateria,autonomia,dispAlugar);
+                    try{LogWriter.logCarro(c.clone(),tempFileName);}catch(IOException e){System.out.println("Erro: Não foi possivel criar logs com este Carro.");}
                     return c;
                 case 2:
                     System.out.println("Introduza as informações seguintes para resgistar um Carro Hibrido:");
@@ -707,9 +716,10 @@ public class Estado implements Serializable{
                     localizacao = new Ponto(locX,locY);
                     consumoBateria = lerDouble("Introduza o consumo da bateria por km");
                     consumoGas = lerDouble("Introduza o consumo de gas por km");
-                    autonomia = lerDouble("Autonomia atual?");
+                    autonomia = lerDouble("Introduza a autonomia atual:");
                     dispAlugar = lerBool("Inicialmente disponivel para alugar? (1- sim, 0- não)");
                     c = new Hibrido(marca,matricula,proprietario.getNif(),velMed,precoBase,localizacao,new ArrayList<Integer>(),consumoGas,consumoBateria,autonomia,dispAlugar);
+                    try{LogWriter.logCarro(c.clone(),tempFileName);}catch(IOException e){System.out.println("Erro: Não foi possivel criar logs com este Carro.");}
                     return c;
                 case 3:
                     System.out.println("Introduza as informações seguintes para resgistar um Carro a Gasolina:");
@@ -727,9 +737,10 @@ public class Estado implements Serializable{
                     locY = lerDouble("Introduza a sua localização (y)");
                     localizacao = new Ponto(locX,locY);
                     consumoGas = lerDouble("Introduza o consumo de gas por km");
-                    autonomia = lerDouble("Autonomia atual?");
+                    autonomia = lerDouble("Introduza a autonomia atual:");
                     dispAlugar = lerBool("Inicialmente disponivel para alugar? (1- sim, 0- não)");
                     c = new Gasolina(marca,matricula,proprietario.getNif(),velMed,precoBase,localizacao,new ArrayList<Integer>(),consumoGas,autonomia,dispAlugar);
+                    try{LogWriter.logCarro(c.clone(),tempFileName);}catch(IOException e){System.out.println("Erro: Não foi possivel criar logs com este Carro.");}
                     return c;
             }
         }while(menuCarro.getOpcao()!=0);
@@ -745,8 +756,8 @@ public class Estado implements Serializable{
             switch (m.getOpcao()) {
                 case 1:
                     try {
-                        escreverFile(path + "state.txt");
-                    } catch (FileNotFoundException e) {
+                        LogWriter.logToSave(tempFileName,path+"state.txt");
+                    } catch (IOException e) {
                         System.out.println("Erro: Não foi possivel guardar o ficheiro.");
                     }
                     break;
@@ -755,28 +766,14 @@ public class Estado implements Serializable{
                     System.out.print("Nome do Ficheiro que pretende gravar: ");
                     String nomeFile = is.nextLine();
                     try {
-                        escreverFile(path + nomeFile);
-                    } catch (FileNotFoundException e) {
+                        LogWriter.logToSave(tempFileName,path+nomeFile);
+                    } catch (IOException e) {
                         System.out.println("Erro: Não foi possivel guardar o ficheiro.");
                     }
                     break;
             }
         } while (m.getOpcao() < 0);
 
-    }
-    //TODO
-    private void escreverFile(String file) throws FileNotFoundException {
-
-        PrintWriter fich = new PrintWriter(file);
-        for (Cliente c : this.listaClientes.values())
-            fich.println(c.toString());
-        for (Proprietario p : this.listaProprietarios.values())
-            fich.println(p.toString());
-        for (Carro c : this.listaCarros.values())
-            fich.println(c.toString());
-
-        fich.flush();
-        fich.close();
     }
 
     /** cerebro da função que carrega o estado*/
@@ -830,16 +827,16 @@ public class Estado implements Serializable{
 
         linhas.forEach(s -> {
             String[] parsed = s.split(":");
-            if (parsed[0].equals("NovoProp")) CVC2Proprietario(parsed[1]);
-            if (parsed[0].equals("NovoCliente")) CVC2Cliente(parsed[1]);
-            if (parsed[0].equals("NovoCarro")) CVC2Carro(parsed[1]);
-            if (parsed[0].equals("Aluguer")) CVC2Aluguer(parsed[1]);
-            if (parsed[0].equals("Classificar")) CVC2Classificacao(parsed[1]);
+            if (parsed[0].equals("NovoProp")) try{CVC2Proprietario(parsed[1]);}catch(IOException e){System.out.println("Erro ao tentar escrever log");}
+            if (parsed[0].equals("NovoCliente")) try{CVC2Cliente(parsed[1]);}catch(IOException e){System.out.println("Erro ao tentar escrever log");}
+            if (parsed[0].equals("NovoCarro")) try{CVC2Carro(parsed[1]);}catch(IOException e){System.out.println("Erro ao tentar escrever log");}
+            if (parsed[0].equals("Aluguer")) try{CVC2Aluguer(parsed[1]);}catch(IOException e){System.out.println("Erro ao tentar escrever log");}
+            if (parsed[0].equals("Classificar")) try{CVC2Classificacao(parsed[1]);}catch(IOException e){System.out.println("Erro ao tentar escrever log");}
         });
     }
 
     /** passa de uma string separada de virgulas para um cliente*/
-    private void CVC2Cliente(String linha)  {
+    private void CVC2Cliente(String linha) throws IOException{
         String[] parsed = linha.split(","); //[Nome,Nif,Email,Morada,X,Y]
         Cliente c = new Cliente(parsed[0],
                 parsed[1],
@@ -852,9 +849,10 @@ public class Estado implements Serializable{
                 new ArrayList<Aluguer>());
         listaClientes.put(c.getEmail(),c.clone());
 
+        LogWriter.logCliente(c,tempFileName);
     }
     /** passa de uma string separada de virgulas para um proprietario*/
-    private void CVC2Proprietario(String linha)  {
+    private void CVC2Proprietario(String linha) throws IOException{
         String[] parsed = linha.split(","); //[Nome,Nif,Email,Morada]
         Proprietario p = new Proprietario(parsed[0],
                 parsed[1],
@@ -867,10 +865,11 @@ public class Estado implements Serializable{
                 new ArrayList<Aluguer>(),
                 new ArrayList<Aluguer>());
         listaProprietarios.put(p.getEmail(), p.clone());
-       ;
+
+        LogWriter.logProp(p,tempFileName);
     }
     /** passa de uma string separada de virgulas para um carro*/
-    private void CVC2Carro(String linha) {
+    private void CVC2Carro(String linha) throws IOException{
         //NovoCarro:Gasolina,Tata,CB-68-97,240536003,62,1.3717524,2.1782432,457,-95.34003,65.17136
         Carro c;
         String[] parsed = linha.split(","); //[Tipo,Marca,Matricula,Nif,VelMedia,PrecoProKm,ConsumoporKm,Autonomia,X,Y]
@@ -890,6 +889,7 @@ public class Estado implements Serializable{
             listaProprietarios.get(email).trocarCarro(c);
             listaCarros.put(c.getMatricula(), c.clone());
 
+            LogWriter.logCarro(c,tempFileName);
         }
         if (parsed[0].equals("Electrico") || parsed[0].equals(("Eletrico"))){
             c = new Eletrico(parsed[1],
@@ -904,6 +904,8 @@ public class Estado implements Serializable{
                     true);
             listaProprietarios.get(email).trocarCarro(c);
             listaCarros.put(c.getMatricula(), c);
+
+            LogWriter.logCarro(c,tempFileName);
 
         }
 
@@ -923,12 +925,11 @@ public class Estado implements Serializable{
             listaProprietarios.get(email).trocarCarro(c);
             listaCarros.put(c.getMatricula(), c);
 
-
-
+            LogWriter.logCarro(c,tempFileName);
         }
     }
     /** passa de uma string separada de virgulas para um aluguer*/
-    private void CVC2Aluguer(String linha){
+    private void CVC2Aluguer(String linha) throws IOException{
         String[] parsed = linha.split(","); //[nif cliente, X destino, Y destino, tipoCombustivel , preferencia]
         String email = parsed[0]+"@gmail.com";
         Cliente cliente = listaClientes.get(email);
@@ -972,18 +973,20 @@ public class Estado implements Serializable{
             Optional<Cliente> clie = listaClientes.values().stream().filter(c->c.getNif().equals(a.getNifCliente())).findAny();
             clie.ifPresent(value -> value.addAluguer(a));
             clie.ifPresent(value -> listaClientes.put(value.getEmail(),value.clone()));
+
+            LogWriter.logAluguer(a,tempFileName);
         }
 
         if(parsed[3].equals("Electrico")) {
             /* vai buscar o carro mais proximo das suas cordenadas com autonomia > distancia*5*/
             Optional<Eletrico> carro;
-            if(parsed[4].equals("MaisPerto")){
+            if (parsed[4].equals("MaisPerto")) {
                 /* vai buscar o carro mais proximo das suas cordenadas com autonomia > distancia*5*/
                 carro = listaCarros.values().stream()
                         .filter(ca -> ca.getAutonomia() > ca.getLocalizacao().distancia((cliente.getLocalizacao())) * 5 && ca.getDispAlugar() && ca instanceof Eletrico)
                         .map(c -> (Eletrico) c)
                         .min(Comparator.comparing(x -> x.getLocalizacao().distancia(cliente.getLocalizacao())));
-            }else{
+            } else {
                 /* vai buscar o carro mais barato das suas cordenadas com autonomia > distancia*5*/
                 carro = listaCarros.values().stream()
                         .filter(ca -> ca.getAutonomia() > ca.getLocalizacao().distancia((cliente.getLocalizacao())) * 5 && ca.getDispAlugar() && ca instanceof Eletrico)
@@ -992,7 +995,8 @@ public class Estado implements Serializable{
             }
             //se carro existir cria o aluguer, se não sai
             Eletrico carroEletrico;
-            if(carro.isPresent())carroEletrico=carro.get();else return;
+            if (carro.isPresent()) carroEletrico = carro.get();
+            else return;
 
             Aluguer a = new Aluguer(carroEletrico.getNif(),
                     parsed[0], carroEletrico.getMatricula(),
@@ -1006,14 +1010,15 @@ public class Estado implements Serializable{
                     parsed[4]);
 
 
-
-            Optional<Proprietario> prop = listaProprietarios.values().stream().filter(p->p.getNif().equals(a.getNifProp())).findAny();
+            Optional<Proprietario> prop = listaProprietarios.values().stream().filter(p -> p.getNif().equals(a.getNifProp())).findAny();
             prop.ifPresent(value -> value.addAluguer(a));
-            prop.ifPresent(value -> listaProprietarios.put(value.getEmail(),value.clone()));
+            prop.ifPresent(value -> listaProprietarios.put(value.getEmail(), value.clone()));
 
-            Optional<Cliente> clie = listaClientes.values().stream().filter(c->c.getNif().equals(a.getNifCliente())).findAny();
+            Optional<Cliente> clie = listaClientes.values().stream().filter(c -> c.getNif().equals(a.getNifCliente())).findAny();
             clie.ifPresent(value -> value.addAluguer(a));
-            clie.ifPresent(value -> listaClientes.put(value.getEmail(),value.clone()));
+            clie.ifPresent(value -> listaClientes.put(value.getEmail(), value.clone()));
+
+            LogWriter.logAluguer(a, tempFileName);
         }
 
         if(parsed[3].equals("Hibrido")) {
@@ -1055,24 +1060,28 @@ public class Estado implements Serializable{
             Optional<Cliente> clie = listaClientes.values().stream().filter(c->c.getNif().equals(a.getNifCliente())).findAny();
             clie.ifPresent(value -> value.addAluguer(a));
             clie.ifPresent(value -> listaClientes.put(value.getEmail(),value.clone()));
+
+            LogWriter.logAluguer(a,tempFileName);
         }
 
     }
     /** passa de uma string separada de virgulas para uma classificação*/
-    private void CVC2Classificacao(String linha)  {
+    private void CVC2Classificacao(String linha) throws IOException {
         String[] parsed = linha.split(","); //[matricula ou nif (cliente ou prop) , nota (0-100)]
         if (parsed[0].length() == 8) {
             Optional<Carro> carro = listaCarros.values().stream().filter(c -> c.getMatricula().equals(parsed[0])).findAny();
             carro.ifPresent(value->value.classficarCarro(Integer.parseInt(parsed[1])));
-            //if(carro.isPresent())LogWriter.logClassCar(carro.get(),Integer.parseInt(parsed[1]),"teste.txt");
+            if(carro.isPresent()) LogWriter.logClassCar(carro.get(),Integer.parseInt(parsed[1]),tempFileName);
         } else {
             Optional<Cliente> cliente = listaClientes.values().stream().filter(c -> c.getNif().equals(parsed[0])).findAny();
             cliente.ifPresent(value -> value.classificar(Integer.parseInt(parsed[1])));
             cliente.ifPresent(c -> listaClientes.put(c.getEmail(),c.clone()));
+            if(cliente.isPresent()) LogWriter.logClassActor(cliente.get(),Integer.parseInt(parsed[1]),tempFileName);
             Optional<Proprietario> prop = listaProprietarios.values().stream().filter(p->p.getNif().equals(parsed[0])).findAny();
             prop.ifPresent(value -> value.classificar(Integer.parseInt(parsed[1])));
             prop.ifPresent(p -> listaProprietarios.put(p.getEmail(),p.clone()));
-            //if(prop.isPresent())LogWriter.logClassActor(prop.get(),Integer.parseInt(parsed[1]),"teste.txt");
+            if(prop.isPresent())LogWriter.logClassActor(prop.get(),Integer.parseInt(parsed[1]),tempFileName);
+
         }
     }
 
