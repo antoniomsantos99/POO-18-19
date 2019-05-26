@@ -6,26 +6,28 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Classe da interface de texto
+ * Classe de estado
  *
- * metodos especialmente estaticos
- *
- * @author Pedro Oliveira
- * @version 28/04/2019
+ * @author Grupo 21
+ * @version 26/05/2019
  */
 
 public class Estado implements Serializable{
 
-    /**
-     * Declarações de variaveis para guardar todos os objetos
-     */
+    /**Path onde vão ser guardadas as saves*/
     private static final String path = "saves/";
 
+    /** map de todos os clientes no sistema*/
     private Map<String, Cliente> listaClientes;
+    /** map de todos os proprietarios no sistema*/
     private Map<String, Proprietario> listaProprietarios;
+    /** map de todos os carros no sistema*/
     private Map<String, Carro> listaCarros;
 
+
+    /** menu para fazer login*/
     private Menu menuLogin;
+    /**manu para fazer registo*/
     private Menu menuRegisto;
 
     /** construtor por omissao */
@@ -78,6 +80,7 @@ public class Estado implements Serializable{
         return p.getPassword().equals(password);
     }
 
+    /** hub com todas as operações que o cliente pode realizar*/
     private void hubCliente(String email){
         String[] options = {"Solicitar o aluguer do carro mais próximo das suas coordenadas.",
                 "Solicitar o aluguer do carro mais barato.",
@@ -339,6 +342,8 @@ public class Estado implements Serializable{
             }
         }while(menuHubCliente.getOpcao()!=0);
     }
+
+    /** hub com todas as operações que o proprietario pode realizar*/
     private void hubProprietario(String email){
         String[] options = {"Registar novo Carro",
                 "Sinalizar que um dos seus carros está disponível ou não para alugar",
@@ -456,10 +461,10 @@ public class Estado implements Serializable{
                     a = pending.get(escolha-1);
                     boolean aceite = lerBool("1- Aceitar pedido.\n0- Rejeitar pedido.");
                     if(aceite){
-                        p.confirmAluguer(a);//adicionar o aluguer a lista de alugueres
+                        p.addAluguer(a);//adicionar o aluguer a lista de alugueres
                         Optional<Cliente> clienteAux = this.listaClientes.values().stream().filter(cl -> cl.getNif().equals(a.getNifCliente())).findFirst();
                         if(clienteAux.isPresent())cliente=clienteAux.get();else {System.out.println("Erro: O cliente não existe.");break;}
-                        cliente.confirmAluguer(a);//adicionar o aluguer a lista de alugueres
+                        cliente.addAluguer(a);//adicionar o aluguer a lista de alugueres
                         p.removerPending(escolha-1);//escolha -1 pcausa d arrays começarem em 0
                         c = this.listaCarros.get(a.getMatricula());
                         c.updateCarro(a);
@@ -636,10 +641,20 @@ public class Estado implements Serializable{
         }while(menuRegisto.getOpcao()<0);
     }
 
+    /**
+     * verifica se um carro existe no sistema
+     * @param matricula matricula do carro a procurar
+     * @return verdadeiro se existe, falso se não
+     */
     private boolean verificaCarro(String matricula){
         return listaCarros.containsKey(matricula);
     }
 
+    /**
+     * regista um carro para um determinado proprietario identificado por email
+     * @param email email do proprietario que está a fazer o registo
+     * @return return do carro criado
+     */
     private Carro registoCarro(String email){
         String[] options = {"Registar Eletrico","Registar Hibrido","Registar Gasolina"};
         Menu menuCarro = new Menu(options);
@@ -764,6 +779,7 @@ public class Estado implements Serializable{
         fich.close();
     }
 
+    /** cerebro da função que carrega o estado*/
     public void carregarEstadoTXT() {
         String[] opcoes = {"Carregar Rápido", "Carregar com Nome do ficheiro"};
         Menu m = new Menu(opcoes);
@@ -796,6 +812,12 @@ public class Estado implements Serializable{
 
     }
 
+    /**
+     *
+     * @param file nome do ficheiro a ler
+     * @throws FileNotFoundException quando o ficheiro não existe
+     * @throws IOException quando á erro nas operações IO
+     */
     private void lerFile(String file) throws FileNotFoundException, IOException {
         List<String> linhas = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(file));
@@ -816,6 +838,7 @@ public class Estado implements Serializable{
         });
     }
 
+    /** passa de uma string separada de virgulas para um cliente*/
     private void CVC2Cliente(String linha) {
         String[] parsed = linha.split(","); //[Nome,Nif,Email,Morada,X,Y]
         Cliente c = new Cliente(parsed[0],
@@ -829,6 +852,7 @@ public class Estado implements Serializable{
                 new ArrayList<Aluguer>());
         listaClientes.put(c.getEmail(),c.clone());
     }
+    /** passa de uma string separada de virgulas para um proprietario*/
     private void CVC2Proprietario(String linha) {
         String[] parsed = linha.split(","); //[Nome,Nif,Email,Morada]
         Proprietario p = new Proprietario(parsed[0],
@@ -843,6 +867,7 @@ public class Estado implements Serializable{
                 new ArrayList<Aluguer>());
         listaProprietarios.put(p.getEmail(), p.clone());
     }
+    /** passa de uma string separada de virgulas para um carro*/
     private void CVC2Carro(String linha) {
         //NovoCarro:Gasolina,Tata,CB-68-97,240536003,62,1.3717524,2.1782432,457,-95.34003,65.17136
         Carro c;
@@ -897,6 +922,7 @@ public class Estado implements Serializable{
 
         }
     }
+    /** passa de uma string separada de virgulas para um aluguer*/
     private void CVC2Aluguer(String linha){
         String[] parsed = linha.split(","); //[nif cliente, X destino, Y destino, tipoCombustivel , preferencia]
         String email = parsed[0]+"@gmail.com";
@@ -1020,6 +1046,7 @@ public class Estado implements Serializable{
             clie.ifPresent(value -> listaClientes.put(value.getEmail(),value.clone()));
         }
     }
+    /** passa de uma string separada de virgulas para uma classificação*/
     private void CVC2Classificacao(String linha) {
         String[] parsed = linha.split(","); //[matricula ou nif (cliente ou prop) , nota (0-100)]
         if (parsed[0].length() == 8) {
@@ -1062,25 +1089,13 @@ public class Estado implements Serializable{
         return e;
     }
 
+    /** dá os top 10 clientes que mais utilizam o sistema*/
     public void listagemClientes(){
         List<Cliente> listagem = listaClientes.values().stream().sorted(Comparator.comparingInt((c->-c.getHistorial().size()))).limit(10).collect(Collectors.toList());
         for(Cliente c:listagem){
             System.out.println(c.toString());
         }
     }
-
-    //PARA DEBUG APENAS, DEPOIS REMOVER
-    public String debugString(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("\nMap de Carros:\n\n");
-        sb.append(listaCarros.toString());
-        sb.append("\nMap de Proprietarios:\n\n");
-        sb.append(listaProprietarios.toString());
-        sb.append("Map de Clientes:\n\n");
-        sb.append(listaClientes.toString());
-        return sb.toString();
-    }
-
     /**
      * le uma String
      * @param s dá print do parametro que recebe

@@ -7,12 +7,13 @@ import java.io.Serializable;
  * Classe que implementa um Ponto num plano2D.
  * As coordenadas do Ponto sÃ£o inteiras.
  *
- * @author  Pedro Oliveira
- * @version 19/05/2019
+ * @author Grupo 21
+ * @version 26/05/2019
  */
+
 public class Ponto implements Serializable {
 
-    //variÃ¡veis de instÃ¢ncia
+    //variáveis de instÃ¢ncia
     private double x;
     private double y;
 
@@ -151,7 +152,7 @@ public class Ponto implements Serializable {
     }
 
     /**
-     * Metodo que devolve a representaÃ§Ã£o em String do Ponto.
+     * Metodo que devolve a representação em String do Ponto.
      * @return String com as coordenadas x e y
      */
     public String toString() {
@@ -170,8 +171,8 @@ public class Ponto implements Serializable {
 
 
     /**
-     * Metodo que faz uma cÃ³pia do objecto receptor da mensagem.
-     * Para tal invoca o construtor de cÃ³pia.
+     * Metodo que faz uma cópia do objecto receptor da mensagem.
+     * Para tal invoca o construtor de cópia.
      *
      * @return objecto clone do objecto que recebe a mensagem.
      */

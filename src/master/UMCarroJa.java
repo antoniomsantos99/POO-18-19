@@ -2,14 +2,23 @@ package master;
 
 import java.io.*;
 
+/**
+ * Classe principal da aplicação
+ *
+ * @author Grupo 21
+ * @version 26/05/2019
+ */
+
 public class UMCarroJa{
 
+    /** estado do programa*/
     private Estado estado;
-
+    /** menu inicial*/
     private Menu menuPrincipal;
-
+    /** menu para dar login ou registo*/
     private Menu menuLogOuReg;
 
+    /** main do programa*/
     public static void main(String[] args){
         System.out.println("Start of main.");
         long startTime = System.currentTimeMillis();
@@ -19,8 +28,9 @@ public class UMCarroJa{
         System.out.println("End of main.");
     }
 
+    /** "cerebro" do programa, dirige tudo para o sitio correto*/
     public UMCarroJa(){
-        String[] opcoesMenuPrincipal = {"Continuar ->","Carregar Estado (.txt)","Gravar Estado (.txt)","Debug"};
+        String[] opcoesMenuPrincipal = {"Continuar ->","Carregar Estado","Gravar Estado"};
         String[] opcoesLogOuReg = {"Login","Registo","10 Clientes que mais utilizam o sistema"};
         this.menuPrincipal = new Menu(opcoesMenuPrincipal);
         this.menuLogOuReg = new Menu(opcoesLogOuReg);
@@ -39,6 +49,7 @@ public class UMCarroJa{
         }
     }
 
+    /** correr o menu principal*/
     private void run(){
         do{
             menuPrincipal.executa();
@@ -56,9 +67,6 @@ public class UMCarroJa{
                     estado.gravarEstadoTXT();
                     //System.out.println(estado.debugString());
                     break;
-                case 4:
-                    System.out.println(estado.debugString());
-                    break;
             }
         }while(menuPrincipal.getOpcao()!=0);
         try{
@@ -69,7 +77,7 @@ public class UMCarroJa{
             e.printStackTrace();
         }
     }
-
+    /**corre o menu de login ou registo*/
     private void loginOuRegisto(){
         do{
             menuLogOuReg.executa();

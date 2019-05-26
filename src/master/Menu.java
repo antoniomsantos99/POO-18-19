@@ -6,6 +6,13 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Classe de menu
+ *
+ * @author Grupo 21
+ * @version 26/05/2019
+ */
+
 public class Menu  implements Serializable {
 
     /** lista de opçoes que se pretendem apresentar*/

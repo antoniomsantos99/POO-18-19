@@ -4,32 +4,41 @@ import java.io.Serializable;
 import java.lang.*;
 import java.time.LocalDateTime;
 
+
 /**
- * Classe do objeto de aluguer
+ * Classe do objeto aluguer
  *
- * @author Pedro Oliveira
- * @version 30/04/19
- *
+ * @author Grupo 21
+ * @version 26/05/2019
  */
 
 
 public class Aluguer implements Serializable {
-    // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
+    // variáveis de instância
+    /** nif do proprietario*/
     private String nifProp;
+    /** nif do cliente*/
     private String nifCliente;
+    /** matricula do carro*/
     private String matricula;
+    /** local inicial do aluguer*/
     private Ponto localInicial;
+    /** local final do aluguer*/
     private Ponto localFinal;
+    /** preco do aluguer*/
     private double preco;
+    /** distancia percorrida*/
     private double distancia;
+    /** inicio do aluguer*/
     private LocalDateTime inicio;
+    /** fim do aluguer*/
     private LocalDateTime fim;
+    /** tipo de combustivel*/
     private String combustivel;
+    /** preferencia, maisPerto ou maiBarato*/
     private String preferencia;
 
-    /**
-     * Construtores
-     */
+    /** construtor por omissão*/
     public Aluguer() {
         this.nifProp = "n/a";
         this.nifCliente = "n/a";
@@ -43,6 +52,8 @@ public class Aluguer implements Serializable {
         this.combustivel = "n/a";
         this.preferencia = "n/a";
     }
+
+    /** construtor por argumentos*/
     public Aluguer(String nifProp, String nifCliente, String matricula, Ponto lI, Ponto lF, double preco, double distancia, LocalDateTime inicio, LocalDateTime fim, String combustivel, String preferencia) {
         this.nifProp = nifProp;
         this.nifCliente = nifCliente;
@@ -56,6 +67,7 @@ public class Aluguer implements Serializable {
         this.combustivel = combustivel;
         this.preferencia = preferencia;
     }
+    /** construtor para o clone*/
     public Aluguer(Aluguer a){
         this.nifProp = a.getNifProp();
         this.nifCliente = a.getNifCliente();
@@ -70,6 +82,7 @@ public class Aluguer implements Serializable {
         this.preferencia = a.getPreferencia();
     }
 
+    /** getters e setters*/
     public String getNifProp() {
         return this.nifProp;
     }
@@ -137,6 +150,7 @@ public class Aluguer implements Serializable {
         this.preferencia = preferencia;
     }
 
+    /** metodo equals*/
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -154,6 +168,7 @@ public class Aluguer implements Serializable {
                 this.preferencia.equals(aluguer.preferencia);
     }
 
+    /** metodo para passar o aluguer para uma string*/
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Aluguer: ");
@@ -170,6 +185,8 @@ public class Aluguer implements Serializable {
         sb.append(", Preferencia: ").append(this.preferencia);
         return sb.toString()+"}\n";
     }
+
+    /** metodo para dar clone do objeto (utilizado para encapsulamento*/
     public Aluguer clone(){
         return new Aluguer(this);
     }
