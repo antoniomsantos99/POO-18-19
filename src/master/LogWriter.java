@@ -22,12 +22,27 @@ public class LogWriter {
         printWriter.close();
     }
 
+
     public static void logCarro(Carro carro,String file) throws IOException {
         FileWriter fileWriter = new FileWriter(file,true);
         PrintWriter printWriter = new PrintWriter(fileWriter);
-        printWriter.printf("NovoCarro:%s,%s,%s,%s,%s,%s,%s,%s,%s\n",carro.getClass().getSimpleName(),carro.getMarca(),carro.getMatricula(),carro.getNif(),String.valueOf(carro.getVelMed()),String.valueOf(carro.getPrecoKm()),String.valueOf(carro.getAutonomia()),String.valueOf(carro.getLocalizacao().getX()),String.valueOf(carro.getLocalizacao().getY()));
-        printWriter.flush();
-        printWriter.close();//corrige estes tmb
+
+        if(carro.getClass().getSimpleName().equals("Gasolina")) {
+            Gasolina carAux = (Gasolina) carro;
+            printWriter.printf("NovoCarro:%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", carro.getClass().getSimpleName(), carro.getMarca(), carro.getMatricula(), carro.getNif(), String.valueOf(carro.getVelMed()), String.valueOf(carro.getPrecoKm()), String.valueOf(carAux.getConsumoGas()), String.valueOf(carro.getAutonomia()), String.valueOf(carro.getLocalizacao().getX()), String.valueOf(carro.getLocalizacao().getY()));
+        }
+
+        if(carro.getClass().getSimpleName().equals("Eletrico")) {
+            Eletrico carAux = (Eletrico) carro;
+            printWriter.printf("NovoCarro:%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", carro.getClass().getSimpleName(), carro.getMarca(), carro.getMatricula(), carro.getNif(), String.valueOf(carro.getVelMed()), String.valueOf(carro.getPrecoKm()), String.valueOf(carAux.getConsumoBat()), String.valueOf(carro.getAutonomia()), String.valueOf(carro.getLocalizacao().getX()), String.valueOf(carro.getLocalizacao().getY()));
+        }
+
+        if(carro.getClass().getSimpleName().equals("Hibrido")) {
+            Hibrido carAux = (Hibrido) carro;
+            printWriter.printf("NovoCarro:%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", carro.getClass().getSimpleName(), carro.getMarca(), carro.getMatricula(), carro.getNif(), String.valueOf(carro.getVelMed()), String.valueOf(carro.getPrecoKm()), String.valueOf(carAux.getConsumoGas()), String.valueOf(carro.getAutonomia()), String.valueOf(carro.getLocalizacao().getX()), String.valueOf(carro.getLocalizacao().getY()));
+        }
+            printWriter.flush();
+        printWriter.close();
     }
 
     public static void logAluguer(Aluguer aluguer,String file) throws IOException {
