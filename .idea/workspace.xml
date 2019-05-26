@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6eae3ca2-9c8d-45e8-a2c3-a1d041439045" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/master/Estado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/master/Estado.java" afterDir="false" />
-    </list>
+    <list default="true" id="6eae3ca2-9c8d-45e8-a2c3-a1d041439045" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,10 +23,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/master/Estado.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
+            <state relative-caret-position="2303">
               <caret line="927" column="47" selection-start-line="927" selection-start-column="47" selection-end-line="927" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -57,10 +54,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/master/LogWriter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
+            <state relative-caret-position="695">
               <caret line="41" selection-start-line="41" selection-end-line="41" />
             </state>
           </provider>
@@ -150,12 +147,23 @@
             <path>
               <item name="POO-18-19" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="POO-18-19" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="out" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="POO-18-19" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="POO-18-19" type="2674bda8:ScopeViewTreeModel$GroupNode" />
               <item name="saves" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="POO-18-19" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="POO-18-19" type="2674bda8:ScopeViewTreeModel$GroupNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="POO-18-19" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="POO-18-19" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="master" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -213,7 +221,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12260128" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -462,16 +469,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/master/LogWriter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="41" selection-start-line="41" selection-end-line="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/master/Estado.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
+        <state relative-caret-position="2303">
           <caret line="927" column="47" selection-start-line="927" selection-start-column="47" selection-end-line="927" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -495,6 +495,13 @@
             <element signature="method#lerBool#0;class#Estado#0" />
             <element signature="method#lerBoolAux#0;class#Estado#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/master/LogWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="695">
+          <caret line="41" selection-start-line="41" selection-end-line="41" />
         </state>
       </provider>
     </entry>
