@@ -483,7 +483,7 @@ public class Estado implements Serializable{
                         p.removerPending(escolha-1);
                     }
                     break;
-                case 6://TODO FIX
+                case 6:
                     p = listaProprietarios.get(email);
                     List<Aluguer> alugueres = p.getHistorial();
                     if(alugueres.isEmpty()){System.out.println("Erro: Parece que não tem alugueres.");break;}
@@ -499,16 +499,36 @@ public class Estado implements Serializable{
                     if(escolha == -1) break;
                     //p = listaProprietarios.get(email);
                     a = alugueres.get(escolha);
-                    System.out.println(a.toString());//TODO faço a minima do que é resgistar o valor, mas já tenho o aluguer certo...
+                    System.out.println("Custo registado com sucesso!");//TODO faço a minima do que é resgistar o valor, mas já tenho o aluguer certo...
                     break;
                 case 7:
-                    cliente = listaClientes.get(email);
-                    List<Aluguer> historico = cliente.getHistorial();
+                    p = listaProprietarios.get(email);
+                    List<Aluguer> historico = p.getHistorial();
                     if(historico.isEmpty()){System.out.println("Sem alugueres realizados");break;}
                     System.out.println("Alugueres mais recentes:");
                     for(int i = historico.size()-5; i < historico.size();i++){
                         if(i>=0) System.out.println(historico.get(i).toString());
                     }
+                    break;
+                case 8:
+                    p = listaProprietarios.get(email);
+                    lsC = p.getSetCarros();
+                    List<Aluguer> historial = p.getHistorial();
+                    if(lsC.isEmpty()){System.out.println("Erro: Parece que não tem nenhum carro.");break;}
+                    for(Carro carro:lsC){
+                        System.out.println("Matricula: "+carro.getMatricula()+",Disponivel Alugar: " + carro.getDispAlugar()+",Preco/Km"+carro.getPrecoKm());
+                    }
+                    matricula = lerString("Introduza a matricula do carro que pretende ver total faturado: (-1 para cancelar)");
+                    if(matricula.equals("-1")) break;
+                    while(!listaCarros.containsKey(matricula)){
+                        matricula = lerString("Erro: Matricula não existe, introduza uma matricula válida: (-1 para cancelar)");
+                        if(matricula.equals("-1")) break;
+                    }
+                    String cast = matricula;
+                    if(matricula.equals("-1")) break;
+                    String matTemp = matricula;
+                    System.out.println("Total Faturado:");
+                    System.out.println(historial.stream().filter(car -> car.getMatricula().equals(matTemp)).mapToDouble(Aluguer::getPreco).sum());
                     break;
             }
         }while(menuHubProprietario.getOpcao()!=0);
