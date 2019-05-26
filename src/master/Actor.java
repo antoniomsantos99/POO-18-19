@@ -145,6 +145,7 @@ public abstract class Actor implements Serializable {
     public void classificar(int i){
         this.classificacao.add(i);
     }
+    public void addAluguer(Aluguer a){this.historial.add(a.clone());}
 }
 
 class Proprietario extends Actor{

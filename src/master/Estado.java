@@ -932,18 +932,13 @@ public class Estado implements Serializable{
                     parsed[3],
                     parsed[4]);
 
-            Optional<Proprietario> prop = listaProprietarios.values().stream().filter(p->p.getNif().equals(carroGasolina.getNif())).findAny();
-            List<Aluguer> newProp;
-            if(prop.isPresent()) newProp = prop.get().getHistorial();else return;
-            newProp.add(a);
-            prop.get().setHistorial(newProp);
+            Optional<Proprietario> prop = listaProprietarios.values().stream().filter(p->p.getNif().equals(a.getNifProp())).findAny();
+            prop.ifPresent(value -> value.addAluguer(a));
+            prop.ifPresent(value -> listaProprietarios.put(value.getEmail(),value.clone()));
 
-
-            Optional<Cliente> clie = listaClientes.values().stream().filter(c->c.getNif().equals(carroGasolina.getNif())).findAny();
-            List<Aluguer> newClie;
-            if(clie.isPresent()) newClie = clie.get().getHistorial();else return;
-            newClie.add(a);
-            clie.get().setHistorial(newClie);
+            Optional<Cliente> clie = listaClientes.values().stream().filter(c->c.getNif().equals(a.getNifCliente())).findAny();
+            clie.ifPresent(value -> value.addAluguer(a));
+            clie.ifPresent(value -> listaClientes.put(value.getEmail(),value.clone()));
         }
 
         if(parsed[3].equals("Electrico")) {
@@ -977,17 +972,13 @@ public class Estado implements Serializable{
                     parsed[3],
                     parsed[4]);
 
-            Optional<Proprietario> prop = listaProprietarios.values().stream().filter(p->p.getNif().equals(carroEletrico.getNif())).findAny();
-            List<Aluguer> newProp;
-            if(prop.isPresent()) newProp = prop.get().getHistorial();else return;
-            newProp.add(a);
-            prop.get().setHistorial(newProp);
+            Optional<Proprietario> prop = listaProprietarios.values().stream().filter(p->p.getNif().equals(a.getNifProp())).findAny();
+            prop.ifPresent(value -> value.addAluguer(a));
+            prop.ifPresent(value -> listaProprietarios.put(value.getEmail(),value.clone()));
 
-            Optional<Cliente> clie = listaClientes.values().stream().filter(c->c.getNif().equals(carroEletrico.getNif())).findAny();
-            List<Aluguer> newClie;
-            if(clie.isPresent()) newClie = clie.get().getHistorial();else return;
-            newClie.add(a);
-            clie.get().setHistorial(newClie);
+            Optional<Cliente> clie = listaClientes.values().stream().filter(c->c.getNif().equals(a.getNifCliente())).findAny();
+            clie.ifPresent(value -> value.addAluguer(a));
+            clie.ifPresent(value -> listaClientes.put(value.getEmail(),value.clone()));
         }
 
         if(parsed[3].equals("Hibrido")) {
@@ -1020,17 +1011,13 @@ public class Estado implements Serializable{
                     parsed[3],
                     parsed[4]);
 
-            Optional<Proprietario> prop = listaProprietarios.values().stream().filter(p->p.getNif().equals(carroHibrido.getNif())).findAny();
-            List<Aluguer> newProp;
-            if(prop.isPresent()) newProp = prop.get().getHistorial();else return;
-            newProp.add(a);
-            prop.get().setHistorial(newProp);
+            Optional<Proprietario> prop = listaProprietarios.values().stream().filter(p->p.getNif().equals(a.getNifProp())).findAny();
+            prop.ifPresent(value -> value.addAluguer(a));
+            prop.ifPresent(value -> listaProprietarios.put(value.getEmail(),value.clone()));
 
-            Optional<Cliente> clie = listaClientes.values().stream().filter(c->c.getNif().equals(carroHibrido.getNif())).findAny();
-            List<Aluguer> newClie;
-            if(clie.isPresent()) newClie = clie.get().getHistorial();else return;
-            newClie.add(a);
-            clie.get().setHistorial(newClie);
+            Optional<Cliente> clie = listaClientes.values().stream().filter(c->c.getNif().equals(a.getNifCliente())).findAny();
+            clie.ifPresent(value -> value.addAluguer(a));
+            clie.ifPresent(value -> listaClientes.put(value.getEmail(),value.clone()));
         }
     }
     private void CVC2Classificacao(String linha) {
@@ -1041,8 +1028,10 @@ public class Estado implements Serializable{
         } else {
             Optional<Cliente> cliente = listaClientes.values().stream().filter(c -> c.getNif().equals(parsed[0])).findAny();
             cliente.ifPresent(value -> value.classificar(Integer.parseInt(parsed[1])));
+            cliente.ifPresent(c -> listaClientes.put(c.getEmail(),c.clone()));
             Optional<Proprietario> prop = listaProprietarios.values().stream().filter(p->p.getNif().equals(parsed[0])).findAny();
             prop.ifPresent(value -> value.classificar(Integer.parseInt(parsed[1])));
+            prop.ifPresent(p -> listaProprietarios.put(p.getEmail(),p.clone()));
         }
     }
 
@@ -1073,8 +1062,8 @@ public class Estado implements Serializable{
         return e;
     }
 
-    public void listagemClientes(){//TODO fix para dar os maiores 10
-        List<Cliente> listagem = listaClientes.values().stream().limit(10).collect(Collectors.toList());
+    public void listagemClientes(){
+        List<Cliente> listagem = listaClientes.values().stream().sorted(Comparator.comparingInt((c->-c.getHistorial().size()))).limit(10).collect(Collectors.toList());
         for(Cliente c:listagem){
             System.out.println(c.toString());
         }
@@ -1083,12 +1072,12 @@ public class Estado implements Serializable{
     //PARA DEBUG APENAS, DEPOIS REMOVER
     public String debugString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Map de Clientes:\n\n");
-        sb.append(listaClientes.toString());
-        sb.append("\nMap de Proprietarios:\n\n");
-        sb.append(listaProprietarios.toString());
         sb.append("\nMap de Carros:\n\n");
         sb.append(listaCarros.toString());
+        sb.append("\nMap de Proprietarios:\n\n");
+        sb.append(listaProprietarios.toString());
+        sb.append("Map de Clientes:\n\n");
+        sb.append(listaClientes.toString());
         return sb.toString();
     }
 
