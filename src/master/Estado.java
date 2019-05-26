@@ -839,7 +839,7 @@ public class Estado implements Serializable{
     }
 
     /** passa de uma string separada de virgulas para um cliente*/
-    private void CVC2Cliente(String linha) {
+    private void CVC2Cliente(String linha)  {
         String[] parsed = linha.split(","); //[Nome,Nif,Email,Morada,X,Y]
         Cliente c = new Cliente(parsed[0],
                 parsed[1],
@@ -851,9 +851,10 @@ public class Estado implements Serializable{
                 new ArrayList<Integer>(),
                 new ArrayList<Aluguer>());
         listaClientes.put(c.getEmail(),c.clone());
+
     }
     /** passa de uma string separada de virgulas para um proprietario*/
-    private void CVC2Proprietario(String linha) {
+    private void CVC2Proprietario(String linha)  {
         String[] parsed = linha.split(","); //[Nome,Nif,Email,Morada]
         Proprietario p = new Proprietario(parsed[0],
                 parsed[1],
@@ -866,6 +867,7 @@ public class Estado implements Serializable{
                 new ArrayList<Aluguer>(),
                 new ArrayList<Aluguer>());
         listaProprietarios.put(p.getEmail(), p.clone());
+       ;
     }
     /** passa de uma string separada de virgulas para um carro*/
     private void CVC2Carro(String linha) {
@@ -887,8 +889,9 @@ public class Estado implements Serializable{
                     true);
             listaProprietarios.get(email).trocarCarro(c);
             listaCarros.put(c.getMatricula(), c.clone());
+
         }
-        if (parsed[0].equals("Electrico")) {
+        if (parsed[0].equals("Electrico") || parsed[0].equals(("Eletrico"))){
             c = new Eletrico(parsed[1],
                     parsed[2],
                     parsed[3],
@@ -901,6 +904,7 @@ public class Estado implements Serializable{
                     true);
             listaProprietarios.get(email).trocarCarro(c);
             listaCarros.put(c.getMatricula(), c);
+
         }
 
         if (parsed[0].equals("Hibrido")) {
@@ -918,6 +922,7 @@ public class Estado implements Serializable{
                     true);
             listaProprietarios.get(email).trocarCarro(c);
             listaCarros.put(c.getMatricula(), c);
+
 
 
         }
@@ -957,6 +962,8 @@ public class Estado implements Serializable{
                     LocalDateTime.now(),
                     parsed[3],
                     parsed[4]);
+
+
 
             Optional<Proprietario> prop = listaProprietarios.values().stream().filter(p->p.getNif().equals(a.getNifProp())).findAny();
             prop.ifPresent(value -> value.addAluguer(a));
@@ -998,6 +1005,8 @@ public class Estado implements Serializable{
                     parsed[3],
                     parsed[4]);
 
+
+
             Optional<Proprietario> prop = listaProprietarios.values().stream().filter(p->p.getNif().equals(a.getNifProp())).findAny();
             prop.ifPresent(value -> value.addAluguer(a));
             prop.ifPresent(value -> listaProprietarios.put(value.getEmail(),value.clone()));
@@ -1037,6 +1046,8 @@ public class Estado implements Serializable{
                     parsed[3],
                     parsed[4]);
 
+
+
             Optional<Proprietario> prop = listaProprietarios.values().stream().filter(p->p.getNif().equals(a.getNifProp())).findAny();
             prop.ifPresent(value -> value.addAluguer(a));
             prop.ifPresent(value -> listaProprietarios.put(value.getEmail(),value.clone()));
@@ -1045,13 +1056,15 @@ public class Estado implements Serializable{
             clie.ifPresent(value -> value.addAluguer(a));
             clie.ifPresent(value -> listaClientes.put(value.getEmail(),value.clone()));
         }
+
     }
     /** passa de uma string separada de virgulas para uma classificação*/
-    private void CVC2Classificacao(String linha) {
+    private void CVC2Classificacao(String linha)  {
         String[] parsed = linha.split(","); //[matricula ou nif (cliente ou prop) , nota (0-100)]
         if (parsed[0].length() == 8) {
             Optional<Carro> carro = listaCarros.values().stream().filter(c -> c.getMatricula().equals(parsed[0])).findAny();
             carro.ifPresent(value->value.classficarCarro(Integer.parseInt(parsed[1])));
+            //if(carro.isPresent())LogWriter.logClassCar(carro.get(),Integer.parseInt(parsed[1]),"teste.txt");
         } else {
             Optional<Cliente> cliente = listaClientes.values().stream().filter(c -> c.getNif().equals(parsed[0])).findAny();
             cliente.ifPresent(value -> value.classificar(Integer.parseInt(parsed[1])));
@@ -1059,6 +1072,7 @@ public class Estado implements Serializable{
             Optional<Proprietario> prop = listaProprietarios.values().stream().filter(p->p.getNif().equals(parsed[0])).findAny();
             prop.ifPresent(value -> value.classificar(Integer.parseInt(parsed[1])));
             prop.ifPresent(p -> listaProprietarios.put(p.getEmail(),p.clone()));
+            //if(prop.isPresent())LogWriter.logClassActor(prop.get(),Integer.parseInt(parsed[1]),"teste.txt");
         }
     }
 
