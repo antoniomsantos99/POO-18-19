@@ -785,6 +785,7 @@ public class Estado implements Serializable{
             switch (m.getOpcao()) {
                 case 1:
                     try {
+                        new File("saves/temp.txt").delete();
                         lerFile(path + "state.txt");
                     } catch (FileNotFoundException e) {
                         System.out.println("Erro: Ficheiro não existe.");
@@ -797,6 +798,7 @@ public class Estado implements Serializable{
                     System.out.print("Nome do Ficheiro que pretende carregar: ");
                     String nomeFile = is.nextLine();
                     try {
+                        new File("saves/temp.txt").delete();
                         lerFile(path + nomeFile);
                     } catch (FileNotFoundException e) {
                         System.out.println("Erro: Ficheiro não existe.");

@@ -76,6 +76,7 @@ public class UMCarroJa{
             System.out.println("Erro ao tentar gravar Estado.");
             e.printStackTrace();
         }
+        new File("saves/temp.txt").delete();
     }
     /**corre o menu de login ou registo*/
     private void loginOuRegisto(){

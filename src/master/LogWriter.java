@@ -1,9 +1,6 @@
 package master;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 public class LogWriter {
 
@@ -20,7 +17,7 @@ public class LogWriter {
     public static void logCliente(Cliente cliente,String file) throws IOException {
         FileWriter fileWriter = new FileWriter(file,true);
         PrintWriter printWriter = new PrintWriter(fileWriter);
-        printWriter.printf("NovoCliente:%s,%s,%s,%s,%f,%f\n",cliente.getNome(),cliente.getNif(),cliente.getEmail(),cliente.getMorada(),cliente.getLocalizacao().getX(),cliente.getLocalizacao().getY());
+        printWriter.printf("NovoCliente:%s,%s,%s,%s,%s,%s\n",cliente.getNome(),cliente.getNif(),cliente.getEmail(),cliente.getMorada(),String.valueOf(cliente.getLocalizacao().getX()),String.valueOf(cliente.getLocalizacao().getY()));
         printWriter.flush();
         printWriter.close();
     }
@@ -28,15 +25,15 @@ public class LogWriter {
     public static void logCarro(Carro carro,String file) throws IOException {
         FileWriter fileWriter = new FileWriter(file,true);
         PrintWriter printWriter = new PrintWriter(fileWriter);
-        printWriter.printf("NovoCarro:%s,%s,%s,%s,%f,%f,%f,%f,%f\n",carro.getClass().getSimpleName(),carro.getMarca(),carro.getMatricula(),carro.getNif(),carro.getVelMed(),carro.getPrecoKm(),carro.getAutonomia(),carro.getLocalizacao().getX(),carro.getLocalizacao().getY());
+        printWriter.printf("NovoCarro:%s,%s,%s,%s,%s,%s,%s,%s,%s\n",carro.getClass().getSimpleName(),carro.getMarca(),carro.getMatricula(),carro.getNif(),String.valueOf(carro.getVelMed()),String.valueOf(carro.getPrecoKm()),String.valueOf(carro.getAutonomia()),String.valueOf(carro.getLocalizacao().getX()),String.valueOf(carro.getLocalizacao().getY()));
         printWriter.flush();
-        printWriter.close();
+        printWriter.close();//corrige estes tmb
     }
 
     public static void logAluguer(Aluguer aluguer,String file) throws IOException {
         FileWriter fileWriter = new FileWriter(file,true);
         PrintWriter printWriter = new PrintWriter(fileWriter);
-        printWriter.printf("Aluguer:%s,%f,%f,%s,%s\n",aluguer.getNifCliente(),aluguer.getLocalFinal().getX(),aluguer.getLocalFinal().getY(),aluguer.getCombustivel(),aluguer.getPreferencia());
+        printWriter.printf("Aluguer:%s,%s,%s,%s,%s\n",aluguer.getNifCliente(),String.valueOf(aluguer.getLocalFinal().getX()),String.valueOf(aluguer.getLocalFinal().getY()),aluguer.getCombustivel(),aluguer.getPreferencia());
         printWriter.flush();
         printWriter.close();
 
@@ -60,7 +57,26 @@ public class LogWriter {
     public static void logToSave(String file,String fileTo)throws IOException{
         File ficheiro = new File(file);
         File ficheiroTo = new File(fileTo);
-        boolean success = ficheiro.renameTo(ficheiroTo);
-        if(!success)System.out.println("Erro: Ficheiro não existe.");
+        try{copyFileUsingStream(ficheiro,ficheiroTo);}
+        catch(IOException e){System.out.println("Erro: Ficheiro não existe.");}
     }
+
+
+    private static void copyFileUsingStream(File source, File dest) throws IOException {
+        InputStream is = null;
+        OutputStream os = null;
+        try {
+            is = new FileInputStream(source);
+            os = new FileOutputStream(dest);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = is.read(buffer)) > 0) {
+                os.write(buffer, 0, length);
+            }
+        } finally {
+            is.close();
+            os.close();
+        }
+    }
+
 }
